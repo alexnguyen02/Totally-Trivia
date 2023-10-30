@@ -1,4 +1,4 @@
 package src.use_case;
 
-public interface QuestionInputBoundary {
+public interface QuestionInputBoundary { //inputBoundary
 }
