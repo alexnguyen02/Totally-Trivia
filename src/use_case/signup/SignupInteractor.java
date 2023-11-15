@@ -1,26 +1,37 @@
-package src.use_case.signup;
+package use_case.signup;
 
-public class SignupInputData {
+import entity.User;
+import entity.UserFactory;
 
-    final private String username;
-    final private String password;
-    final private String repeatPassword;
+import java.time.LocalDateTime;
 
-    public SignupInputData(String username, String password, String repeatPassword) {
-        this.username = username;
-        this.password = password;
-        this.repeatPassword = repeatPassword;
+public class SignupInteractor implements SignupInputBoundary {
+    final SignupUserDataAccessInterface userDataAccessObject;
+    final SignupOutputBoundary userPresenter;
+    final UserFactory userFactory;
+
+    public SignupInteractor(SignupUserDataAccessInterface signupDataAccessInterface,
+                            SignupOutputBoundary signupOutputBoundary,
+                            UserFactory userFactory) {
+        this.userDataAccessObject = signupDataAccessInterface;
+        this.userPresenter = signupOutputBoundary;
+        this.userFactory = userFactory;
     }
 
-    String getUsername() {
-        return username;
-    }
+    @Override
+    public void execute(SignupInputData signupInputData) {
+        if (userDataAccessObject.existsByName(signupInputData.getUsername())) {
+            userPresenter.prepareFailView("User already exists.");
+        } else if (!signupInputData.getPassword().equals(signupInputData.getRepeatPassword())) {
+            userPresenter.prepareFailView("Passwords don't match.");
+        } else {
 
-    String getPassword() {
-        return password;
-    }
+            LocalDateTime now = LocalDateTime.now();
+            User user = userFactory.create(signupInputData.getUsername(), signupInputData.getPassword(), now);
+            userDataAccessObject.save(user);
 
-    public String getRepeatPassword() {
-        return repeatPassword;
+            SignupOutputData signupOutputData = new SignupOutputData(user.getName(), now.toString(), false);
+            userPresenter.prepareSuccessView(signupOutputData);
+        }
     }
 }
