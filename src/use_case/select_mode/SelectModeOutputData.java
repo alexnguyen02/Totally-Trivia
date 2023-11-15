@@ -1,4 +1,4 @@
-package src.use_case.select_mode;
+package use_case.select_mode;
 
 import src.entity.Question;
 
