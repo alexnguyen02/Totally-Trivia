@@ -8,11 +8,11 @@ import java.util.*;
 
 public class InMemorySelectModeAccessObject implements SelectModeDataObjectInterface {
 
-    private final Map<Integer, Question> easyQuestions = new HashMap<>();
+    private final Map<Integer, Question> easyQuestions = new HashMap<Integer,Question>();
 
-    private final Map<Integer, Question> mediumQuestions = new HashMap<>();
+    private final Map<Integer, Question> mediumQuestions = new HashMap<Integer,Question>();
 
-    private final Map<Integer, Question> hardQuestions = new HashMap<>();
+    private final Map<Integer, Question> hardQuestions = new HashMap<Integer,Question>();
 
     public InMemorySelectModeAccessObject(){
         ArrayList<String> possibleAnswersOne = new ArrayList<>(List.of(new String[]{"Dog", "Cat", "Both", "Neither"}));
@@ -31,8 +31,8 @@ public class InMemorySelectModeAccessObject implements SelectModeDataObjectInter
                 "Dog or Cat?",
                 "Animals",
                 "Easy",
-                answerPackageOne);
-        easyQuestions.put(2, questionOne);
+                answerPackageTwo);
+        easyQuestions.put(2, questionTwo);
     }
 
 
@@ -41,19 +41,23 @@ public class InMemorySelectModeAccessObject implements SelectModeDataObjectInter
         ArrayList<Question> listOfQuestions= new ArrayList<>();
 
         /// For now, we will assume that all questions have the same category, which is "Animals" in this case.
-        if (difficultyLevel.equals("easy")){
-            for(int i = 0; i < numOfQuestions; i++){
-                listOfQuestions.add(easyQuestions.get(i));
+        if (difficultyLevel.equals("Easy")){
+            for(Map.Entry<Integer, Question> entry: easyQuestions.entrySet()){
+                Question q = entry.getValue();
+                listOfQuestions.add(q);
             }
-        } else if (difficultyLevel.equals("medium")) {
+        } else if (difficultyLevel.equals("Medium")) {
             for(int i = 0; i < numOfQuestions; i++){
-                listOfQuestions.add(mediumQuestions.get(i));
+                Question q = mediumQuestions.get(i);
+                listOfQuestions.add(q);
             }
         } else {
             for(int i = 0; i < numOfQuestions; i++){
-                listOfQuestions.add(hardQuestions.get(i));
+                Question q = hardQuestions.get(i);
+                listOfQuestions.add(q);
             }
         }
+
         return listOfQuestions;
     }
 }

@@ -7,7 +7,7 @@ import src.use_case.signup.SignupUserDataAccessInterface;
 
 import src.entity.User;
 import src.entity.UserFactory;
-import src.use_case.signup.LoginUserDataAccessInterface;
+import src.use_case.login.LoginUserDataAccessInterface;
 import src.use_case.signup.SignupUserDataAccessInterface;
 
 import java.io.*;

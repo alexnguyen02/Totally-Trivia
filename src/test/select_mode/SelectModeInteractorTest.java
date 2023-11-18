@@ -1,4 +1,4 @@
-package src.use_case.select_mode;
+package src.test.select_mode;
 
 import src.data_access.InMemorySelectModeAccessObject;
 import src.use_case.select_mode.*;
@@ -8,17 +8,19 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/// Test case for SelectModeInteractor
+
 public class SelectModeInteractorTest {
 
     @org.junit.Test
     public void successTest(){
-        SelectModeInputData inputData = new SelectModeInputData("Animals", "easy", 2);
+        SelectModeInputData inputData = new SelectModeInputData("Animals", "Easy", 2);
         SelectModeDataObjectInterface selectModeDatabase = new InMemorySelectModeAccessObject();
 
         SelectModeOutputBoundary successPresenter = new SelectModeOutputBoundary() {
             @Override
             public void prepareSelectModeSuccessView(SelectModeOutputData selectModeOutputData) {
-                ArrayList<String> actualQuestions = selectModeOutputData.getAllQuestions();
+                ArrayList<String> actualQuestions = selectModeOutputData.getOutputQuestions();
                 ArrayList<String> expectedQuestions = new ArrayList<>(List.of(new String[]{"Dog or Cat?", "Dog or Cat?"}));
 
                 assertEquals(expectedQuestions, actualQuestions);
