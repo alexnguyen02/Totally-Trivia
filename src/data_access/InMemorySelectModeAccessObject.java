@@ -20,7 +20,7 @@ public class InMemorySelectModeAccessObject implements SelectModeDataObjectInter
         Question questionOne = new Question(
                 "Dog or Cat?",
                 "Animals",
-                "easy",
+                "Easy",
                 answerPackageOne);
         easyQuestions.put(1, questionOne);
 
@@ -30,7 +30,7 @@ public class InMemorySelectModeAccessObject implements SelectModeDataObjectInter
         Question questionTwo = new Question(
                 "Dog or Cat?",
                 "Animals",
-                "easy",
+                "Easy",
                 answerPackageOne);
         easyQuestions.put(2, questionOne);
     }

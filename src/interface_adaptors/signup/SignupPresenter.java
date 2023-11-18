@@ -1,5 +1,8 @@
 package src.interface_adaptors.signup;
 
+import src.interface_adaptors.ViewManagerModel;
+import src.interface_adaptors.login.LoginViewModel;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

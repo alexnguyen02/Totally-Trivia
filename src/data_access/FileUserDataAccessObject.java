@@ -1,5 +1,11 @@
 package src.data_access;
 
+import src.entity.User;
+import src.entity.UserFactory;
+import src.use_case.signup.ClearUserDataAccessInterface;
+import src.use_case.signup.LoginUserDataAccessInterface;
+import src.use_case.signup.SignupUserDataAccessInterface;
+
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -41,8 +47,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                     String password = String.valueOf(col[headers.get("password")]);
                     String creationTimeText = String.valueOf(col[headers.get("creation_time")]);
                     LocalDateTime ldt = LocalDateTime.parse(creationTimeText);
-                    User user = userFactory.create(username, password, ldt);
-                    accounts.put(username, user);
+                    // User user = userFactory.create(username, password, ldt);
+                    // accounts.put(username, user);
                 }
             }
         }

@@ -1,5 +1,9 @@
 package src.view;
 
+import src.interface_adaptors.signup.SignupController;
+import src.interface_adaptors.signup.SignupState;
+import src.interface_adaptors.signup.SignupViewModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,19 +17,18 @@ public class SignUpView {
     public class SignupView extends JPanel implements ActionListener, PropertyChangeListener {
         public final String viewName = "sign up";
 
-        private final SignupViewModel signupViewModel;
         private final JTextField usernameInputField = new JTextField(15);
         private final JPasswordField passwordInputField = new JPasswordField(15);
         private final JPasswordField repeatPasswordInputField = new JPasswordField(15);
         private final SignupController signupController;
-        private final ClearViewModel clearViewModel;
+        private final SignupViewModel signupViewModel;
+        // private final ClearViewModel clearViewModel;
 
 
         private final JButton signUp;
         private final JButton cancel;
 
         public SignupView(SignupController controller, SignupViewModel signupViewModel) {
-
             this.signupController = controller;
             this.signupViewModel = signupViewModel;
             signupViewModel.addPropertyChangeListener(this);
@@ -132,7 +135,7 @@ public class SignUpView {
             this.add(repeatPasswordInfo);
             this.add(buttons);
 
-            public void actionPerformed (ActionEvent evt){
+            public void actionPerformed(ActionEvent evt){
                 JOptionPane.showConfirmDialog(this, "Cancel not implemented yet.");
             }
 

@@ -1,4 +1,4 @@
-package src.use_case;
+package src.entity;
 
 import java.util.ArrayList;
 
