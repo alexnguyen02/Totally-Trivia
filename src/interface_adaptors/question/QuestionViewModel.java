@@ -1,4 +1,4 @@
-package src.interface_adaptors;
+package interface_adaptors.question;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

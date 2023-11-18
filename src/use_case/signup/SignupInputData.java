@@ -1,28 +1,26 @@
-package src.use_case.signup;
+package use_case.signup;
 
 public class SignupInputData {
-    public class SignupInputData {
 
-        final private String username;
-        final private String password;
-        final private String repeatPassword;
+    final private String username;
+    final private String password;
+    final private String repeatPassword;
 
-        public SignupInputData(String username, String password, String repeatPassword) {
-            this.username = username;
-            this.password = password;
-            this.repeatPassword = repeatPassword;
-        }
+    public SignupInputData(String username, String password, String repeatPassword) {
+        this.username = username;
+        this.password = password;
+        this.repeatPassword = repeatPassword;
+    }
 
-        String getUsername() {
-            return username;
-        }
+    String getUsername() {
+        return username;
+    }
 
-        String getPassword() {
-            return password;
-        }
+    String getPassword() {
+        return password;
+    }
 
-        public String getRepeatPassword() {
-            return repeatPassword;
-        }
+    public String getRepeatPassword() {
+        return repeatPassword;
     }
 }

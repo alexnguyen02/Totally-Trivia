@@ -1,4 +1,9 @@
-package src.data_access;
+package data_access;
+
+import entity.User;
+import entity.UserFactory;
+import use_case.login.LoginUserDataAccessInterface;
+import use_case.signup.SignupUserDataAccessInterface;
 
 import src.entity.User;
 import src.entity.UserFactory;
@@ -12,7 +17,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, ClearUserDataAccessInterface {
+public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface {
 
     private final File csvFile;
 
@@ -37,8 +42,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
             try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
                 String header = reader.readLine();
 
-//                // For later: clean this up by creating a new Exception subclass and handling it in the UI.
-//                assert header.equals("username,password,creation_time");
+                // For later: clean this up by creating a new Exception subclass and handling it in the UI.
+                assert header.equals("username,password,creation_time");
 
                 String row;
                 while ((row = reader.readLine()) != null) {
@@ -89,7 +94,6 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
     /**
      * Return whether a user exists with username identifier.
-     *
      * @param identifier the username to check.
      * @return whether a user exists with username identifier
      */
@@ -97,4 +101,5 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     public boolean existsByName(String identifier) {
         return accounts.containsKey(identifier);
     }
+
 }
