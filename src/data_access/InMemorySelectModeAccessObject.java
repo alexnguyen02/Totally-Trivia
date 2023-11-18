@@ -1,4 +1,4 @@
-package data_access;
+package src.data_access;
 
 import src.entity.AnswerPackage;
 import src.entity.Question;

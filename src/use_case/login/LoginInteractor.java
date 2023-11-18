@@ -1,6 +1,6 @@
-package use_case.login;
+package src.use_case.login;
 
-import entity.User;
+import src.entity.User;
 
 public class LoginInteractor implements LoginInputBoundary {
     final LoginUserDataAccessInterface userDataAccessObject;

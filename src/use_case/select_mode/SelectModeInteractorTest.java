@@ -1,4 +1,4 @@
-package use_case.select_mode;
+package src.use_case.select_mode;
 
 import src.data_access.InMemorySelectModeAccessObject;
 import src.use_case.select_mode.*;

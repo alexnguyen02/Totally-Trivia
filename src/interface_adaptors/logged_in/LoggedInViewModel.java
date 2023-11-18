@@ -1,7 +1,7 @@
-package interface_adaptors.logged_in;
+package src.interface_adaptors.logged_in;
 
-import interface_adaptors.ViewModel;
-import interface_adaptors.login.LoginState;
+import src.interface_adaptors.ViewModel;
+import src.interface_adaptors.login.LoginState;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -9,7 +9,7 @@ import java.beans.PropertyChangeSupport;
 public class LoggedInViewModel extends ViewModel {
     public final String TITLE_LABEL = "Logged In View";
 
-    private interface_adapter.logged_in.LoggedInState state = new interface_adapter.logged_in.LoggedInState();
+    private LoggedInState state = new LoggedInState();
 
     public static final String LOGOUT_BUTTON_LABEL = "Log out";
     private String loggedInUser;
@@ -18,7 +18,7 @@ public class LoggedInViewModel extends ViewModel {
         super("logged in");
     }
 
-    public void setState(interface_adapter.logged_in.LoggedInState state) {
+    public void setState(LoggedInState state) {
         this.state = state;
     }
 
@@ -34,7 +34,7 @@ public class LoggedInViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public interface_adapter.logged_in.LoggedInState getState() {
+    public LoggedInState getState() {
         return state;
     }
 

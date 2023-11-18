@@ -1,7 +1,7 @@
-package data_access;
+package src.data_access;
 
-import entity.User;
-import use_case.signup.SignupUserDataAccessInterface;
+import src.entity.User;
+import src.use_case.signup.*;
 
 import src.entity.User;
 import src.use_case.signup.SignupUserDataAccessInterface;
