@@ -1,6 +1,6 @@
-package view;
+package src.view;
 
-import interface_adaptors.ViewManagerModel;
+import src.interface_adaptors.ViewManagerModel;
 
 import javax.swing.*;
 import java.awt.*;

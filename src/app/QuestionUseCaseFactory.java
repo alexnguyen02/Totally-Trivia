@@ -1,2 +1,5 @@
-package src.app;public class QuestionUseCaseFactory {
+package src.app;
+
+public class QuestionUseCaseFactory {
+
 }

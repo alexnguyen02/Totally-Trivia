@@ -58,4 +58,14 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
         // start.addActionListener(
 
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+
+    }
 }

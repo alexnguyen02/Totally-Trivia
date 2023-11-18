@@ -1,17 +1,17 @@
-package app;
+package src.app;
 
-import app.LoginUseCaseFactory;
-import data_access.FileUserDataAccessObject;
-import entity.CommonUserFactory;
-import interface_adaptors.login.LoginViewModel;
-import interface_adaptors.logged_in.LoggedInViewModel;
-import interface_adaptors.signup.SignupViewModel;
-import interface_adaptors.ViewManagerModel;
-import use_case.login.LoginUserDataAccessInterface;
-import view.LoggedInView;
-import view.LoginView;
-import view.SignupView;
-import view.ViewManager;
+import src.app.LoginUseCaseFactory;
+import src.data_access.FileUserDataAccessObject;
+import src.entity.CommonUserFactory;
+import src.interface_adaptors.login.LoginViewModel;
+import src.interface_adaptors.logged_in.LoggedInViewModel;
+import src.interface_adaptors.signup.SignupViewModel;
+import src.interface_adaptors.ViewManagerModel;
+import src.use_case.login.LoginUserDataAccessInterface;
+import src.view.LoggedInView;
+import src.view.LoginView;
+import src.view.SignupView;
+import src.view.ViewManager;
 
 import javax.swing.*;
 import java.awt.*;

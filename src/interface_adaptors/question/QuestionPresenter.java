@@ -1,4 +1,4 @@
-package src.interface_adaptors;
+package src.interface_adaptors.question;
 
 public class QuestionPresenter {
 }

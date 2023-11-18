@@ -1,12 +1,10 @@
-package use_case.signup;
+package src.use_case.signup;
 
-import entity.User;
+import src.entity.User;
 
 import src.entity.User;
 
 public interface SignupUserDataAccessInterface {
-    void save(User user);
-
     User get(String username);
 
     boolean existsByName(String identifier);

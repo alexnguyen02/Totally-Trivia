@@ -1,7 +1,7 @@
-package use_case.signup;
+package src.use_case.signup;
 
-import entity.User;
-import entity.UserFactory;
+import src.entity.User;
+import src.entity.UserFactory;
 
 import java.time.LocalDateTime;
 

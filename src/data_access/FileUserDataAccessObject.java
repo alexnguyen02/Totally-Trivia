@@ -1,13 +1,12 @@
-package data_access;
-
-import entity.User;
-import entity.UserFactory;
-import use_case.login.LoginUserDataAccessInterface;
-import use_case.signup.SignupUserDataAccessInterface;
+package src.data_access;
 
 import src.entity.User;
 import src.entity.UserFactory;
-import src.use_case.signup.ClearUserDataAccessInterface;
+import src.use_case.login.LoginUserDataAccessInterface;
+import src.use_case.signup.SignupUserDataAccessInterface;
+
+import src.entity.User;
+import src.entity.UserFactory;
 import src.use_case.signup.LoginUserDataAccessInterface;
 import src.use_case.signup.SignupUserDataAccessInterface;
 
