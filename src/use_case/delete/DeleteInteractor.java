@@ -11,7 +11,9 @@ public class DeleteInteractor implements DeleteInputBoundary {
     }
     @Override
     public void execute(){
-        String username = userDataAccessObject.delete();
+        String id = new String();
+        String p = new String();
+        String username = userDataAccessObject.delete(id, p);
         DeleteOutputData DeleteOutputData = new DeleteOutputData(username);
         userPresenter.prepareSuccessView(DeleteOutputData);
     }
