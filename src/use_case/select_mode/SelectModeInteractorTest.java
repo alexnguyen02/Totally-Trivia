@@ -12,7 +12,7 @@ public class SelectModeInteractorTest {
 
     @org.junit.Test
     public void successTest(){
-        SelectModeInputData inputData = new SelectModeInputData("Animals", "easy", 2);
+        SelectModeInputData inputData = new SelectModeInputData("Animals", "Easy", 2);
         SelectModeDataObjectInterface selectModeDatabase = new InMemorySelectModeAccessObject();
 
         SelectModeOutputBoundary successPresenter = new SelectModeOutputBoundary() {
