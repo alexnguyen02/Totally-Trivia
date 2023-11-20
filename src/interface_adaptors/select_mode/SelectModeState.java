@@ -47,4 +47,18 @@ public class SelectModeState {
         return this.numOfQuestions;
     }
 
+    public void setNumOfQuestions(Integer numOfQuestions){
+        this.numOfQuestions = numOfQuestions;
+    }
+
+    public String toString() {
+        StringBuilder questionsToString = new StringBuilder();
+
+        for (String q : this.outputQuestions){
+            questionsToString.append(q).append("\n");
+        }
+
+        return questionsToString.toString();
+    }
+
 }

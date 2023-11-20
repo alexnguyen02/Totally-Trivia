@@ -2,16 +2,15 @@ package src.app;
 
 import src.app.LoginUseCaseFactory;
 import src.data_access.FileUserDataAccessObject;
+import src.data_access.InMemorySelectModeAccessObject;
 import src.entity.CommonUserFactory;
 import src.interface_adaptors.login.LoginViewModel;
 import src.interface_adaptors.logged_in.LoggedInViewModel;
+import src.interface_adaptors.select_mode.SelectModeViewModel;
 import src.interface_adaptors.signup.SignupViewModel;
 import src.interface_adaptors.ViewManagerModel;
 import src.use_case.login.LoginUserDataAccessInterface;
-import src.view.LoggedInView;
-import src.view.LoginView;
-import src.view.SignupView;
-import src.view.ViewManager;
+import src.view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,12 +43,19 @@ public class Main {
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
 
+        // Initialize SelectModeViewModel
+        SelectModeViewModel selectModeViewModel = new SelectModeViewModel();
+
         FileUserDataAccessObject userDataAccessObject;
         try {
             userDataAccessObject = new FileUserDataAccessObject("./users.csv", new CommonUserFactory());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        // Initialize InMemoryDataAccessObject (for testing purpose); The actual Data Access Object is calling API
+        InMemorySelectModeAccessObject selectModeAccessObject;
+        selectModeAccessObject = new InMemorySelectModeAccessObject();
 
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
         // views.add(signupView, signupView.viewName);
@@ -59,6 +65,9 @@ public class Main {
 
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
         views.add(loggedInView, loggedInView.viewName);
+
+        SelectModeView selectModeView = SelectModeUseCaseFactory.create(viewManagerModel, selectModeViewModel, selectModeAccessObject);
+        views.add(selectModeView, selectModeView.viewName);
 
         viewManagerModel.setActiveView(signupView.viewName);
         viewManagerModel.firePropertyChanged();

@@ -9,6 +9,15 @@ import java.util.ArrayList;
 
 public class SelectModeViewModel extends ViewModel {
 
+    public static final String TITLE_LABEL = "Custom your trivia";
+
+    public static final String CATEGORY_LABEL = "Category";
+    public static final String DIFFICULTY_LABEL = "Difficulty level";
+    public static final String NUM_QUESTIONS_LABEL = "Number of questions";
+
+    public static final String START_BUTTON_LABEL = "Start";
+    public static final String RESET_BUTTON_LABEL = "Reset";
+
     private ArrayList<String> outputQuestions;
     private static SelectModeState state;
 

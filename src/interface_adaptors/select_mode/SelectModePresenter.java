@@ -19,10 +19,13 @@ public class SelectModePresenter implements SelectModeOutputBoundary {
 
     @Override
     public void prepareSelectModeSuccessView(SelectModeOutputData selectModeOutputData) {
-        ArrayList<String> outputQuestions = selectModeOutputData.getAllQuestions();
+        ArrayList<String> outputQuestions = selectModeOutputData.getOutputQuestions();
 
         SelectModeState selectModeState = new SelectModeState(outputQuestions);
         this.selectModeViewModel.setState(selectModeState);
+        this.selectModeViewModel.firePropertyChanged();
+
+        this.viewManagerModel.setActiveView(this.selectModeViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 
