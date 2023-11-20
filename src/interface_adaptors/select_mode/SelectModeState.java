@@ -1,4 +1,4 @@
-package src.interface_adaptors.select_mode;
+package interface_adaptors.select_mode;
 
 import java.util.ArrayList;
 

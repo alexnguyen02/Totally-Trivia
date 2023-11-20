@@ -1,10 +1,7 @@
-package src.data_access;
+package data_access;
 
-import src.entity.User;
-import src.use_case.signup.*;
-
-import src.entity.User;
-import src.use_case.signup.SignupUserDataAccessInterface;
+import entity.User;
+import use_case.signup.*;
 
 import java.util.HashMap;
 import java.util.Map;

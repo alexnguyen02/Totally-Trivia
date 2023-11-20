@@ -1,14 +1,14 @@
-package src.app;
+package app;
 
-import src.interface_adaptors.ViewManagerModel;
-import src.interface_adaptors.select_mode.SelectModeController;
-import src.interface_adaptors.select_mode.SelectModePresenter;
-import src.interface_adaptors.select_mode.SelectModeViewModel;
-import src.use_case.select_mode.SelectModeDataObjectInterface;
-import src.use_case.select_mode.SelectModeInputBoundary;
-import src.use_case.select_mode.SelectModeInteractor;
-import src.use_case.select_mode.SelectModeOutputBoundary;
-import src.view.SelectModeView;
+import interface_adaptors.ViewManagerModel;
+import interface_adaptors.select_mode.SelectModeController;
+import interface_adaptors.select_mode.SelectModePresenter;
+import interface_adaptors.select_mode.SelectModeViewModel;
+import use_case.select_mode.SelectModeDataObjectInterface;
+import use_case.select_mode.SelectModeInputBoundary;
+import use_case.select_mode.SelectModeInteractor;
+import use_case.select_mode.SelectModeOutputBoundary;
+import view.SelectModeView;
 
 import javax.swing.*;
 import java.io.IOException;

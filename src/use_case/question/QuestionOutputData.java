@@ -1,4 +1,4 @@
-package src.use_case.question;
+package use_case.question;
 
 public class QuestionOutputData {
 }

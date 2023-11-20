@@ -1,4 +1,4 @@
-package src.entity;
+package entity;
 
 public class Question {
     /// A class represents ONE QUESTION in the trivia cash game

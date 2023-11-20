@@ -1,9 +1,9 @@
-package src.view;
+package view;
 
-import src.interface_adaptors.login.LoginController;
-import src.interface_adaptors.login.LoginState;
-import src.interface_adaptors.login.LoginViewModel;
-import src.interface_adaptors.signup.SignupState;
+import interface_adaptors.login.LoginController;
+import interface_adaptors.login.LoginState;
+import interface_adaptors.login.LoginViewModel;
+import interface_adaptors.signup.SignupState;
 
 import javax.swing.*;
 import java.awt.*;

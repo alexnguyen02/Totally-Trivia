@@ -1,7 +1,7 @@
-package src.interface_adaptors.select_mode;
+package interface_adaptors.select_mode;
 
-import src.interface_adaptors.ViewModel;
-import src.view.SelectModeView;
+import interface_adaptors.ViewModel;
+import view.SelectModeView;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

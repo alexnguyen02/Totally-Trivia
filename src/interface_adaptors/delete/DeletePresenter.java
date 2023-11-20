@@ -1,7 +1,7 @@
-package src.interface_adaptors.delete;
+package interface_adaptors.delete;
 
-import src.use_case.delete.DeleteOutputBoundary;
-import src.use_case.delete.DeleteOutputData;
+import use_case.delete.DeleteOutputBoundary;
+import use_case.delete.DeleteOutputData;
 
 import java.util.StringJoiner;
 

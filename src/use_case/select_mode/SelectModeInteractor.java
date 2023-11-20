@@ -1,7 +1,7 @@
-package src.use_case.select_mode;
+package use_case.select_mode;
 
-import src.data_access.InMemorySelectModeAccessObject;
-import src.entity.Question;
+import data_access.InMemorySelectModeAccessObject;
+import entity.Question;
 
 import java.util.ArrayList;
 

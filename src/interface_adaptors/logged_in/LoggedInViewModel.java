@@ -1,7 +1,7 @@
-package src.interface_adaptors.logged_in;
+package interface_adaptors.logged_in;
 
-import src.interface_adaptors.ViewModel;
-import src.interface_adaptors.login.LoginState;
+import interface_adaptors.ViewModel;
+import interface_adaptors.login.LoginState;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

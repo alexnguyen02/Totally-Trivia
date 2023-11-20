@@ -1,8 +1,8 @@
-package src.view;
+package view;
 
-import src.interface_adaptors.select_mode.SelectModeController;
-import src.interface_adaptors.select_mode.SelectModeState;
-import src.interface_adaptors.select_mode.SelectModeViewModel;
+import interface_adaptors.select_mode.SelectModeController;
+import interface_adaptors.select_mode.SelectModeState;
+import interface_adaptors.select_mode.SelectModeViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,8 +11,8 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import static src.interface_adaptors.select_mode.SelectModeViewModel.*;
-import static src.interface_adaptors.select_mode.SelectModeViewModel.NUM_QUESTIONS_LABEL;
+import static interface_adaptors.select_mode.SelectModeViewModel.*;
+import static interface_adaptors.select_mode.SelectModeViewModel.NUM_QUESTIONS_LABEL;
 
 public class SelectModeView extends JPanel implements ActionListener, PropertyChangeListener {
 

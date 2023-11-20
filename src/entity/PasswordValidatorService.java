@@ -1,5 +1,5 @@
-package src.entity;
-import src.entity.PasswordValidator;
+package entity;
+import entity.PasswordValidator;
 
 public class PasswordValidatorService implements PasswordValidator {
     public boolean passwordIsValid(String password) {

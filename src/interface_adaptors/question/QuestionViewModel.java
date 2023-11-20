@@ -1,8 +1,8 @@
-package src.interface_adaptors.question;
+package interface_adaptors.question;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import src.interface_adaptors.ViewModel;
+import interface_adaptors.ViewModel;
 
 public class QuestionViewModel extends ViewModel {
 

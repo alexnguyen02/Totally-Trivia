@@ -1,6 +1,6 @@
-package src.interface_adaptors.delete;
+package interface_adaptors.delete;
 
-import src.use_case.delete.DeleteInputBoundary;
+import use_case.delete.DeleteInputBoundary;
 
 
 public class DeleteController {

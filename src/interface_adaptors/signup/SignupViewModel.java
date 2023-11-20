@@ -1,10 +1,10 @@
-package src.interface_adaptors.signup;
+package interface_adaptors.signup;
 
-import src.interface_adaptors.ViewModel;
+import interface_adaptors.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import src.interface_adaptors.signup.SignupState;
+import interface_adaptors.signup.SignupState;
 
 public class SignupViewModel extends ViewModel {
 

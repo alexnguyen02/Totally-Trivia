@@ -1,6 +1,6 @@
-package src.interface_adaptors.delete;
+package interface_adaptors.delete;
 
-import src.interface_adaptors.ViewModel;
+import interface_adaptors.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

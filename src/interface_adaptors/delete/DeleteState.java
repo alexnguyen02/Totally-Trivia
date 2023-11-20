@@ -1,4 +1,4 @@
-package src.interface_adaptors.delete;
+package interface_adaptors.delete;
 
 public class DeleteState {
     private String username;

@@ -1,13 +1,13 @@
-package src.interface_adaptors.signup;
+package interface_adaptors.signup;
 
-import src.interface_adaptors.login.LoginState;
-import src.interface_adaptors.login.LoginViewModel;
-import src.interface_adaptors.ViewManagerModel;
-import src.use_case.signup.SignupOutputBoundary;
-import src.use_case.signup.SignupOutputData;
+import interface_adaptors.login.LoginState;
+import interface_adaptors.login.LoginViewModel;
+import interface_adaptors.ViewManagerModel;
+import use_case.signup.SignupOutputBoundary;
+import use_case.signup.SignupOutputData;
 
-import src.interface_adaptors.ViewManagerModel;
-import src.interface_adaptors.login.LoginViewModel;
+import interface_adaptors.ViewManagerModel;
+import interface_adaptors.login.LoginViewModel;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

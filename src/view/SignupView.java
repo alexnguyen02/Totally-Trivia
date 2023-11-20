@@ -1,7 +1,7 @@
-package src.view;
+package view;
 
-import src.interface_adaptors.signup.SignupController;
-import src.interface_adaptors.signup.SignupViewModel;
+import interface_adaptors.signup.SignupController;
+import interface_adaptors.signup.SignupViewModel;
 
 public class SignupView {
     public String viewName;

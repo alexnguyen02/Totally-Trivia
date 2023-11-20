@@ -1,8 +1,8 @@
-package src.interface_adaptors.select_mode;
+package interface_adaptors.select_mode;
 
-import src.interface_adaptors.ViewManagerModel;
-import src.use_case.select_mode.SelectModeOutputBoundary;
-import src.use_case.select_mode.SelectModeOutputData;
+import interface_adaptors.ViewManagerModel;
+import use_case.select_mode.SelectModeOutputBoundary;
+import use_case.select_mode.SelectModeOutputData;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package src.use_case.delete;
+package use_case.delete;
 
 public class DeleteInteractor implements DeleteInputBoundary {
     final DeleteUserDataAccessInterface userDataAccessObject;

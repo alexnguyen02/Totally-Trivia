@@ -1,8 +1,6 @@
-package src.use_case.signup;
+package use_case.signup;
 
-import src.entity.User;
-
-import src.entity.User;
+import entity.User;
 
 public interface SignupUserDataAccessInterface {
     User get(String username);

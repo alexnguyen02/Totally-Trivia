@@ -1,4 +1,4 @@
-package src.view;
+package view;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import src.interface_adaptors.question.QuestionViewModel;
+import interface_adaptors.question.QuestionViewModel;
 
 public class QuestionView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "question";

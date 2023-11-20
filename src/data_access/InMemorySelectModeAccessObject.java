@@ -1,8 +1,8 @@
-package src.data_access;
+package data_access;
 
-import src.entity.AnswerPackage;
-import src.entity.Question;
-import src.use_case.select_mode.SelectModeDataObjectInterface;
+import entity.AnswerPackage;
+import entity.Question;
+import use_case.select_mode.SelectModeDataObjectInterface;
 
 import java.util.*;
 

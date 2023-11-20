@@ -1,14 +1,9 @@
-package src.data_access;
+package data_access;
 
-import src.entity.User;
-import src.entity.UserFactory;
-import src.use_case.login.LoginUserDataAccessInterface;
-import src.use_case.signup.SignupUserDataAccessInterface;
-
-import src.entity.User;
-import src.entity.UserFactory;
-import src.use_case.login.LoginUserDataAccessInterface;
-import src.use_case.signup.SignupUserDataAccessInterface;
+import entity.User;
+import entity.UserFactory;
+import use_case.login.LoginUserDataAccessInterface;
+import use_case.signup.SignupUserDataAccessInterface;
 
 import java.io.*;
 import java.time.LocalDateTime;

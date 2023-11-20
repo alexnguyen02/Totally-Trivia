@@ -1,8 +1,8 @@
-package src.interface_adaptors.select_mode;
+package interface_adaptors.select_mode;
 
-import src.use_case.select_mode.SelectModeInputBoundary;
+import use_case.select_mode.SelectModeInputBoundary;
 
-import src.use_case.select_mode.SelectModeInputData;
+import use_case.select_mode.SelectModeInputData;
 
 public class SelectModeController {
     final SelectModeInputBoundary selectModeUseCaseInteractor;

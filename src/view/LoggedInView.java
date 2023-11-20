@@ -1,8 +1,8 @@
-package src.view;
+package view;
 
-import src.interface_adaptors.logged_in.LoggedInState;
-import src.interface_adaptors.logged_in.LoggedInViewModel;
-import src.interface_adaptors.login.LoginState;
+import interface_adaptors.logged_in.LoggedInState;
+import interface_adaptors.logged_in.LoggedInViewModel;
+import interface_adaptors.login.LoginState;
 
 import javax.swing.*;
 import java.awt.*;

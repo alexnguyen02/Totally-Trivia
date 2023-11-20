@@ -1,13 +1,13 @@
-package src.interface_adaptors.login;
+package interface_adaptors.login;
 
-import src.interface_adaptors.logged_in.LoggedInState;
-import src.interface_adaptors.logged_in.LoggedInViewModel;
-import src.interface_adaptors.ViewManagerModel;
-import src.interface_adaptors.signup.SignupState;
-import src.use_case.login.LoginOutputBoundary;
-import src.use_case.login.LoginOutputData;
-import src.use_case.signup.SignupOutputBoundary;
-import src.use_case.signup.SignupOutputData;
+import interface_adaptors.logged_in.LoggedInState;
+import interface_adaptors.logged_in.LoggedInViewModel;
+import interface_adaptors.ViewManagerModel;
+import interface_adaptors.signup.SignupState;
+import use_case.login.LoginOutputBoundary;
+import use_case.login.LoginOutputData;
+import use_case.signup.SignupOutputBoundary;
+import use_case.signup.SignupOutputData;
 
 public class LoginPresenter implements LoginOutputBoundary {
 
