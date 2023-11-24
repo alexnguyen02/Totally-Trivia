@@ -7,4 +7,8 @@ public class QuestionInputData {
     public QuestionInputData(String answerText) {
         this.answerText = answerText;
     }
+
+    public String getAnswerText() {
+        return answerText;
+    }
 }

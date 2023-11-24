@@ -6,6 +6,7 @@ import data_access.InMemorySelectModeAccessObject;
 import entity.CommonUserFactory;
 import interface_adaptors.login.LoginViewModel;
 import interface_adaptors.logged_in.LoggedInViewModel;
+import interface_adaptors.question.QuestionViewModel;
 import interface_adaptors.select_mode.SelectModeViewModel;
 import interface_adaptors.signup.SignupViewModel;
 import interface_adaptors.ViewManagerModel;
@@ -42,6 +43,7 @@ public class Main {
         LoginViewModel loginViewModel = new LoginViewModel();
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
+        QuestionViewModel questionViewModel = new QuestionViewModel();
 
         // Initialize SelectModeViewModel
         SelectModeViewModel selectModeViewModel = new SelectModeViewModel();
@@ -58,7 +60,7 @@ public class Main {
         selectModeAccessObject = new InMemorySelectModeAccessObject();
 
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
-        // views.add(signupView, signupView.viewName);
+        //views.add(signupView, signupView.viewName);
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
@@ -69,7 +71,10 @@ public class Main {
         SelectModeView selectModeView = SelectModeUseCaseFactory.create(viewManagerModel, selectModeViewModel, selectModeAccessObject);
         views.add(selectModeView, selectModeView.viewName);
 
-        viewManagerModel.setActiveView(signupView.viewName);
+        QuestionView questionView = QuestionUseCaseFactory.create(viewManagerModel, questionViewModel);
+        views.add(questionView, questionView.viewName);
+
+        viewManagerModel.setActiveView(questionView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();
