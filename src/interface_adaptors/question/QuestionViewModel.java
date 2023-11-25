@@ -22,13 +22,18 @@ public class QuestionViewModel extends ViewModel {
         this.THIRD_ANSWER_BUTTON_LABEL = "Drusilla";
         this.FOURTH_ANSWER_BUTTON_LABEL = "Aggripina";
     }
+    public void updateViewModel() {
+        this.QUESTION_TITLE_LABEL = "Who was Murad I's son?";
+        this.FIRST_ANSWER_BUTTON_LABEL = "Osman";
+        this.SECOND_ANSWER_BUTTON_LABEL = "Mehmed II";
+        this.THIRD_ANSWER_BUTTON_LABEL = "Bayezid I";
+        this.FOURTH_ANSWER_BUTTON_LABEL = "Selim I";
+    }
     public String getViewName() {return this.viewName;}
     public void setState(QuestionState state) {
         this.state = state;
     }
-    public QuestionState getState() {
-        return this.state;
-    }
+    public QuestionState getState() { return this.state; }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
