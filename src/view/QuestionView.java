@@ -10,6 +10,7 @@ import java.beans.PropertyChangeListener;
 import interface_adaptors.question.QuestionController;
 import interface_adaptors.question.QuestionState;
 import interface_adaptors.question.QuestionViewModel;
+import use_case.signup.SignupOutputBoundary;
 
 public class QuestionView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "question";
@@ -17,6 +18,7 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
     private final QuestionViewModel questionViewModel;
     private final QuestionController questionController;
 
+    private final JLabel question;
     private final JButton answer1;
     private final JButton answer2;
     private final JButton answer3;
@@ -28,8 +30,8 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
         this.questionViewModel = questionViewModel;
         questionViewModel.addPropertyChangeListener(this);
 
-        JLabel title = new JLabel(questionViewModel.QUESTION_TITLE_LABEL);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.question = new JLabel(questionViewModel.QUESTION_TITLE_LABEL);
+        question.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JPanel buttons = new JPanel();
 
@@ -88,13 +90,18 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        this.add(title);
+        this.add(question);
         this.add(buttons);
     }
 
-    /**
-     * React to a button click that results in evt.
-     */
+    public void updateView() {
+        question.setText(questionViewModel.QUESTION_TITLE_LABEL);
+        answer1.setText(questionViewModel.FIRST_ANSWER_BUTTON_LABEL);
+        answer2.setText(questionViewModel.SECOND_ANSWER_BUTTON_LABEL);
+        answer3.setText(questionViewModel.THIRD_ANSWER_BUTTON_LABEL);
+        answer4.setText(questionViewModel.FOURTH_ANSWER_BUTTON_LABEL);
+    }
+
     public void actionPerformed(ActionEvent evt) {
         JOptionPane.showConfirmDialog(this, "Not implemented yet.");
     }
@@ -108,6 +115,8 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
         } else {
             JOptionPane.showMessageDialog(this, "That answer is incorrect :(");
         }
+        questionViewModel.updateViewModel();
+        updateView();
+        System.out.println(questionViewModel.getState().getQuestionNum());
     }
-
 }

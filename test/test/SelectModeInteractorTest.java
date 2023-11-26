@@ -1,3 +1,5 @@
+package test;
+
 import data_access.InMemorySelectModeAccessObject;
 import use_case.select_mode.*;
 
@@ -27,10 +29,10 @@ public class SelectModeInteractorTest {
 
             @Override
             public void prepareSelectModeFailView(String error) {
-               fail("Select mode use case failure is unexpected");
-                }
-            };
+                fail("Select mode use case failure is unexpected");
+            }
+        };
         SelectModeInputBoundary selectModeInputInteractor = new SelectModeInteractor(selectModeDatabase, successPresenter);
         selectModeInputInteractor.execute(inputData);
-        }
     }
+}
