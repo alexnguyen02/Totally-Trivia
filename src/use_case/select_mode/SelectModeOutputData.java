@@ -23,4 +23,8 @@ public class SelectModeOutputData {
         return allQuestions;
     }
 
+    public ArrayList<Question> getQuestionObjects(){
+        return this.listOfQuestions;
+    }
+
 }
