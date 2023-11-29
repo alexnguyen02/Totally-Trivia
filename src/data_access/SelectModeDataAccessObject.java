@@ -77,11 +77,12 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
     private AnswerPackage buildAnswerPackage(String correctAnswer, String incorrectAnswers){
         JSONObject incorrectAnswersObject = new JSONObject(incorrectAnswers);
         JSONArray incorrectAnswersArray = new JSONArray(incorrectAnswersObject);
-        int possibleAnswersSize = incorrectAnswersArray.length() + 1;
 
+        int possibleAnswersSize = incorrectAnswersArray.length() + 1;
         ArrayList<String> possibleAnswersList = new ArrayList<>(possibleAnswersSize);
+        
         for (int i = 0; i < incorrectAnswersArray.length(); i++) {
-            possibleAnswersList.set(i, incorrectAnswersArray.getString(i));
+            possibleAnswersList.add(i, incorrectAnswersArray.getString(i));
         }
 
         Random random = new Random();
