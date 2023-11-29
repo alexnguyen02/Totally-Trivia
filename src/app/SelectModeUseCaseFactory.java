@@ -1,6 +1,8 @@
 package app;
 
+import data_access.QuestionStorageDataAccessObject;
 import interface_adaptors.ViewManagerModel;
+import interface_adaptors.question.QuestionViewModel;
 import interface_adaptors.select_mode.SelectModeController;
 import interface_adaptors.select_mode.SelectModePresenter;
 import interface_adaptors.select_mode.SelectModeViewModel;
@@ -20,10 +22,13 @@ public class SelectModeUseCaseFactory {
     public static SelectModeView create(
             ViewManagerModel viewManagerModel,
             SelectModeViewModel selectModeViewModel,
-            SelectModeDataObjectInterface selectModeDataObject) {
+            SelectModeDataObjectInterface selectModeDataObject,
+            QuestionStorageDataAccessObject questionStorageDataAccessObject,
+            QuestionViewModel questionViewModel) {
 
         try {
-            SelectModeController selectModeController = createSelectModeUseCase(viewManagerModel, selectModeViewModel, selectModeDataObject);
+            SelectModeController selectModeController = createSelectModeUseCase(viewManagerModel, selectModeViewModel,
+                    selectModeDataObject, questionStorageDataAccessObject, questionViewModel);
             return new SelectModeView(selectModeViewModel, selectModeController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not access data object");
@@ -35,12 +40,16 @@ public class SelectModeUseCaseFactory {
     private static SelectModeController createSelectModeUseCase(
             ViewManagerModel viewManagerModel,
             SelectModeViewModel selectModeViewModel,
-            SelectModeDataObjectInterface selectModeDataAccessObject) throws IOException {
+            SelectModeDataObjectInterface selectModeDataAccessObject,
+            QuestionStorageDataAccessObject questionStorageDataAccessObject,
+            QuestionViewModel questionViewModel) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.
-        SelectModeOutputBoundary selectModeOutputBoundary = new SelectModePresenter(viewManagerModel, selectModeViewModel);
+        SelectModeOutputBoundary selectModeOutputBoundary = new SelectModePresenter(viewManagerModel,
+                selectModeViewModel, questionViewModel);
 
-        SelectModeInputBoundary selectModeInteractor= new SelectModeInteractor(selectModeDataAccessObject, selectModeOutputBoundary);
+        SelectModeInputBoundary selectModeInteractor= new SelectModeInteractor(selectModeDataAccessObject,
+                selectModeOutputBoundary, questionStorageDataAccessObject);
 
         return new SelectModeController(selectModeInteractor);
     }

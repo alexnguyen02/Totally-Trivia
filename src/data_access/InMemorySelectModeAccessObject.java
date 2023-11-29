@@ -15,24 +15,24 @@ public class InMemorySelectModeAccessObject implements SelectModeDataObjectInter
     private final Map<Integer, Question> hardQuestions = new HashMap<Integer,Question>();
 
     public InMemorySelectModeAccessObject(){
-        ArrayList<String> possibleAnswersOne = new ArrayList<>(List.of(new String[]{"Dog", "Cat", "Both", "Neither"}));
+        /*ArrayList<String> possibleAnswersOne = new ArrayList<>(List.of(new String[]{"Dog", "Cat", "Both", "Neither"}));
         AnswerPackage answerPackageOne = new AnswerPackage(possibleAnswersOne, "Dog");
         Question questionOne = new Question(
                 "Dog or Cat?",
                 "Animals",
                 "Easy",
                 answerPackageOne);
-        easyQuestions.put(1, questionOne);
+        easyQuestions.put(1, questionOne);*/
 
 
-        ArrayList<String> possibleAnswersTwo = new ArrayList<>(List.of(new String[]{"Dog", "Cat", "Both", "Neither"}));
-        AnswerPackage answerPackageTwo = new AnswerPackage(possibleAnswersTwo, "Dog");
-        Question questionTwo = new Question(
+        /*//ArrayList<String> possibleAnswersTwo = new ArrayList<>(List.of(new String[]{"Dog", "Cat", "Both", "Neither"}));
+        //AnswerPackage answerPackageTwo = new AnswerPackage(possibleAnswersTwo, "Dog");
+        //Question questionTwo = new Question(
                 "Dog or Cat?",
                 "Animals",
                 "Easy",
                 answerPackageTwo);
-        easyQuestions.put(2, questionTwo);
+        easyQuestions.put(2, questionTwo);*/
     }
 
 

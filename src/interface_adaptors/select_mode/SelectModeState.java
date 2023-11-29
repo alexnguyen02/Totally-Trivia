@@ -1,5 +1,7 @@
 package interface_adaptors.select_mode;
 
+import entity.Question;
+
 import java.util.ArrayList;
 
 public class SelectModeState {
@@ -7,7 +9,7 @@ public class SelectModeState {
     private String difficultyLevel = "";
     private Integer numOfQuestions = 0;
 
-    private ArrayList<String> outputQuestions;
+    private ArrayList<Question> outputQuestions;
 
     public SelectModeState(SelectModeState copy){
         this.category = copy.category;
@@ -15,15 +17,15 @@ public class SelectModeState {
         this.numOfQuestions = copy.numOfQuestions;
     }
 
-    public SelectModeState(ArrayList<String> outputQuestions){
+    public SelectModeState(ArrayList<Question> outputQuestions){
         this.outputQuestions = outputQuestions;
     }
 
-    public ArrayList<String> getOutputQuestions() {
+    public ArrayList<Question> getOutputQuestions() {
         return this.outputQuestions;
     }
 
-    public void setOutputQuestions(ArrayList<String> outputQuestions) {
+    public void setOutputQuestions(ArrayList<Question> outputQuestions) {
         this.outputQuestions = outputQuestions;
     }
 
@@ -54,7 +56,7 @@ public class SelectModeState {
     public String toString() {
         StringBuilder questionsToString = new StringBuilder();
 
-        for (String q : this.outputQuestions){
+        for (Question q : this.outputQuestions){
             questionsToString.append(q).append("\n");
         }
 

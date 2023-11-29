@@ -11,8 +11,8 @@ public class QuestionController {
         this.questionUseCaseInteractor = questionUseCaseInteractor;
     }
 
-    public void execute(String answerText) {
-        QuestionInputData questionInputData = new QuestionInputData(answerText);
+    public void execute(String answerText, int questionNum) {
+        QuestionInputData questionInputData = new QuestionInputData(answerText, questionNum);
 
         questionUseCaseInteractor.execute(questionInputData);
     }

@@ -18,6 +18,8 @@ public class QuestionPresenter implements QuestionOutputBoundary {
         QuestionState questionState = questionViewModel.getState();
         questionState.setQuestionCorrect(questionOutputData.correctness);
         questionState.setQuestionNum(questionState.getQuestionNum() + 1);
+        questionState.setNewQuestion(questionOutputData.nextQuestion);
+
         questionViewModel.setState(questionState);
         questionViewModel.firePropertyChanged();
         viewManagerModel.firePropertyChanged();

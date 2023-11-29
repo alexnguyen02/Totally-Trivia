@@ -3,7 +3,12 @@ package app;
 import app.LoginUseCaseFactory;
 import data_access.FileUserDataAccessObject;
 import data_access.InMemorySelectModeAccessObject;
+import data_access.QuestionStorageDataAccessObject;
+import data_access.SelectModeDataAccessObject;
 import entity.CommonUserFactory;
+import interface_adaptors.game_over.GameOverController;
+import interface_adaptors.game_over.GameOverPresenter;
+import interface_adaptors.game_over.GameOverViewModel;
 import interface_adaptors.login.LoginViewModel;
 import interface_adaptors.logged_in.LoggedInViewModel;
 import interface_adaptors.question.QuestionViewModel;
@@ -44,6 +49,7 @@ public class Main {
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
         QuestionViewModel questionViewModel = new QuestionViewModel();
+        GameOverViewModel gameOverViewModel = new GameOverViewModel();
 
         // Initialize SelectModeViewModel
         SelectModeViewModel selectModeViewModel = new SelectModeViewModel();
@@ -58,6 +64,8 @@ public class Main {
         // Initialize InMemoryDataAccessObject (for testing purpose); The actual Data Access Object is calling API
         InMemorySelectModeAccessObject selectModeAccessObject;
         selectModeAccessObject = new InMemorySelectModeAccessObject();
+        SelectModeDataAccessObject selectModeDataAccessObject = new SelectModeDataAccessObject();
+        QuestionStorageDataAccessObject questionStorageDataAccessObject = new QuestionStorageDataAccessObject();
 
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
         //views.add(signupView, signupView.viewName);
@@ -68,13 +76,17 @@ public class Main {
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
         views.add(loggedInView, loggedInView.viewName);
 
-        SelectModeView selectModeView = SelectModeUseCaseFactory.create(viewManagerModel, selectModeViewModel, selectModeAccessObject);
+        SelectModeView selectModeView = SelectModeUseCaseFactory.create(viewManagerModel, selectModeViewModel,
+                selectModeDataAccessObject, questionStorageDataAccessObject, questionViewModel);
         views.add(selectModeView, selectModeView.viewName);
 
-        QuestionView questionView = QuestionUseCaseFactory.create(viewManagerModel, questionViewModel);
+        QuestionView questionView = QuestionUseCaseFactory.create(viewManagerModel, questionViewModel, gameOverViewModel, questionStorageDataAccessObject);
         views.add(questionView, questionView.viewName);
 
-        viewManagerModel.setActiveView(questionView.viewName);
+        GameOverView gameOverView = new GameOverView(gameOverViewModel, new GameOverController(new GameOverPresenter(viewManagerModel)));
+        views.add(gameOverView, gameOverView.viewName);
+
+        viewManagerModel.setActiveView(selectModeView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();
