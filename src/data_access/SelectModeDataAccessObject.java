@@ -34,7 +34,7 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
 
     private String difficultyLevel;
 
-    public void SelecModeDataAccessObject() {
+    public SelectModeDataAccessObject() {
         createCategoryMap();
     }
 

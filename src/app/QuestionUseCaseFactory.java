@@ -1,7 +1,9 @@
 package app;
 
 
+import data_access.QuestionStorageDataAccessObject;
 import interface_adaptors.ViewManagerModel;
+import interface_adaptors.game_over.GameOverViewModel;
 import interface_adaptors.question.QuestionPresenter;
 import interface_adaptors.question.QuestionViewModel;
 import use_case.question.QuestionInputBoundary;
@@ -21,15 +23,18 @@ public class QuestionUseCaseFactory {
 
     public static QuestionView create(
             ViewManagerModel viewManagerModel,
-            QuestionViewModel questionViewModel) {
-        QuestionController questionController = createQuestionUseCase(viewManagerModel, questionViewModel);
-        return new QuestionView(questionViewModel, questionController);
+            QuestionViewModel questionViewModel, GameOverViewModel gameOverViewModel,
+            QuestionStorageDataAccessObject questionStorageDataAccessObject) {
+        QuestionController questionController = createQuestionUseCase(viewManagerModel,
+                questionViewModel, questionStorageDataAccessObject);
+        return new QuestionView(questionViewModel, questionController, gameOverViewModel);
     }
 
     private static QuestionController createQuestionUseCase(ViewManagerModel viewManagerModel,
-                                                            QuestionViewModel questionViewModel) {
+                                                            QuestionViewModel questionViewModel,
+                                                            QuestionStorageDataAccessObject questionStorageDataAccessObject) {
         QuestionOutputBoundary questionOutputBoundary = new QuestionPresenter(viewManagerModel, questionViewModel);
-        QuestionInputBoundary questionInteractor = new QuestionInteractor(questionOutputBoundary);
+        QuestionInputBoundary questionInteractor = new QuestionInteractor(questionOutputBoundary, questionStorageDataAccessObject);
         return new QuestionController(questionInteractor);
     }
 }

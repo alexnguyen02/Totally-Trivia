@@ -1,6 +1,8 @@
 package interface_adaptors.select_mode;
 
+import entity.Question;
 import interface_adaptors.ViewManagerModel;
+import interface_adaptors.question.QuestionViewModel;
 import use_case.select_mode.SelectModeOutputBoundary;
 import use_case.select_mode.SelectModeOutputData;
 
@@ -10,22 +12,29 @@ public class SelectModePresenter implements SelectModeOutputBoundary {
 
     private final SelectModeViewModel selectModeViewModel;
 
+    //this may be breaking CA
+    private final QuestionViewModel questionViewModel;
+
     private final ViewManagerModel viewManagerModel;
 
-    public SelectModePresenter(ViewManagerModel viewManagerModel, SelectModeViewModel selectModeViewModel){
+    public SelectModePresenter(ViewManagerModel viewManagerModel, SelectModeViewModel selectModeViewModel,
+                               QuestionViewModel questionViewModel){
         this.selectModeViewModel = selectModeViewModel;
         this.viewManagerModel = viewManagerModel;
+        this.questionViewModel = questionViewModel;
     }
 
     @Override
     public void prepareSelectModeSuccessView(SelectModeOutputData selectModeOutputData) {
-        ArrayList<String> outputQuestions = selectModeOutputData.getOutputQuestions();
+        ArrayList<Question> outputQuestions = selectModeOutputData.getOutputQuestions();
 
         SelectModeState selectModeState = new SelectModeState(outputQuestions);
         this.selectModeViewModel.setState(selectModeState);
         this.selectModeViewModel.firePropertyChanged();
 
-        this.viewManagerModel.setActiveView(this.selectModeViewModel.getViewName());
+        this.questionViewModel.updateViewModel(outputQuestions.get(0));
+
+        this.viewManagerModel.setActiveView("question");
         this.viewManagerModel.firePropertyChanged();
     }
 

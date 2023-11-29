@@ -69,6 +69,9 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(start)) {
                             SelectModeState currentState = selectModeViewModel.getState();
+                            String category = currentState.getCategory();
+                            String difficulty = currentState.getDifficultyLevel();
+                            Integer num = currentState.getNumOfQuestions();
                             System.out.println(currentState.getCategory());
                             System.out.println(currentState.getDifficultyLevel());
                             System.out.println(currentState.getNumOfQuestions());

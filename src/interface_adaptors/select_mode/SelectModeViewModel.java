@@ -1,5 +1,6 @@
 package interface_adaptors.select_mode;
 
+import entity.Question;
 import interface_adaptors.ViewModel;
 import view.SelectModeView;
 
@@ -18,7 +19,7 @@ public class SelectModeViewModel extends ViewModel {
     public static final String START_BUTTON_LABEL = "Start";
     public static final String RESET_BUTTON_LABEL = "Reset";
 
-    private ArrayList<String> outputQuestions;
+    private ArrayList<Question> outputQuestions;
     private static SelectModeState state;
 
     public SelectModeViewModel(){

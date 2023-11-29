@@ -7,15 +7,17 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import interface_adaptors.game_over.GameOverState;
+import interface_adaptors.game_over.GameOverViewModel;
 import interface_adaptors.question.QuestionController;
 import interface_adaptors.question.QuestionState;
 import interface_adaptors.question.QuestionViewModel;
-import use_case.signup.SignupOutputBoundary;
 
 public class QuestionView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "question";
 
     private final QuestionViewModel questionViewModel;
+    private final GameOverViewModel gameOverViewModel;
     private final QuestionController questionController;
 
     private final JLabel question;
@@ -24,10 +26,12 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
     private final JButton answer3;
     private final JButton answer4;
 
-    public QuestionView(QuestionViewModel questionViewModel, QuestionController controller) {
+    public QuestionView(QuestionViewModel questionViewModel, QuestionController controller,
+                        GameOverViewModel gameOverViewModel) {
 
         this.questionController = controller;
         this.questionViewModel = questionViewModel;
+        this.gameOverViewModel = gameOverViewModel;
         questionViewModel.addPropertyChangeListener(this);
 
         this.question = new JLabel(questionViewModel.QUESTION_TITLE_LABEL);
@@ -48,9 +52,10 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        questionController.execute(answer1.getText());
                         QuestionState currentState = questionViewModel.getState();
-                        rightOrWrong(currentState.getQuestionCorrect());
+                        questionController.execute(answer2.getText(), currentState.getQuestionNum());
+                        QuestionState currentState2 = questionViewModel.getState();
+                        rightOrWrong(currentState2.getQuestionCorrect());
                     }
                 }
         );
@@ -59,9 +64,10 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        questionController.execute(answer2.getText());
                         QuestionState currentState = questionViewModel.getState();
-                        rightOrWrong(currentState.getQuestionCorrect());
+                        questionController.execute(answer2.getText(), currentState.getQuestionNum());
+                        QuestionState currentState2 = questionViewModel.getState();
+                        rightOrWrong(currentState2.getQuestionCorrect());
                     }
                 }
         );
@@ -70,9 +76,10 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        questionController.execute(answer3.getText());
                         QuestionState currentState = questionViewModel.getState();
-                        rightOrWrong(currentState.getQuestionCorrect());
+                        questionController.execute(answer2.getText(), currentState.getQuestionNum());
+                        QuestionState currentState2 = questionViewModel.getState();
+                        rightOrWrong(currentState2.getQuestionCorrect());
                     }
                 }
         );
@@ -81,9 +88,10 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        questionController.execute(answer4.getText());
                         QuestionState currentState = questionViewModel.getState();
-                        rightOrWrong(currentState.getQuestionCorrect());
+                        questionController.execute(answer2.getText(), currentState.getQuestionNum());
+                        QuestionState currentState2 = questionViewModel.getState();
+                        rightOrWrong(currentState2.getQuestionCorrect());
                     }
                 }
         );
@@ -110,13 +118,18 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
     public void propertyChange(PropertyChangeEvent evt) {}
 
     public void rightOrWrong(Boolean correctness) {
+        GameOverState gameOverState = gameOverViewModel.getState();
         if (correctness) {
             JOptionPane.showMessageDialog(this, "That is correct :)");
+            gameOverState.setCorrectNum(gameOverState.getCorrectNum() + 1);
+            gameOverState.setPointsEarned(gameOverState.getPointsEarned() + 5);
         } else {
             JOptionPane.showMessageDialog(this, "That answer is incorrect :(");
         }
-        questionViewModel.updateViewModel();
+        gameOverState.setTotalNum(gameOverState.getTotalNum() + 1);
+        gameOverViewModel.setState(gameOverState);
+        QuestionState questionState = questionViewModel.getState();
+        questionViewModel.updateViewModel(questionState.getNewQuestion());
         updateView();
-        System.out.println(questionViewModel.getState().getQuestionNum());
     }
 }
