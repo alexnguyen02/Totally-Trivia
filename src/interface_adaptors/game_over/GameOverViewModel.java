@@ -7,7 +7,7 @@ import interface_adaptors.ViewModel;
 public class GameOverViewModel extends ViewModel {
 
     private String viewName;
-    public final String TITLE_LABEL = "Game Over View";
+    public final String TITLE_LABEL = "GAME OVER!";
     public final String POINTS_EARNED = "Points Earned: ";
     public final String CORRECT_ANSWERS = "Correct Answers: ";
 

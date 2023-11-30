@@ -63,10 +63,14 @@ public class GameOverView extends JPanel implements ActionListener, PropertyChan
 
     }
 
-    public void actionPerformed(ActionEvent evt) {
-        JOptionPane.showConfirmDialog(this, "Not implemented yet.");
+    public void updateView() {
+        this.points_earned.setText(gameOverViewModel.POINTS_EARNED + gameOverViewModel.getState().getPointsEarned());
+        this.correct_answers.setText(gameOverViewModel.CORRECT_ANSWERS +
+                gameOverViewModel.getState().getCorrectNum() + '/' + gameOverViewModel.getState().getTotalNum());
     }
 
+    public void actionPerformed(ActionEvent evt) {}
+
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {}
+    public void propertyChange(PropertyChangeEvent evt) { updateView(); }
 }

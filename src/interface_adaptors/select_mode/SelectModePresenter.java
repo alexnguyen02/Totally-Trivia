@@ -33,6 +33,7 @@ public class SelectModePresenter implements SelectModeOutputBoundary {
         this.selectModeViewModel.firePropertyChanged();
 
         this.questionViewModel.updateViewModel(outputQuestions.get(0));
+        this.questionViewModel.firePropertyChanged();
 
         this.viewManagerModel.setActiveView("question");
         this.viewManagerModel.firePropertyChanged();

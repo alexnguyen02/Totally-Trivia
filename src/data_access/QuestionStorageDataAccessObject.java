@@ -19,4 +19,5 @@ public class QuestionStorageDataAccessObject {
     public void setQuestions(ArrayList<Question> newQuestions) {
         this.listOfQuestions = newQuestions;
     }
+
 }

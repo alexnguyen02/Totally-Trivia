@@ -17,14 +17,7 @@ public class QuestionViewModel extends ViewModel {
     public String FOURTH_ANSWER_BUTTON_LABEL;
     private QuestionState state = new QuestionState();
 
-    public QuestionViewModel() {
-        super("question");
-        this.QUESTION_TITLE_LABEL = "";
-        this.FIRST_ANSWER_BUTTON_LABEL = "";
-        this.SECOND_ANSWER_BUTTON_LABEL = "";
-        this.THIRD_ANSWER_BUTTON_LABEL = "";
-        this.FOURTH_ANSWER_BUTTON_LABEL = "";
-    }
+    public QuestionViewModel() { super("question"); }
     public void updateViewModel(Question newQuestion) {
         this.QUESTION_TITLE_LABEL = newQuestion.getContent();
         ArrayList<String> answers = newQuestion.getAnswerPackage().getPossibleAnswers();
@@ -32,6 +25,7 @@ public class QuestionViewModel extends ViewModel {
         this.SECOND_ANSWER_BUTTON_LABEL = answers.get(1);
         this.THIRD_ANSWER_BUTTON_LABEL = answers.get(2);
         this.FOURTH_ANSWER_BUTTON_LABEL = answers.get(3);
+
     }
     public String getViewName() {return this.viewName;}
     public void setState(QuestionState state) {
@@ -45,5 +39,13 @@ public class QuestionViewModel extends ViewModel {
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
+    }
+
+    public void resetViewModel() {
+        this.QUESTION_TITLE_LABEL = "";
+        this.FIRST_ANSWER_BUTTON_LABEL = "";
+        this.SECOND_ANSWER_BUTTON_LABEL = "";
+        this.THIRD_ANSWER_BUTTON_LABEL = "";
+        this.FOURTH_ANSWER_BUTTON_LABEL = "";
     }
 }
