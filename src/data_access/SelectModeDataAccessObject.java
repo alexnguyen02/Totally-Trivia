@@ -74,20 +74,32 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
         return result;
     }
 
-    private AnswerPackage buildAnswerPackage(String correctAnswer, String incorrectAnswers){
-        JSONObject incorrectAnswersObject = new JSONObject(incorrectAnswers);
-        JSONArray incorrectAnswersArray = new JSONArray(incorrectAnswersObject);
+    private AnswerPackage buildAnswerPackage(String JSONString){
+        // Extract the correct answer from the JSONString
+        String correctAnswerRegex = "\"correct_answer\":\"(.*?)\"";
+        String correctAnswer = extractFromJSONString(correctAnswerRegex, JSONString);
 
+        // Extract the incorrect answers from the JSONString
+        JSONObject incorrectAnswersObject = new JSONObject(JSONString);
+        JSONArray incorrectAnswersArray = incorrectAnswersObject.getJSONArray("incorrect_answers");
+
+        // The array of incorrect answers only contains 3 answers, so the size of all possible answers
+        // must be 3 + 1 (the correct answer) = 4
         int possibleAnswersSize = incorrectAnswersArray.length() + 1;
+
+        // Build an array of possible answers from the array of incorrect answers
         ArrayList<String> possibleAnswersList = new ArrayList<>(possibleAnswersSize);
-        
         for (int i = 0; i < incorrectAnswersArray.length(); i++) {
             possibleAnswersList.add(i, incorrectAnswersArray.getString(i));
         }
 
+        // Generate a random index and
+        // add the correct answer to the that index of the array of possible answers
         Random random = new Random();
-        int randomIndex = random.nextInt(possibleAnswersSize + 1);
+        int randomIndex = random.nextInt(possibleAnswersSize);
         possibleAnswersList.add(randomIndex, correctAnswer);
+
+        System.out.println(possibleAnswersList);
 
         return new AnswerPackage(possibleAnswersList, correctAnswer);
     }
@@ -96,9 +108,6 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
         String content;
         String category;
         String difficultyLevel;
-
-        String correctAnswer;
-        String incorrectAnswers;
         AnswerPackage answerPackage;
 
         // Extract the content of the question
@@ -113,23 +122,14 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
         String difficultyLevelRegex = "\"difficulty\":\"(.*?)\"";
         difficultyLevel = extractFromJSONString(difficultyLevelRegex, JSONString);
 
-        // Extract the correct answer of the question
-        String correctAnswerRegex = "\"correct_answer\":\"(.*?)\"";
-        correctAnswer = extractFromJSONString(correctAnswerRegex, JSONString);
-
-        // Extract the incorrect answers of the question
-        String incorrectAnswerRegex = "\"incorrect_answers\":\"(.*?)\"";
-        incorrectAnswers = extractFromJSONString(incorrectAnswerRegex, JSONString);
-
         // Build a new AnswerPackage
-        answerPackage = buildAnswerPackage(correctAnswer, incorrectAnswers);
+        answerPackage = buildAnswerPackage(JSONString);
         return new Question(content, category, difficultyLevel, answerPackage);
     }
 
 
     private ArrayList<Question> getQuestionsFromAPI(){
         ArrayList<Question> listOfQuestions= new ArrayList<>();
-
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         Request request = new Request.Builder()
                 .url(API_URL)
@@ -153,7 +153,7 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
                     System.out.println(decodedResult);
                 }
             } else {
-                throw new RuntimeException(responseBody.getString("message"));
+                throw new RuntimeException("Error occurred when connecting with API");
             }
 
         } catch (IOException e) {
@@ -166,7 +166,6 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
     @Override
     public ArrayList<Question> getQuestions(String category, String difficultyLevel, int numOfQuestions) {
         buildAPIURL(category, difficultyLevel, numOfQuestions);
-
         return getQuestionsFromAPI();
     }
 }
