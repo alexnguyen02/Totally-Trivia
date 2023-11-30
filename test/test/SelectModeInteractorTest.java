@@ -1,6 +1,8 @@
 package test;
 
 import data_access.InMemorySelectModeAccessObject;
+import data_access.QuestionStorageDataAccessObject;
+import entity.Question;
 import use_case.select_mode.*;
 
 import java.util.ArrayList;
@@ -16,14 +18,17 @@ public class SelectModeInteractorTest {
     public void successTest(){
         SelectModeInputData inputData = new SelectModeInputData("Animals", "Easy", 2);
         SelectModeDataObjectInterface selectModeDatabase = new InMemorySelectModeAccessObject();
+        QuestionStorageDataAccessObject questionStorageDataAccessObject = new QuestionStorageDataAccessObject();
 
         SelectModeOutputBoundary successPresenter = new SelectModeOutputBoundary() {
             @Override
             public void prepareSelectModeSuccessView(SelectModeOutputData selectModeOutputData) {
-                ArrayList<String> actualQuestions = selectModeOutputData.getOutputQuestions();
-                //ArrayList<String> expectedQuestions = new ArrayList<>(List.of(new String[]{"Dog or Cat?", "Dog or Cat?"}));
-
-                //assertEquals(expectedQuestions, actualQuestions);
+                ArrayList<Question> actualQuestions = selectModeOutputData.getOutputQuestions();
+                for (Question q: actualQuestions){
+                    assertEquals("Dog or Cat?", q.getContent());
+                    assertEquals("Animals", q.getCategory());
+                    assertEquals("Easy", q.getDifficultyLevel());
+                }
                 assertEquals(2, actualQuestions.size());
             }
 
@@ -32,7 +37,7 @@ public class SelectModeInteractorTest {
                 fail("Select mode use case failure is unexpected");
             }
         };
-        SelectModeInputBoundary selectModeInputInteractor = new SelectModeInteractor(selectModeDatabase, successPresenter);
+        SelectModeInputBoundary selectModeInputInteractor = new SelectModeInteractor(selectModeDatabase, successPresenter, questionStorageDataAccessObject);
         selectModeInputInteractor.execute(inputData);
     }
 }

@@ -13,17 +13,6 @@ public class SelectModeOutputData {
     }
 
     public ArrayList<Question> getOutputQuestions(){
-        ArrayList<Question> allQuestions = new ArrayList<>();
-
-        for (Question q : this.listOfQuestions){
-            System.out.println(q);
-            allQuestions.add(q);
-        }
-        return allQuestions;
-    }
-
-    public ArrayList<Question> getQuestionObjects(){
         return this.listOfQuestions;
     }
-
 }

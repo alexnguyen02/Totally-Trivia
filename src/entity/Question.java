@@ -20,6 +20,14 @@ public class Question {
         return this.content;
     }
 
+    public String getCategory(){
+        return this.category;
+    }
+
+    public String getDifficultyLevel(){
+        return this.difficultyLevel;
+    }
+
     public AnswerPackage getAnswerPackage() {
         return this.answerPackage;
     }

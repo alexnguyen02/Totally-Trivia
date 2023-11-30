@@ -16,6 +16,7 @@ import interface_adaptors.select_mode.SelectModeViewModel;
 import interface_adaptors.signup.SignupViewModel;
 import interface_adaptors.ViewManagerModel;
 import use_case.login.LoginUserDataAccessInterface;
+import use_case.select_mode.SelectModeDataObjectInterface;
 import view.*;
 
 import javax.swing.*;
@@ -62,8 +63,8 @@ public class Main {
         }
 
         // Initialize InMemoryDataAccessObject (for testing purpose); The actual Data Access Object is calling API
-        InMemorySelectModeAccessObject selectModeAccessObject;
-        selectModeAccessObject = new InMemorySelectModeAccessObject();
+        SelectModeDataObjectInterface selectModeAccessObject;
+        selectModeAccessObject = new SelectModeDataAccessObject();
         SelectModeDataAccessObject selectModeDataAccessObject = new SelectModeDataAccessObject();
         QuestionStorageDataAccessObject questionStorageDataAccessObject = new QuestionStorageDataAccessObject();
 
