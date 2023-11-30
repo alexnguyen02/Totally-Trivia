@@ -50,7 +50,7 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
         this.category = categoryMap.get(category);
         this.difficultyLevel = difficultyLevel.toLowerCase();
         this.numOfQuestions = numOfQuestions;
-        
+
         if (category.equals("Any category") && difficultyLevel.equals("Any difficulty level")){
             API_URL = String.format("https://opentdb.com/api.php?amount=%d&type=multiple", this.numOfQuestions);
         } else if (category.equals("Any category")) {
@@ -96,8 +96,10 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
         // Generate a random index and
         // add the correct answer to the that index of the array of possible answers
         Random random = new Random();
-        int randomIndex = random.nextInt(possibleAnswersSize + 1);
+        int randomIndex = random.nextInt(possibleAnswersSize);
         possibleAnswersList.add(randomIndex, correctAnswer);
+
+        System.out.println(possibleAnswersList);
 
         return new AnswerPackage(possibleAnswersList, correctAnswer);
     }
