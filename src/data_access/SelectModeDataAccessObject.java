@@ -96,12 +96,13 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
         String cleanUpString = incorrectAnswers.replace("[", "").replace("]", "");
 
         String[] incorrectAnswersArray = cleanUpString.split(",");
-        ArrayList<String> possibleAnswersList = new ArrayList<>(Arrays.asList(incorrectAnswersArray));
+        ArrayList<String> possibleAnswersList = new ArrayList<>();
+        for (String answer : incorrectAnswersArray){
+            possibleAnswersList.add(answer.replace("\"", ""));
+        }
 
         int possibleAnswersSize = incorrectAnswersArray.length + 1;
 
-        // Generate a random index and
-        // add the correct answer to the that index of the array of possible answers
         Random random = new Random();
         int randomIndex = random.nextInt(possibleAnswersSize);
         possibleAnswersList.add(randomIndex, correctAnswer);
@@ -117,6 +118,9 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
         // Extract the content of the question
         String contentRegex = "\"question\":\"(.*?)\"";
         content = extractFromJSONString(contentRegex, JSONString, false);
+        
+        // For testing purpose
+        System.out.println(content);
 
         // Extract the category of the question
         String categoryRegex = "\"category\":\"(.*?)\"";
