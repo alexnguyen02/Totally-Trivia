@@ -6,15 +6,13 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import use_case.select_mode.SelectModeDataObjectInterface;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -62,46 +60,52 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
         }
     }
 
-    private String extractFromJSONString(String regex, String JSONString){
+    private String extractFromJSONString(String regex, String JSONString, boolean isIncorrectAnswers){
         String result = null;
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(JSONString);
         if (matcher.find()){
-            result = matcher.group(1);
+            if (isIncorrectAnswers){
+                result = matcher.group();
+            } else {
+                result = matcher.group(1);
+            }
         }
-
         return result;
     }
+
 
     private AnswerPackage buildAnswerPackage(String JSONString){
         // Extract the correct answer from the JSONString
         String correctAnswerRegex = "\"correct_answer\":\"(.*?)\"";
-        String correctAnswer = extractFromJSONString(correctAnswerRegex, JSONString);
+        String correctAnswer = extractFromJSONString(correctAnswerRegex, JSONString, false);
 
         // Extract the incorrect answers from the JSONString
-        JSONObject incorrectAnswersObject = new JSONObject(JSONString);
-        JSONArray incorrectAnswersArray = incorrectAnswersObject.getJSONArray("incorrect_answers");
+        String incorrectAnswersRegex = "\\[[^\\[]*]";
+        String incorrectAnswers = extractFromJSONString(incorrectAnswersRegex, JSONString, true);
 
-        // The array of incorrect answers only contains 3 answers, so the size of all possible answers
-        // must be 3 + 1 (the correct answer) = 4
-        int possibleAnswersSize = incorrectAnswersArray.length() + 1;
+        ArrayList<String> possibleAnswersList = getAnswersList(incorrectAnswers, correctAnswer);
 
-        // Build an array of possible answers from the array of incorrect answers
-        ArrayList<String> possibleAnswersList = new ArrayList<>(possibleAnswersSize);
-        for (int i = 0; i < incorrectAnswersArray.length(); i++) {
-            possibleAnswersList.add(i, incorrectAnswersArray.getString(i));
-        }
+        return new AnswerPackage(possibleAnswersList, correctAnswer);
+
+    }
+
+    @NotNull
+    private static ArrayList<String> getAnswersList(String incorrectAnswers, String correctAnswer) {
+        String cleanUpString = incorrectAnswers.replace("[", "").replace("]", "");
+
+        String[] incorrectAnswersArray = cleanUpString.split(",");
+        ArrayList<String> possibleAnswersList = new ArrayList<>(Arrays.asList(incorrectAnswersArray));
+
+        int possibleAnswersSize = incorrectAnswersArray.length + 1;
 
         // Generate a random index and
         // add the correct answer to the that index of the array of possible answers
         Random random = new Random();
         int randomIndex = random.nextInt(possibleAnswersSize);
         possibleAnswersList.add(randomIndex, correctAnswer);
-
-        System.out.println(possibleAnswersList);
-
-        return new AnswerPackage(possibleAnswersList, correctAnswer);
+        return possibleAnswersList;
     }
 
     private Question buildQuestion(String JSONString){
@@ -112,19 +116,23 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
 
         // Extract the content of the question
         String contentRegex = "\"question\":\"(.*?)\"";
-        content = extractFromJSONString(contentRegex, JSONString);
+        content = extractFromJSONString(contentRegex, JSONString, false);
 
         // Extract the category of the question
         String categoryRegex = "\"category\":\"(.*?)\"";
-        category = extractFromJSONString(categoryRegex, JSONString);
+        category = extractFromJSONString(categoryRegex, JSONString, false);
 
         // Extract the difficulty level of the question
         String difficultyLevelRegex = "\"difficulty\":\"(.*?)\"";
-        difficultyLevel = extractFromJSONString(difficultyLevelRegex, JSONString);
+        difficultyLevel = extractFromJSONString(difficultyLevelRegex, JSONString, false);
 
         // Build a new AnswerPackage
         answerPackage = buildAnswerPackage(JSONString);
         return new Question(content, category, difficultyLevel, answerPackage);
+    }
+
+    private String cleanUpHTMLChar (String inputString){
+        return StringEscapeUtils.unescapeHtml4(inputString);
     }
 
 
@@ -144,13 +152,9 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
             if (response.isSuccessful()){
                 JSONArray results = responseBody.getJSONArray("results");
                 for (Object r : results){
-                    String decodedResult = StringEscapeUtils.unescapeHtml4(r.toString());
-
-                    Question question = buildQuestion(decodedResult);
+                    String cleanUpResult = cleanUpHTMLChar(r.toString());
+                    Question question = buildQuestion(cleanUpResult);
                     listOfQuestions.add(question);
-
-                    // For testing purpose
-                    System.out.println(decodedResult);
                 }
             } else {
                 throw new RuntimeException("Error occurred when connecting with API");

@@ -52,9 +52,12 @@ public class Main {
         QuestionViewModel questionViewModel = new QuestionViewModel();
         GameOverViewModel gameOverViewModel = new GameOverViewModel();
 
+        DeleteViewModel deleteViewModel = new DeleteViewModel();
+        LogoutViewModel logoutViewModel = new LogoutViewModel();
+
         // Initialize SelectModeViewModel
         SelectModeViewModel selectModeViewModel = new SelectModeViewModel();
-
+        
         FileUserDataAccessObject userDataAccessObject;
         try {
             userDataAccessObject = new FileUserDataAccessObject("./users.csv", new CommonUserFactory());
@@ -88,6 +91,12 @@ public class Main {
         views.add(gameOverView, gameOverView.viewName);
 
         viewManagerModel.setActiveView(selectModeView.viewName);
+
+        LogoutView logoutView = new LogoutView(new LogoutController(null), logoutViewModel);
+        views.add(logoutView, logoutView.viewName);
+
+        viewManagerModel.setActiveView(signupView.viewName);
+       
         viewManagerModel.firePropertyChanged();
 
         application.pack();
