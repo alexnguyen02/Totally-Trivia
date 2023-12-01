@@ -1,18 +1,21 @@
 package use_case.delete;
 
+// TODO Complete me
+
+import java.util.ArrayList;
 
 public class DeleteOutputData {
-    private String username;
-    public DeleteOutputData(String username) {
-        this.username = username;
+    private String usernames;
+    public DeleteOutputData(String usernames) {
+        this.usernames = usernames;
     }
 
 
-    public String getUsername() {
-        return username;
+    public String getUsernames() {
+        return usernames;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsernames(String usernames) {
+        this.usernames = usernames;
     }
 }

@@ -10,12 +10,11 @@ public class DeleteInteractor implements DeleteInputBoundary {
         this.userPresenter = deleteOutputBoundary;
     }
     @Override
-    public void execute(){
-        String id = new String();
-        String p = new String();
-        String username = userDataAccessObject.delete(id, p);
-        DeleteOutputData DeleteOutputData = new DeleteOutputData(username);
-        userPresenter.prepareSuccessView(DeleteOutputData);
+    public void execute(String s){
+
+        String username = userDataAccessObject.delete(s);
+        DeleteOutputData deleteOutputData = new DeleteOutputData(username);
+        userPresenter.prepareSuccessView(deleteOutputData);
     }
 
 }

@@ -1,17 +1,18 @@
 package interface_adaptors.delete;
 
 public class DeleteState {
-    private String username;
+    private String usernames;
 
-    public DeleteState(String username) {
-        this.username = username;
+    public DeleteState(String usernames) {
+        this.usernames = usernames;
     }
 
-    public String getUsername() {
-        return username;
+    public DeleteState() {}
+    public String getUsernames() {
+        return usernames;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsernames(String usernames) {
+        this.usernames = usernames;
     }
 }

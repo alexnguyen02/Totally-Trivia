@@ -1,5 +1,6 @@
 package use_case.delete;
 
+
 public interface DeleteUserDataAccessInterface {
-    String delete(String a, String b);
+    String delete(String s);
 }

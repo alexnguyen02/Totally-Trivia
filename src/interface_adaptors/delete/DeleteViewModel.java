@@ -5,15 +5,14 @@ import interface_adaptors.ViewModel;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-
 public class DeleteViewModel extends ViewModel {
-    public static final String DEELETE_BUTTON_LABEL = "delete";
+    public static final String DELETE_BUTTON_LABEL = "Delete account";
 
-    private DeleteState state = new DeleteState(getState().getUsername());
+    private DeleteState state = new DeleteState();
 
 
     public DeleteViewModel() {
-        super("delete user");
+        super("Delete account");
     }
 
     public void setState(DeleteState state) {

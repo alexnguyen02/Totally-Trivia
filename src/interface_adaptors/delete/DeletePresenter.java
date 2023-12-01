@@ -3,8 +3,6 @@ package interface_adaptors.delete;
 import use_case.delete.DeleteOutputBoundary;
 import use_case.delete.DeleteOutputData;
 
-import java.util.StringJoiner;
-
 
 public class DeletePresenter implements DeleteOutputBoundary {
     private final DeleteViewModel deleteViewModel;
@@ -16,10 +14,11 @@ public class DeletePresenter implements DeleteOutputBoundary {
     @Override
     public void prepareSuccessView(DeleteOutputData response) {
         DeleteState deleteState = deleteViewModel.getState();
-        String name = response.getUsername();
 
 
-        deleteState.setUsername(name);
+
+
+        deleteState.setUsernames(response.getUsernames());
         this.deleteViewModel.setState(deleteState);
         deleteViewModel.firePropertyChanged();
     }
