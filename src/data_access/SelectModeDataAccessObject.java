@@ -118,7 +118,7 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
         // Extract the content of the question
         String contentRegex = "\"question\":\"(.*?)\"";
         content = extractFromJSONString(contentRegex, JSONString, false);
-        
+
         // For testing purpose
         System.out.println(content);
 
