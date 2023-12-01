@@ -29,9 +29,9 @@ public class QuestionPresenter implements QuestionOutputBoundary {
             } else if (questionOutputData.difficulty.equals("hard")) {
                 questionState.setTotalPoints(questionState.getTotalPoints() + 3);
             }
-            if (questionState.getNewQuestion() != null) {
-                questionViewModel.updateViewModel(questionOutputData.nextQuestion);
-            }
+        }
+        if (questionState.getNewQuestion() != null) {
+            questionViewModel.updateViewModel(questionOutputData.nextQuestion);
         }
 
         questionViewModel.setState(questionState);
