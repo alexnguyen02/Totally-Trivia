@@ -41,7 +41,7 @@ public class SelectColourView extends JPanel implements ActionListener, Property
 
                 Color selectedColour = convertColorNameToColor(selectedColourString);
 
-                SelectColourController.execute(selectedColour);
+                selectColourController.execute(selectedColour);
 
                 // Update the state in the view model
                 selectColourViewModel.setState(currentState);
