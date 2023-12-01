@@ -2,19 +2,15 @@ package app;
 
 import app.LoginUseCaseFactory;
 import data_access.FileUserDataAccessObject;
-//import data_access.InMemorySelectModeAccessObject;
+import data_access.InMemorySelectModeAccessObject;
 import data_access.QuestionStorageDataAccessObject;
 import data_access.SelectModeDataAccessObject;
 import entity.CommonUserFactory;
-import interface_adaptors.delete.DeleteController;
-import interface_adaptors.delete.DeleteViewModel;
 import interface_adaptors.game_over.GameOverController;
 import interface_adaptors.game_over.GameOverPresenter;
 import interface_adaptors.game_over.GameOverViewModel;
 import interface_adaptors.login.LoginViewModel;
 import interface_adaptors.logged_in.LoggedInViewModel;
-import interface_adaptors.logout.LogoutController;
-import interface_adaptors.logout.LogoutViewModel;
 import interface_adaptors.question.QuestionViewModel;
 import interface_adaptors.select_mode.SelectModeViewModel;
 import interface_adaptors.signup.SignupViewModel;
@@ -55,8 +51,7 @@ public class Main {
         SignupViewModel signupViewModel = new SignupViewModel();
         QuestionViewModel questionViewModel = new QuestionViewModel();
         GameOverViewModel gameOverViewModel = new GameOverViewModel();
-        DeleteViewModel deleteViewModel = new DeleteViewModel();
-        LogoutViewModel logoutViewModel = new LogoutViewModel();
+
         // Initialize SelectModeViewModel
         SelectModeViewModel selectModeViewModel = new SelectModeViewModel();
 
@@ -74,16 +69,13 @@ public class Main {
         QuestionStorageDataAccessObject questionStorageDataAccessObject = new QuestionStorageDataAccessObject();
 
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
-        views.add(signupView, signupView.viewName);
+        //views.add(signupView, signupView.viewName);
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
 
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
         views.add(loggedInView, loggedInView.viewName);
-
-        DeleteView deleteView = new DeleteView(new DeleteController(null), deleteViewModel);
-        views.add(deleteView, deleteView.viewName);
 
         SelectModeView selectModeView = SelectModeUseCaseFactory.create(viewManagerModel, selectModeViewModel,
                 selectModeDataAccessObject, questionStorageDataAccessObject, questionViewModel);
@@ -95,10 +87,8 @@ public class Main {
         GameOverView gameOverView = new GameOverView(gameOverViewModel, new GameOverController(new GameOverPresenter(viewManagerModel)));
         views.add(gameOverView, gameOverView.viewName);
 
-        LogoutView logoutView = new LogoutView(new LogoutController(null), logoutViewModel);
-        viewManagerModel.setActiveView(loginView.viewName);
+        viewManagerModel.setActiveView(selectModeView.viewName);
         viewManagerModel.firePropertyChanged();
-
 
         application.pack();
         application.setVisible(true);
