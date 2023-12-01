@@ -13,6 +13,8 @@ import interface_adaptors.game_over.GameOverPresenter;
 import interface_adaptors.game_over.GameOverViewModel;
 import interface_adaptors.login.LoginViewModel;
 import interface_adaptors.logged_in.LoggedInViewModel;
+import interface_adaptors.logout.LogoutController;
+import interface_adaptors.logout.LogoutViewModel;
 import interface_adaptors.question.QuestionViewModel;
 import interface_adaptors.select_mode.SelectModeViewModel;
 import interface_adaptors.signup.SignupViewModel;
@@ -54,6 +56,7 @@ public class Main {
         QuestionViewModel questionViewModel = new QuestionViewModel();
         GameOverViewModel gameOverViewModel = new GameOverViewModel();
         DeleteViewModel deleteViewModel = new DeleteViewModel();
+        LogoutViewModel logoutViewModel = new LogoutViewModel();
         // Initialize SelectModeViewModel
         SelectModeViewModel selectModeViewModel = new SelectModeViewModel();
 
@@ -92,8 +95,10 @@ public class Main {
         GameOverView gameOverView = new GameOverView(gameOverViewModel, new GameOverController(new GameOverPresenter(viewManagerModel)));
         views.add(gameOverView, gameOverView.viewName);
 
-        viewManagerModel.setActiveView(signupView.viewName);
+        LogoutView logoutView = new LogoutView(new LogoutController(null), logoutViewModel);
+        viewManagerModel.setActiveView(loginView.viewName);
         viewManagerModel.firePropertyChanged();
+
 
         application.pack();
         application.setVisible(true);
