@@ -2,15 +2,19 @@ package app;
 
 import app.LoginUseCaseFactory;
 import data_access.FileUserDataAccessObject;
-import data_access.InMemorySelectModeAccessObject;
+
 import data_access.QuestionStorageDataAccessObject;
 import data_access.SelectModeDataAccessObject;
 import entity.CommonUserFactory;
+import interface_adaptors.delete.DeleteViewModel;
 import interface_adaptors.game_over.GameOverController;
 import interface_adaptors.game_over.GameOverPresenter;
 import interface_adaptors.game_over.GameOverViewModel;
 import interface_adaptors.login.LoginViewModel;
 import interface_adaptors.logged_in.LoggedInViewModel;
+import interface_adaptors.logout.LogoutController;
+import interface_adaptors.logout.LogoutPresenter;
+import interface_adaptors.logout.LogoutViewModel;
 import interface_adaptors.question.QuestionViewModel;
 import interface_adaptors.select_mode.SelectModeViewModel;
 import interface_adaptors.signup.SignupViewModel;
@@ -18,6 +22,8 @@ import interface_adaptors.ViewManagerModel;
 import interface_adaptors.select_colour.SelectColourViewModel;
 import data_access.SelectColourDataAccessObject;
 import use_case.login.LoginUserDataAccessInterface;
+import use_case.logout.LogoutInputBoundary;
+import use_case.logout.LogoutInteractor;
 import use_case.select_mode.SelectModeDataObjectInterface;
 import view.*;
 
@@ -75,7 +81,8 @@ public class Main {
         selectModeAccessObject = new SelectModeDataAccessObject();
         SelectModeDataAccessObject selectModeDataAccessObject = new SelectModeDataAccessObject();
         QuestionStorageDataAccessObject questionStorageDataAccessObject = new QuestionStorageDataAccessObject();
-        SelectColourDataAccessObject selectColourDataAccessObject = new SelectColourDataAccessObject();
+        Color defaultColour = new Color(255);
+        SelectColourDataAccessObject selectColourDataAccessObject = new SelectColourDataAccessObject(defaultColour);
 
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.viewName);
@@ -102,10 +109,10 @@ public class Main {
         SelectColourView selectColourView = SelectColourUseCaseFactory.create(viewManagerModel, selectColourViewModel, selectColourDataAccessObject);
         views.add(selectColourView, selectColourView.viewName);
 
-        AccountView accountView = new AccountView(viewManagerModel, selectColourView, logoutView, deleteView);
+        AccountView accountView = new AccountView(viewManagerModel);
         views.add(accountView, accountView.viewName);
 
-        MainScreenView mainScreenView = new MainScreenView(viewManagerModel, selectModeView, accountView);
+        MainScreenView mainScreenView = new MainScreenView(viewManagerModel);
         views.add(mainScreenView, mainScreenView.viewName);
 
         viewManagerModel.setActiveView(signupView.viewName);

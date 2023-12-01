@@ -1,9 +1,6 @@
 package view;
 
 import interface_adaptors.ViewManagerModel;
-import view.SelectColourView;
-import view.LogoutView;
-import view.DeleteView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,18 +16,10 @@ public class AccountView extends JPanel {
 
     private final ViewManagerModel viewManagerModel;
 
-    private final SelectColourView selectColourView;
 
-    private final LogoutView logoutView;
-
-    private final DeleteView deleteView;
-
-    public AccountView(ViewManagerModel viewManagerModel, SelectColourView selectColourView, LogoutView logoutView, DeleteView deleteView) {
+    public AccountView(ViewManagerModel viewManagerModel) {
 
         this.viewManagerModel = viewManagerModel;
-        this.selectColourView = selectColourView;
-        this.logoutView = logoutView;
-        this.deleteView = deleteView;
 
 
         JPanel buttons = new JPanel();
@@ -45,7 +34,7 @@ public class AccountView extends JPanel {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 if (evt.getSource().equals(changeColour)) {
-                    viewManagerModel.setActiveView(selectColourView.viewName);
+                    viewManagerModel.setActiveView("select colour");
                     viewManagerModel.firePropertyChanged();
                 }
             }
@@ -55,7 +44,7 @@ public class AccountView extends JPanel {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 if (evt.getSource().equals(logOut)) {
-                    viewManagerModel.setActiveView(logoutView.viewName);
+                    viewManagerModel.setActiveView("logout");
                     viewManagerModel.firePropertyChanged();
                 }
             }
@@ -65,7 +54,7 @@ public class AccountView extends JPanel {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 if (evt.getSource().equals(deleteAccount)) {
-                    viewManagerModel.setActiveView(deleteView.viewName);
+                    viewManagerModel.setActiveView("delete");
                     viewManagerModel.firePropertyChanged();
                 }
             }

@@ -3,6 +3,7 @@ package use_case.signup;
 import entity.User;
 import entity.UserFactory;
 
+import java.awt.*;
 import java.time.LocalDateTime;
 
 public class SignupInteractor implements SignupInputBoundary {
@@ -27,7 +28,7 @@ public class SignupInteractor implements SignupInputBoundary {
         } else {
 
             LocalDateTime now = LocalDateTime.now();
-            User user = userFactory.create(signupInputData.getUsername(), signupInputData.getPassword(), now);
+            User user = userFactory.create(signupInputData.getUsername(), signupInputData.getPassword(), now, 0, new Color(255));
             userDataAccessObject.save(user);
 
             SignupOutputData signupOutputData = new SignupOutputData(user.getName(), now.toString(), false);

@@ -11,7 +11,6 @@ public class SelectColourDataAccessObject implements SelectColourDataAccessInter
     public SelectColourDataAccessObject(Color selectedColour) {
         this.selectedColour = selectedColour;
 
-
     }
 
     @Override
