@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AccountView {
+public class AccountView extends JPanel {
 
     public String viewName = "account";
     private final JButton changeColour;
@@ -70,6 +70,8 @@ public class AccountView {
                 }
             }
         });
+
+        add(buttons);
 
     }
 }

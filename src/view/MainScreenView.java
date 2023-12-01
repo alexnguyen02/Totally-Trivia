@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainScreenView {
+public class MainScreenView extends JPanel {
 
     public String viewName = "main screen";
     private final JButton playGame;
@@ -52,6 +52,8 @@ public class MainScreenView {
                 }
             }
         });
+
+        add(buttons);
 
     }
 }
