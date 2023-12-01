@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import use_case.select_mode.SelectModeDataObjectInterface;
@@ -84,11 +85,18 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
         String incorrectAnswersRegex = "\\[[^\\[]*]";
         String incorrectAnswers = extractFromJSONString(incorrectAnswersRegex, JSONString, true);
 
+        ArrayList<String> possibleAnswersList = getAnswersList(incorrectAnswers, correctAnswer);
+
+        return new AnswerPackage(possibleAnswersList, correctAnswer);
+
+    }
+
+    @NotNull
+    private static ArrayList<String> getAnswersList(String incorrectAnswers, String correctAnswer) {
         String cleanUpString = incorrectAnswers.replace("[", "").replace("]", "");
 
         String[] incorrectAnswersArray = cleanUpString.split(",");
-        ArrayList<String> possibleAnswersList = new ArrayList<>();
-        possibleAnswersList.addAll(Arrays.asList(incorrectAnswersArray));
+        ArrayList<String> possibleAnswersList = new ArrayList<>(Arrays.asList(incorrectAnswersArray));
 
         int possibleAnswersSize = incorrectAnswersArray.length + 1;
 
@@ -97,9 +105,7 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
         Random random = new Random();
         int randomIndex = random.nextInt(possibleAnswersSize);
         possibleAnswersList.add(randomIndex, correctAnswer);
-
-        return new AnswerPackage(possibleAnswersList, correctAnswer);
-
+        return possibleAnswersList;
     }
 
     private Question buildQuestion(String JSONString){
@@ -125,6 +131,10 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
         return new Question(content, category, difficultyLevel, answerPackage);
     }
 
+    private String cleanUpHTMLChar (String inputString){
+        return StringEscapeUtils.unescapeHtml4(inputString);
+    }
+
 
     private ArrayList<Question> getQuestionsFromAPI(){
         ArrayList<Question> listOfQuestions= new ArrayList<>();
@@ -142,13 +152,9 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
             if (response.isSuccessful()){
                 JSONArray results = responseBody.getJSONArray("results");
                 for (Object r : results){
-                    String decodedResult = StringEscapeUtils.unescapeHtml4(r.toString());
-
-                    Question question = buildQuestion(decodedResult);
+                    String cleanUpResult = cleanUpHTMLChar(r.toString());
+                    Question question = buildQuestion(cleanUpResult);
                     listOfQuestions.add(question);
-
-                    // For testing purpose
-                    System.out.println(decodedResult);
                 }
             } else {
                 throw new RuntimeException("Error occurred when connecting with API");
