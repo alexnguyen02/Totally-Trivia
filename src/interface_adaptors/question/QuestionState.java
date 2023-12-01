@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public class QuestionState {
     private Boolean questionCorrect = null;
-    private int questionNum = 0;
+    private int questionNum;
+    private int totalQuestions;
     private Question newQuestion;
+    private int totalPoints;
+    private int questionsCorrect;
 
-    public QuestionState(QuestionState copy) {
-        questionNum = copy.questionNum;
-    }
     public QuestionState() {
     }
 
@@ -28,5 +28,23 @@ public class QuestionState {
     public void setNewQuestion(Question question) { this.newQuestion = question; }
 
     public Question getNewQuestion() { return this.newQuestion; }
+    public int getTotalQuestions() { return this.totalQuestions; }
 
+    public void setTotalQuestions(int newTotal) { this.totalQuestions = newTotal; }
+
+    public void setQuestionsCorrect(int questionsCorrect) {
+        this.questionsCorrect = questionsCorrect;
+    }
+
+    public int getQuestionsCorrect() {
+        return questionsCorrect;
+    }
+
+    public int getTotalPoints() {
+        return totalPoints;
+    }
+
+    public void setTotalPoints(int totalPoints) {
+        this.totalPoints = totalPoints;
+    }
 }

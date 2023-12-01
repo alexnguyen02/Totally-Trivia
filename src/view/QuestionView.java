@@ -7,8 +7,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import interface_adaptors.game_over.GameOverState;
-import interface_adaptors.game_over.GameOverViewModel;
+import interface_adaptors.question.CreateGameOverController;
 import interface_adaptors.question.QuestionController;
 import interface_adaptors.question.QuestionState;
 import interface_adaptors.question.QuestionViewModel;
@@ -17,8 +16,8 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
     public final String viewName = "question";
 
     private final QuestionViewModel questionViewModel;
-    private final GameOverViewModel gameOverViewModel;
     private final QuestionController questionController;
+    private final CreateGameOverController createGameOverController;
 
     private final JLabel question;
     private final JButton answer1;
@@ -27,11 +26,12 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
     private final JButton answer4;
 
     public QuestionView(QuestionViewModel questionViewModel, QuestionController controller,
-                        GameOverViewModel gameOverViewModel) {
+                        CreateGameOverController createGameOverController) {
 
         this.questionController = controller;
         this.questionViewModel = questionViewModel;
-        this.gameOverViewModel = gameOverViewModel;
+        this.createGameOverController = createGameOverController;
+
         questionViewModel.addPropertyChangeListener(this);
 
         this.question = new JLabel(questionViewModel.QUESTION_TITLE_LABEL);
@@ -53,9 +53,8 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         QuestionState currentState = questionViewModel.getState();
-                        questionController.execute(answer2.getText(), currentState.getQuestionNum());
-                        QuestionState currentState2 = questionViewModel.getState();
-                        rightOrWrong(currentState2.getQuestionCorrect());
+                        questionController.execute(answer1.getText(), currentState.getQuestionNum());
+                        rightOrWrong();
                     }
                 }
         );
@@ -66,8 +65,7 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
                     public void actionPerformed(ActionEvent e) {
                         QuestionState currentState = questionViewModel.getState();
                         questionController.execute(answer2.getText(), currentState.getQuestionNum());
-                        QuestionState currentState2 = questionViewModel.getState();
-                        rightOrWrong(currentState2.getQuestionCorrect());
+                        rightOrWrong();
                     }
                 }
         );
@@ -77,9 +75,8 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         QuestionState currentState = questionViewModel.getState();
-                        questionController.execute(answer2.getText(), currentState.getQuestionNum());
-                        QuestionState currentState2 = questionViewModel.getState();
-                        rightOrWrong(currentState2.getQuestionCorrect());
+                        questionController.execute(answer3.getText(), currentState.getQuestionNum());
+                        rightOrWrong();
                     }
                 }
         );
@@ -89,9 +86,8 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         QuestionState currentState = questionViewModel.getState();
-                        questionController.execute(answer2.getText(), currentState.getQuestionNum());
-                        QuestionState currentState2 = questionViewModel.getState();
-                        rightOrWrong(currentState2.getQuestionCorrect());
+                        questionController.execute(answer4.getText(), currentState.getQuestionNum());
+                        rightOrWrong();
                     }
                 }
         );
@@ -110,26 +106,32 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
         answer4.setText(questionViewModel.FOURTH_ANSWER_BUTTON_LABEL);
     }
 
-    public void actionPerformed(ActionEvent evt) {
-        JOptionPane.showConfirmDialog(this, "Not implemented yet.");
-    }
+    public void actionPerformed(ActionEvent evt) {}
 
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {}
+    public void propertyChange(PropertyChangeEvent evt) { updateView(); }
 
-    public void rightOrWrong(Boolean correctness) {
-        GameOverState gameOverState = gameOverViewModel.getState();
-        if (correctness) {
-            JOptionPane.showMessageDialog(this, "That is correct :)");
-            gameOverState.setCorrectNum(gameOverState.getCorrectNum() + 1);
-            gameOverState.setPointsEarned(gameOverState.getPointsEarned() + 5);
+    public void rightOrWrong() {
+        QuestionState currentState = questionViewModel.getState();
+        currentState.setQuestionNum(currentState.getQuestionNum() + 1);
+        if (currentState.getQuestionCorrect()) {
+            JOptionPane.showMessageDialog(this, "That answer is correct!");
+            currentState.setQuestionsCorrect(currentState.getQuestionsCorrect() + 1);
         } else {
-            JOptionPane.showMessageDialog(this, "That answer is incorrect :(");
+            JOptionPane.showMessageDialog(this, "That answer is incorrect!");
         }
-        gameOverState.setTotalNum(gameOverState.getTotalNum() + 1);
-        gameOverViewModel.setState(gameOverState);
-        QuestionState questionState = questionViewModel.getState();
-        questionViewModel.updateViewModel(questionState.getNewQuestion());
-        updateView();
+        //updateView();
+        currentState.setQuestionCorrect(null);
+        if (currentState.getTotalQuestions() == currentState.getQuestionNum()) {
+            gameOver();
+        }
+    }
+
+    public void gameOver() {
+        QuestionState inputState = questionViewModel.getState();
+        QuestionState newState = new QuestionState();
+        questionViewModel.setState(newState);
+        questionViewModel.resetViewModel();
+        createGameOverController.execute(inputState);
     }
 }

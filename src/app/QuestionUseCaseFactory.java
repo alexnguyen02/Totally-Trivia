@@ -3,18 +3,13 @@ package app;
 
 import data_access.QuestionStorageDataAccessObject;
 import interface_adaptors.ViewManagerModel;
+import interface_adaptors.question.*;
+import interface_adaptors.game_over.GameOverPresenter;
 import interface_adaptors.game_over.GameOverViewModel;
-import interface_adaptors.question.QuestionPresenter;
-import interface_adaptors.question.QuestionViewModel;
 import use_case.question.QuestionInputBoundary;
 import use_case.question.QuestionInteractor;
 import use_case.question.QuestionOutputBoundary;
 import view.QuestionView;
-import interface_adaptors.question.QuestionController;
-import view.SelectModeView;
-
-import javax.swing.*;
-import java.io.IOException;
 
 public class QuestionUseCaseFactory {
 
@@ -27,7 +22,8 @@ public class QuestionUseCaseFactory {
             QuestionStorageDataAccessObject questionStorageDataAccessObject) {
         QuestionController questionController = createQuestionUseCase(viewManagerModel,
                 questionViewModel, questionStorageDataAccessObject);
-        return new QuestionView(questionViewModel, questionController, gameOverViewModel);
+        CreateGameOverController createGameOverController = createGameOverController(viewManagerModel, gameOverViewModel);
+        return new QuestionView(questionViewModel, questionController, createGameOverController);
     }
 
     private static QuestionController createQuestionUseCase(ViewManagerModel viewManagerModel,
@@ -36,5 +32,10 @@ public class QuestionUseCaseFactory {
         QuestionOutputBoundary questionOutputBoundary = new QuestionPresenter(viewManagerModel, questionViewModel);
         QuestionInputBoundary questionInteractor = new QuestionInteractor(questionOutputBoundary, questionStorageDataAccessObject);
         return new QuestionController(questionInteractor);
+    }
+
+    private static CreateGameOverController createGameOverController(ViewManagerModel viewManagerModel, GameOverViewModel gameOverViewModel) {
+        CreateGameOverPresenter createGameOverPresenter = new CreateGameOverPresenter(viewManagerModel, gameOverViewModel);
+        return new CreateGameOverController(createGameOverPresenter);
     }
 }
