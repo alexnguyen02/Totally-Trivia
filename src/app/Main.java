@@ -15,6 +15,8 @@ import interface_adaptors.question.QuestionViewModel;
 import interface_adaptors.select_mode.SelectModeViewModel;
 import interface_adaptors.signup.SignupViewModel;
 import interface_adaptors.ViewManagerModel;
+import interface_adaptors.select_colour.SelectColourViewModel;
+import data_access.SelectColourDataAccessObject;
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.select_mode.SelectModeDataObjectInterface;
 import view.*;
@@ -55,6 +57,9 @@ public class Main {
         DeleteViewModel deleteViewModel = new DeleteViewModel();
         LogoutViewModel logoutViewModel = new LogoutViewModel();
 
+        SelectColourViewModel selectColourViewModel = new SelectColourViewModel();
+
+
         // Initialize SelectModeViewModel
         SelectModeViewModel selectModeViewModel = new SelectModeViewModel();
         
@@ -70,9 +75,10 @@ public class Main {
         selectModeAccessObject = new SelectModeDataAccessObject();
         SelectModeDataAccessObject selectModeDataAccessObject = new SelectModeDataAccessObject();
         QuestionStorageDataAccessObject questionStorageDataAccessObject = new QuestionStorageDataAccessObject();
+        SelectColourDataAccessObject selectColourDataAccessObject = new SelectColourDataAccessObject();
 
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
-        //views.add(signupView, signupView.viewName);
+        views.add(signupView, signupView.viewName);
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
@@ -90,13 +96,19 @@ public class Main {
         GameOverView gameOverView = new GameOverView(gameOverViewModel, new GameOverController(new GameOverPresenter(viewManagerModel)));
         views.add(gameOverView, gameOverView.viewName);
 
-        viewManagerModel.setActiveView(selectModeView.viewName);
-
         LogoutView logoutView = new LogoutView(new LogoutController(null), logoutViewModel);
         views.add(logoutView, logoutView.viewName);
 
+        SelectColourView selectColourView = SelectColourUseCaseFactory.create(viewManagerModel, selectColourViewModel, selectColourDataAccessObject);
+        views.add(selectColourView, selectColourView.viewName);
+
+        AccountView accountView = new AccountView(viewManagerModel, selectColourView, logoutView, deleteView);
+        views.add(accountView, accountView.viewName);
+
+        MainScreenView mainScreenView = new MainScreenView(viewManagerModel, selectModeView, accountView);
+        views.add(mainScreenView, mainScreenView.viewName);
+
         viewManagerModel.setActiveView(signupView.viewName);
-       
         viewManagerModel.firePropertyChanged();
 
         application.pack();
