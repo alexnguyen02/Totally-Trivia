@@ -44,101 +44,35 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
         }
     }
 
+    @Override
+    public ArrayList<Question> getQuestions(String category, String difficultyLevel, int numOfQuestions) {
+        buildAPIURL(category, difficultyLevel, numOfQuestions);
+        return getQuestionsFromAPI();
+    }
+
     private void buildAPIURL(String category, String difficultyLevel, int numOfQuestions){
         this.category = categoryMap.get(category);
         this.difficultyLevel = difficultyLevel.toLowerCase();
         this.numOfQuestions = numOfQuestions;
 
         if (category.equals("Any category") && difficultyLevel.equals("Any difficulty level")){
-            API_URL = String.format("https://opentdb.com/api.php?amount=%d&type=multiple", this.numOfQuestions);
+            API_URL = String.format("https://opentdb.com/api.php?amount=%d&type=multiple",
+                    this.numOfQuestions);
         } else if (category.equals("Any category")) {
-            API_URL = String.format("https://opentdb.com/api.php?amount=%d&difficulty=%s&type=multiple", this.numOfQuestions, this.difficultyLevel);
+            API_URL = String.format("https://opentdb.com/api.php?amount=%d&difficulty=%s&type=multiple",
+                    this.numOfQuestions,
+                    this.difficultyLevel);
         } else if (difficultyLevel.equals("Any difficulty level")) {
-            API_URL = String.format("https://opentdb.com/api.php?amount=%d&category=%d&type=multiple", this.numOfQuestions, this.category);
+            API_URL = String.format("https://opentdb.com/api.php?amount=%d&category=%d&type=multiple",
+                    this.numOfQuestions,
+                    this.category);
         } else {
-            API_URL = String.format("https://opentdb.com/api.php?amount=%d&category=%d&difficulty=%s&type=multiple", this.numOfQuestions, this.category, this.difficultyLevel);
+            API_URL = String.format("https://opentdb.com/api.php?amount=%d&category=%d&difficulty=%s&type=multiple",
+                    this.numOfQuestions,
+                    this.category,
+                    this.difficultyLevel);
         }
     }
-
-    private String extractFromJSONString(String regex, String JSONString, boolean isIncorrectAnswers){
-        String result = null;
-
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(JSONString);
-        if (matcher.find()){
-            if (isIncorrectAnswers){
-                result = matcher.group();
-            } else {
-                result = matcher.group(1);
-            }
-        }
-        return result;
-    }
-
-
-    private AnswerPackage buildAnswerPackage(String JSONString){
-        // Extract the correct answer from the JSONString
-        String correctAnswerRegex = "\"correct_answer\":\"(.*?)\"";
-        String correctAnswer = extractFromJSONString(correctAnswerRegex, JSONString, false);
-
-        // Extract the incorrect answers from the JSONString
-        String incorrectAnswersRegex = "\\[[^\\[]*]";
-        String incorrectAnswers = extractFromJSONString(incorrectAnswersRegex, JSONString, true);
-
-        ArrayList<String> possibleAnswersList = getAnswersList(incorrectAnswers, correctAnswer);
-
-        return new AnswerPackage(possibleAnswersList, correctAnswer);
-
-    }
-
-    @NotNull
-    private static ArrayList<String> getAnswersList(String incorrectAnswers, String correctAnswer) {
-        String cleanUpString = incorrectAnswers.replace("[", "").replace("]", "");
-
-        String[] incorrectAnswersArray = cleanUpString.split(",");
-        ArrayList<String> possibleAnswersList = new ArrayList<>();
-        for (String answer : incorrectAnswersArray){
-            possibleAnswersList.add(answer.replace("\"", ""));
-        }
-
-        int possibleAnswersSize = incorrectAnswersArray.length + 1;
-
-        Random random = new Random();
-        int randomIndex = random.nextInt(possibleAnswersSize);
-        possibleAnswersList.add(randomIndex, correctAnswer);
-        return possibleAnswersList;
-    }
-
-    private Question buildQuestion(String JSONString){
-        String content;
-        String category;
-        String difficultyLevel;
-        AnswerPackage answerPackage;
-
-        // Extract the content of the question
-        String contentRegex = "\"question\":\"(.*?)\"";
-        content = extractFromJSONString(contentRegex, JSONString, false);
-
-        // For testing purpose
-        System.out.println(content);
-
-        // Extract the category of the question
-        String categoryRegex = "\"category\":\"(.*?)\"";
-        category = extractFromJSONString(categoryRegex, JSONString, false);
-
-        // Extract the difficulty level of the question
-        String difficultyLevelRegex = "\"difficulty\":\"(.*?)\"";
-        difficultyLevel = extractFromJSONString(difficultyLevelRegex, JSONString, false);
-
-        // Build a new AnswerPackage
-        answerPackage = buildAnswerPackage(JSONString);
-        return new Question(content, category, difficultyLevel, answerPackage);
-    }
-
-    private String cleanUpHTMLChar (String inputString){
-        return StringEscapeUtils.unescapeHtml4(inputString);
-    }
-
 
     private ArrayList<Question> getQuestionsFromAPI(){
         ArrayList<Question> listOfQuestions= new ArrayList<>();
@@ -154,10 +88,11 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
             JSONObject responseBody = new JSONObject(response.body().string());
 
             if (response.isSuccessful()){
-                JSONArray results = responseBody.getJSONArray("results");
-                for (Object r : results){
-                    String cleanUpResult = cleanUpHTMLChar(r.toString());
-                    Question question = buildQuestion(cleanUpResult);
+                JSONArray rawResults = responseBody.getJSONArray("results");
+                for (Object r : rawResults){
+                    String cleanResult = removeHTMLChar(r.toString());
+
+                    Question question = buildQuestion(cleanResult);
                     listOfQuestions.add(question);
                 }
             } else {
@@ -167,13 +102,90 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         return listOfQuestions;
     }
 
-    @Override
-    public ArrayList<Question> getQuestions(String category, String difficultyLevel, int numOfQuestions) {
-        buildAPIURL(category, difficultyLevel, numOfQuestions);
-        return getQuestionsFromAPI();
+    private Question buildQuestion(String JSONString){
+        String content;
+        String category;
+        String difficultyLevel;
+        AnswerPackage answerPackage;
+
+        // Extract the content of the question
+        String contentRegex = "\"question[^]]*correct_answer\"";
+        content = cleanupContentString(extractRegex(contentRegex, JSONString, true));
+
+        // For testing purpose
+        System.out.println(content);
+
+        // Extract the category of the question
+        String categoryRegex = "\"category\":\"(.*?)\"";
+        category = extractRegex(categoryRegex, JSONString, false);
+
+        // Extract the difficulty level of the question
+        String difficultyLevelRegex = "\"difficulty\":\"(.*?)\"";
+        difficultyLevel = extractRegex(difficultyLevelRegex, JSONString, false);
+
+        // Build a new AnswerPackage
+        answerPackage = buildAnswerPackage(JSONString);
+        return new Question(content, category, difficultyLevel, answerPackage);
+    }
+
+    private AnswerPackage buildAnswerPackage(String JSONString){
+        // Extract the correct answer from the JSONString
+        String correctAnswerRegex = "\"correct_answer\":\"(.*?)\"";
+        String correctAnswer = extractRegex(correctAnswerRegex, JSONString, false);
+
+        // Extract the incorrect answers from the JSONString
+        String incorrectAnswersRegex = "\\[[^\\[]*]";
+        String incorrectAnswers = extractRegex(incorrectAnswersRegex, JSONString, true);
+
+        ArrayList<String> possibleAnswersList = getPossibleAnswersList(incorrectAnswers, correctAnswer);
+        return new AnswerPackage(possibleAnswersList, correctAnswer);
+    }
+
+    @NotNull
+    private static ArrayList<String> getPossibleAnswersList(String incorrectAnswers, String correctAnswer) {
+        String cleanupString = incorrectAnswers.replace("[", "").replace("]", "");
+
+        String[] incorrectAnswersArray = cleanupString.split(",");
+        ArrayList<String> possibleAnswersList = new ArrayList<>();
+        for (String answer : incorrectAnswersArray){
+            possibleAnswersList.add(answer.replace("\"", ""));
+        }
+        return addCorrectAnswerToList(possibleAnswersList, correctAnswer, incorrectAnswersArray.length + 1);
+    }
+
+    private static ArrayList<String> addCorrectAnswerToList(ArrayList<String> possibleAnswersList, String correctAnswer, int listSize){
+        Random random = new Random();
+        int randomIndex = random.nextInt(listSize);
+
+        possibleAnswersList.add(randomIndex, correctAnswer);
+
+        return possibleAnswersList;
+    }
+
+    private String extractRegex(String regex, String JSONString, boolean noGroup){
+        String result = null;
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(JSONString);
+        if (matcher.find()){
+            if (noGroup){
+                result = matcher.group();
+            } else {
+                result = matcher.group(1);
+            }
+        }
+        return result;
+    }
+
+    private String removeHTMLChar(String inputString){
+        return StringEscapeUtils.unescapeHtml4(inputString);
+    }
+
+    private String cleanupContentString(String contentString) {
+        String removedPrefix = contentString.replace("\"question\":\"", "");
+        return removedPrefix.replace("\",\"correct_answer\"", "");
     }
 }
