@@ -67,10 +67,10 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
         if (matcher.find()){
             if (isIncorrectAnswers){
                 result = matcher.group();
+            } else {
+                result = matcher.group(1);
             }
-            result = matcher.group(1);
         }
-
         return result;
     }
 
