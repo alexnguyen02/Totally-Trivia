@@ -113,18 +113,18 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
 
         // Extract the content of the question
         String contentRegex = "\"question[^]]*correct_answer\"";
-        content = cleanupContentString(extractRegex(contentRegex, JSONString, true));
+        content = cleanupContentString(extractStringPatter(contentRegex, JSONString, true));
 
         // For testing purpose
         System.out.println(content);
 
         // Extract the category of the question
         String categoryRegex = "\"category\":\"(.*?)\"";
-        category = extractRegex(categoryRegex, JSONString, false);
+        category = extractStringPatter(categoryRegex, JSONString, false);
 
         // Extract the difficulty level of the question
         String difficultyLevelRegex = "\"difficulty\":\"(.*?)\"";
-        difficultyLevel = extractRegex(difficultyLevelRegex, JSONString, false);
+        difficultyLevel = extractStringPatter(difficultyLevelRegex, JSONString, false);
 
         // Build a new AnswerPackage
         answerPackage = buildAnswerPackage(JSONString);
@@ -134,11 +134,11 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
     private AnswerPackage buildAnswerPackage(String JSONString){
         // Extract the correct answer from the JSONString
         String correctAnswerRegex = "\"correct_answer\":\"(.*?)\"";
-        String correctAnswer = extractRegex(correctAnswerRegex, JSONString, false);
+        String correctAnswer = extractStringPatter(correctAnswerRegex, JSONString, false);
 
         // Extract the incorrect answers from the JSONString
         String incorrectAnswersRegex = "\\[[^\\[]*]";
-        String incorrectAnswers = extractRegex(incorrectAnswersRegex, JSONString, true);
+        String incorrectAnswers = extractStringPatter(incorrectAnswersRegex, JSONString, true);
 
         ArrayList<String> possibleAnswersList = getPossibleAnswersList(incorrectAnswers, correctAnswer);
         return new AnswerPackage(possibleAnswersList, correctAnswer);
@@ -165,7 +165,7 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
         return possibleAnswersList;
     }
 
-    private String extractRegex(String regex, String JSONString, boolean noGroup){
+    private String extractStringPatter(String regex, String JSONString, boolean noGroup){
         String result = null;
 
         Pattern pattern = Pattern.compile(regex);
