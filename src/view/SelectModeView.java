@@ -33,7 +33,7 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
     private final JComboBox<String> difficultyLevelDropdown = new JComboBox<>(new String[]{"Any difficulty level","Easy", "Medium", "Hard"});
 
     // The array of integer {2,4,6} is for testing purpose only; The actual array of integer is {10,20,30}
-    private final JComboBox<Integer> numOfQuestionDropdown = new JComboBox<>(new Integer[]{2, 4, 6}); //
+    private final JComboBox<Integer> numOfQuestionDropdown = new JComboBox<>(new Integer[]{5, 10, 20, 30}); //
 
 
     // Start (game) button
@@ -72,6 +72,8 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
                             String category = currentState.getCategory();
                             String difficulty = currentState.getDifficultyLevel();
                             Integer num = currentState.getNumOfQuestions();
+
+                            // For testing purpose
                             System.out.println(currentState.getCategory());
                             System.out.println(currentState.getDifficultyLevel());
                             System.out.println(currentState.getNumOfQuestions());
