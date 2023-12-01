@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.*;
 import java.time.LocalDateTime;
 
 public interface User {
@@ -9,4 +10,14 @@ public interface User {
     String getPassword();
 
     LocalDateTime getCreationTime();
+
+    Integer getPoints();
+
+    Color getColourScheme();
+
+    void setPoints(Integer points);
+
+    void setColourScheme(Color colour);
+
+    void copyUser(User user);
 }

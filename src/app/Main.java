@@ -2,15 +2,20 @@ package app;
 
 import app.LoginUseCaseFactory;
 import data_access.FileUserDataAccessObject;
-import data_access.InMemorySelectModeAccessObject;
+
 import data_access.QuestionStorageDataAccessObject;
 import data_access.SelectModeDataAccessObject;
 import entity.CommonUserFactory;
+import entity.User;
+import interface_adaptors.delete.DeleteViewModel;
 import interface_adaptors.game_over.GameOverController;
 import interface_adaptors.game_over.GameOverPresenter;
 import interface_adaptors.game_over.GameOverViewModel;
 import interface_adaptors.login.LoginViewModel;
 import interface_adaptors.logged_in.LoggedInViewModel;
+import interface_adaptors.logout.LogoutController;
+import interface_adaptors.logout.LogoutPresenter;
+import interface_adaptors.logout.LogoutViewModel;
 import interface_adaptors.question.QuestionViewModel;
 import interface_adaptors.select_mode.SelectModeViewModel;
 import interface_adaptors.signup.SignupViewModel;
@@ -18,12 +23,15 @@ import interface_adaptors.ViewManagerModel;
 import interface_adaptors.select_colour.SelectColourViewModel;
 import data_access.SelectColourDataAccessObject;
 import use_case.login.LoginUserDataAccessInterface;
+import use_case.logout.LogoutInputBoundary;
+import use_case.logout.LogoutInteractor;
 import use_case.select_mode.SelectModeDataObjectInterface;
 import view.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) {
@@ -40,29 +48,22 @@ public class Main {
         JPanel views = new JPanel(cardLayout);
         application.add(views);
 
-        // This keeps track of and manages which view is currently showing.
+        // Initates the ViewManagerModel, which will manage all Views.
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         new ViewManager(views, cardLayout, viewManagerModel);
 
-        // The data for the views, such as username and password, are in the ViewModels.
-        // This information will be changed by a presenter object that is reporting the
-        // results from the use case. The ViewModels are observable, and will
-        // be observed by the Views.
+        // Initiates all the ViewModels for each use case.
         LoginViewModel loginViewModel = new LoginViewModel();
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
         QuestionViewModel questionViewModel = new QuestionViewModel();
         GameOverViewModel gameOverViewModel = new GameOverViewModel();
-
         DeleteViewModel deleteViewModel = new DeleteViewModel();
         LogoutViewModel logoutViewModel = new LogoutViewModel();
-
         SelectColourViewModel selectColourViewModel = new SelectColourViewModel();
-
-
-        // Initialize SelectModeViewModel
         SelectModeViewModel selectModeViewModel = new SelectModeViewModel();
-        
+
+        // Initiates the FileUserDataAccessObject.
         FileUserDataAccessObject userDataAccessObject;
         try {
             userDataAccessObject = new FileUserDataAccessObject("./users.csv", new CommonUserFactory());
@@ -73,14 +74,21 @@ public class Main {
         // Initialize InMemoryDataAccessObject (for testing purpose); The actual Data Access Object is calling API
         SelectModeDataObjectInterface selectModeAccessObject;
         selectModeAccessObject = new SelectModeDataAccessObject();
+
+        // Initializes all the remaining Data Access Objects.
         SelectModeDataAccessObject selectModeDataAccessObject = new SelectModeDataAccessObject();
         QuestionStorageDataAccessObject questionStorageDataAccessObject = new QuestionStorageDataAccessObject();
-        SelectColourDataAccessObject selectColourDataAccessObject = new SelectColourDataAccessObject();
+        Color defaultColour = new Color(255);
+        SelectColourDataAccessObject selectColourDataAccessObject = new SelectColourDataAccessObject(defaultColour);
 
-        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
+        // Initializes an empty User. This User will be filled in by sign up/log in.
+        CommonUserFactory userFactory = new CommonUserFactory();
+        User user = userFactory.create("", "",LocalDateTime.parse("2023-12-01T14:58:50.150"), 0, new Color(255));
+
+        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject, user);
         views.add(signupView, signupView.viewName);
 
-        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject, user);
         views.add(loginView, loginView.viewName);
 
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
@@ -93,7 +101,7 @@ public class Main {
         QuestionView questionView = QuestionUseCaseFactory.create(viewManagerModel, questionViewModel, gameOverViewModel, questionStorageDataAccessObject);
         views.add(questionView, questionView.viewName);
 
-        GameOverView gameOverView = new GameOverView(gameOverViewModel, new GameOverController(new GameOverPresenter(viewManagerModel)));
+        GameOverView gameOverView = GameOverUseCaseFactory.create(viewManagerModel, gameOverViewModel, userDataAccessObject, user);
         views.add(gameOverView, gameOverView.viewName);
 
         LogoutView logoutView = new LogoutView(new LogoutController(null), logoutViewModel);
@@ -102,10 +110,10 @@ public class Main {
         SelectColourView selectColourView = SelectColourUseCaseFactory.create(viewManagerModel, selectColourViewModel, selectColourDataAccessObject);
         views.add(selectColourView, selectColourView.viewName);
 
-        AccountView accountView = new AccountView(viewManagerModel, selectColourView, logoutView, deleteView);
+        AccountView accountView = new AccountView(viewManagerModel);
         views.add(accountView, accountView.viewName);
 
-        MainScreenView mainScreenView = new MainScreenView(viewManagerModel, selectModeView, accountView);
+        MainScreenView mainScreenView = new MainScreenView(viewManagerModel);
         views.add(mainScreenView, mainScreenView.viewName);
 
         viewManagerModel.setActiveView(signupView.viewName);

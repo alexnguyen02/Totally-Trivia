@@ -2,16 +2,18 @@ package data_access;
 
 import entity.User;
 import entity.UserFactory;
+import use_case.game_over.GameOverUserDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 
+import java.awt.*;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface {
+public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, GameOverUserDataAccessInterface {
 
     private final File csvFile;
 
@@ -28,6 +30,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         headers.put("username", 0);
         headers.put("password", 1);
         headers.put("creation_time", 2);
+        headers.put("points", 3);
+        headers.put("colour_scheme", 4);
 
         if (csvFile.length() == 0) {
             save();
@@ -37,7 +41,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                 String header = reader.readLine();
 
                 // For later: clean this up by creating a new Exception subclass and handling it in the UI.
-                assert header.equals("username,password,creation_time");
+                assert header.equals("username,password,creation_time,points,color_scheme");
 
                 String row;
                 while ((row = reader.readLine()) != null) {
@@ -45,9 +49,13 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                     String username = String.valueOf(col[headers.get("username")]);
                     String password = String.valueOf(col[headers.get("password")]);
                     String creationTimeText = String.valueOf(col[headers.get("creation_time")]);
+                    String points = String.valueOf(col[headers.get("points")]);
+                    String colourScheme = String.valueOf(col[headers.get("colour_scheme")]);
                     LocalDateTime ldt = LocalDateTime.parse(creationTimeText);
-                    // User user = userFactory.create(username, password, ldt);
-                    // accounts.put(username, user);
+                    Integer int_points = Integer.valueOf(points);
+                    Color colour_ColourScheme = new Color(Integer.valueOf(colourScheme));
+                    User user = userFactory.create(username, password, ldt, int_points, colour_ColourScheme);
+                    accounts.put(username, user);
                 }
             }
         }
@@ -72,8 +80,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
             writer.newLine();
 
             for (User user : accounts.values()) {
-                String line = String.format("%s,%s,%s",
-                        user.getName(), user.getPassword(), user.getCreationTime());
+                String line = String.format("%s,%s,%s,%s,%s",
+                        user.getName(), user.getPassword(), user.getCreationTime(), user.getPoints(), user.getColourScheme());
                 writer.write(line);
                 writer.newLine();
             }
@@ -96,4 +104,10 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         return accounts.containsKey(identifier);
     }
 
+    @Override
+    public void changePoints(String userId, Integer points) {
+        User user = accounts.get(userId);
+        user.setPoints(user.getPoints() + points);
+        save();
+    }
 }

@@ -52,7 +52,14 @@ public class GameOverView extends JPanel implements ActionListener, PropertyChan
                 }
         );
 
-        //implement main menu when Daniel finishes it.
+        main_menu.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        gameOverController.execute("main screen");
+                    }
+                }
+        );
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
