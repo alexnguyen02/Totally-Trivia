@@ -5,9 +5,9 @@ import java.time.LocalDateTime;
 
 class CommonUser implements User {
 
-    private final String name;
-    private final String password;
-    private final LocalDateTime creationTime;
+    private String name;
+    private String password;
+    private LocalDateTime creationTime;
     private Integer points;
     private Color colourScheme;
 
@@ -46,4 +46,11 @@ class CommonUser implements User {
     public void setPoints(Integer points) { this.points = points; }
 
     public void setColourScheme(Color colour) { this.colourScheme = colour; }
+    public void copyUser(User user) {
+        this.name = user.getName();
+        this.password = user.getPassword();
+        this.creationTime = user.getCreationTime();
+        this.points = user.getPoints();
+        this.colourScheme = user.getColourScheme();
+    }
 }

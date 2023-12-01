@@ -18,4 +18,6 @@ public interface User {
     void setPoints(Integer points);
 
     void setColourScheme(Color colour);
+
+    void copyUser(User user);
 }

@@ -1,13 +1,17 @@
 package interface_adaptors.game_over;
 
 
+import use_case.game_over.GameOverInputBoundary;
+import use_case.game_over.GameOverInputData;
+
 public class GameOverController {
-    final GameOverPresenter gameOverPresenter;
-    public GameOverController(GameOverPresenter gameOverPresenter) {
-        this.gameOverPresenter = gameOverPresenter;
+    final GameOverInputBoundary gameOverInteractor;
+    public GameOverController(GameOverInputBoundary gameOverInteractor) {
+        this.gameOverInteractor = gameOverInteractor;
     }
 
-    public void execute(String viewName) {
-        gameOverPresenter.prepareSuccessView(viewName);
+    public void execute(String viewName, Integer points) {
+        GameOverInputData gameOverInputData = new GameOverInputData(viewName, points);
+        gameOverInteractor.execute(gameOverInputData);
     }
 }

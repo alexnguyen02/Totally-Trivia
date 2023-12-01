@@ -6,6 +6,7 @@ import data_access.FileUserDataAccessObject;
 import data_access.QuestionStorageDataAccessObject;
 import data_access.SelectModeDataAccessObject;
 import entity.CommonUserFactory;
+import entity.User;
 import interface_adaptors.delete.DeleteViewModel;
 import interface_adaptors.game_over.GameOverController;
 import interface_adaptors.game_over.GameOverPresenter;
@@ -30,6 +31,7 @@ import view.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) {
@@ -46,29 +48,22 @@ public class Main {
         JPanel views = new JPanel(cardLayout);
         application.add(views);
 
-        // This keeps track of and manages which view is currently showing.
+        // Initates the ViewManagerModel, which will manage all Views.
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         new ViewManager(views, cardLayout, viewManagerModel);
 
-        // The data for the views, such as username and password, are in the ViewModels.
-        // This information will be changed by a presenter object that is reporting the
-        // results from the use case. The ViewModels are observable, and will
-        // be observed by the Views.
+        // Initiates all the ViewModels for each use case.
         LoginViewModel loginViewModel = new LoginViewModel();
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
         QuestionViewModel questionViewModel = new QuestionViewModel();
         GameOverViewModel gameOverViewModel = new GameOverViewModel();
-
         DeleteViewModel deleteViewModel = new DeleteViewModel();
         LogoutViewModel logoutViewModel = new LogoutViewModel();
-
         SelectColourViewModel selectColourViewModel = new SelectColourViewModel();
-
-
-        // Initialize SelectModeViewModel
         SelectModeViewModel selectModeViewModel = new SelectModeViewModel();
-        
+
+        // Initiates the FileUserDataAccessObject.
         FileUserDataAccessObject userDataAccessObject;
         try {
             userDataAccessObject = new FileUserDataAccessObject("./users.csv", new CommonUserFactory());
@@ -79,15 +74,21 @@ public class Main {
         // Initialize InMemoryDataAccessObject (for testing purpose); The actual Data Access Object is calling API
         SelectModeDataObjectInterface selectModeAccessObject;
         selectModeAccessObject = new SelectModeDataAccessObject();
+
+        // Initializes all the remaining Data Access Objects.
         SelectModeDataAccessObject selectModeDataAccessObject = new SelectModeDataAccessObject();
         QuestionStorageDataAccessObject questionStorageDataAccessObject = new QuestionStorageDataAccessObject();
         Color defaultColour = new Color(255);
         SelectColourDataAccessObject selectColourDataAccessObject = new SelectColourDataAccessObject(defaultColour);
 
-        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
+        // Initializes an empty User. This User will be filled in by sign up/log in.
+        CommonUserFactory userFactory = new CommonUserFactory();
+        User user = userFactory.create("", "",LocalDateTime.parse("2023-12-01T14:58:50.150"), 0, new Color(255));
+
+        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject, user);
         views.add(signupView, signupView.viewName);
 
-        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject, user);
         views.add(loginView, loginView.viewName);
 
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
@@ -100,7 +101,7 @@ public class Main {
         QuestionView questionView = QuestionUseCaseFactory.create(viewManagerModel, questionViewModel, gameOverViewModel, questionStorageDataAccessObject);
         views.add(questionView, questionView.viewName);
 
-        GameOverView gameOverView = new GameOverView(gameOverViewModel, new GameOverController(new GameOverPresenter(viewManagerModel)));
+        GameOverView gameOverView = GameOverUseCaseFactory.create(viewManagerModel, gameOverViewModel, userDataAccessObject, user);
         views.add(gameOverView, gameOverView.viewName);
 
         LogoutView logoutView = new LogoutView(new LogoutController(null), logoutViewModel);
