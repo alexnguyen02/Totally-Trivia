@@ -9,7 +9,7 @@ import java.beans.PropertyChangeSupport;
 public class LogoutViewModel extends ViewModel {
     public static final String LOGOUT_BUTTON_LABEL = "logout";
 
-    private LogoutState state = new LogoutState(getState().getUsername());
+    private LogoutState state;
 
 
     public LogoutViewModel() {

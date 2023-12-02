@@ -15,6 +15,7 @@ public class LogoutState {
         this.username = username;
 
     }
+    public LogoutState () {}
 
     public String getUsername() {
         return username;
