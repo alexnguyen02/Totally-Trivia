@@ -19,7 +19,7 @@ public class DeletePresenter implements DeleteOutputBoundary {
 
 
         deleteState.setUsernames(response.getUsernames());
-        this.deleteViewModel.setState(deleteState);
+        deleteViewModel.setState(deleteState);
         deleteViewModel.firePropertyChanged();
     }
 
