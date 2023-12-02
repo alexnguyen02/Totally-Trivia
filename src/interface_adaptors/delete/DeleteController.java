@@ -3,15 +3,15 @@ package interface_adaptors.delete;
 import use_case.delete.DeleteInputBoundary;
 
 public class DeleteController {
-    final DeleteInputBoundary deleteAllUseCaseInteractor;
+    final DeleteInputBoundary deleteInteractor;
 
-    public DeleteController(DeleteInputBoundary deleteAllUseCaseInteractor) {
-        this.deleteAllUseCaseInteractor = deleteAllUseCaseInteractor;
+    public DeleteController(DeleteInputBoundary deleteInteractor) {
+        this.deleteInteractor = deleteInteractor;
     }
 
     public void execute(String s) {
 
 
-        deleteAllUseCaseInteractor.execute(s);
+        deleteInteractor.execute(s);
     }
 }
