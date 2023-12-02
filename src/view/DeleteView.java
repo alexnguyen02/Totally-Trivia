@@ -53,6 +53,7 @@ public class DeleteView extends JPanel implements ActionListener, PropertyChange
                         if (evt.getSource().equals(delete)) {
                             String s = deleteViewModel.getState().getUsernames();
                             deleteController.execute(s);
+
                         }
                     }
                 }

@@ -15,10 +15,9 @@ public class LogoutPresenter implements LogoutOutputBoundary {
     @Override
     public void prepareSuccessView(LogoutOutputData response) {
         LogoutState logoutState = logoutViewModel.getState();
-        String name = response.getMessage();
 
 
-        logoutState.setUsername(name);
+        logoutState.setUsername(response.getUsername());
         this.logoutViewModel.setState(logoutState);
         logoutViewModel.firePropertyChanged();
     }
