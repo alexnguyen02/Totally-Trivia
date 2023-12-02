@@ -22,7 +22,7 @@ public class SelectColourUseCaseFactory {
 
         try {
             SelectColourController selectColourController = createSelectColourController(viewManagerModel, selectColourViewModel, selectColourDataAccessObject);
-            return new SelectColourView(selectColourViewModel, selectColourController);
+            return new SelectColourView(selectColourViewModel, selectColourController, viewManagerModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open file.");
         }

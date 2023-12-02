@@ -10,4 +10,8 @@ public class ColourPackage {
     public ColourPackage(ArrayList<Color> possibleColours) {
         this.possibleColours = possibleColours;
     }
+
+    public ArrayList<Color> getUnlockedColours() {
+        return possibleColours;
+    }
 }

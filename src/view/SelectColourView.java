@@ -1,10 +1,12 @@
 package view;
 
+import interface_adaptors.ViewManagerModel;
 import interface_adaptors.select_colour.SelectColourController;
 import interface_adaptors.select_colour.SelectColourViewModel;
 import interface_adaptors.select_colour.SelectColourState;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -27,10 +29,33 @@ public class SelectColourView extends JPanel implements ActionListener, Property
 
     private final JComboBox<String> colourDropdown = new JComboBox<>(colourList);
 
-    public SelectColourView(SelectColourViewModel selectColourViewModel, SelectColourController selectColourController){
+    private final JButton back;
+
+    public SelectColourView(SelectColourViewModel selectColourViewModel, SelectColourController selectColourController, ViewManagerModel viewManagerModel){
         this.selectColourViewModel = selectColourViewModel;
         this.selectColourController = selectColourController;
         this.selectColourViewModel.addPropertyChangeListener(this);
+
+
+        JPanel titlePanel = new JPanel(new FlowLayout());
+        JLabel titleLabel = new JLabel("Select the Background Colour");
+        titlePanel.add(titleLabel);
+
+        add(titlePanel);
+
+        JPanel buttons = new JPanel();
+        back = new JButton("Back");
+        buttons.add(back);
+
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if (evt.getSource().equals(back)) {
+                    viewManagerModel.setActiveView("account");
+                    viewManagerModel.firePropertyChanged();
+                }
+            }
+        });
 
         colourDropdown.addActionListener(new ActionListener() {
             @Override
@@ -39,7 +64,7 @@ public class SelectColourView extends JPanel implements ActionListener, Property
 
                 String selectedColourString = colourDropdown.getSelectedItem().toString();
 
-                Color selectedColour = convertColorNameToColor(selectedColourString);
+                Color selectedColour = convertColourNameToColor(selectedColourString);
 
                 selectColourController.execute(selectedColour);
 
@@ -50,7 +75,7 @@ public class SelectColourView extends JPanel implements ActionListener, Property
         add(colourDropdown);
     }
 
-    private Color convertColorNameToColor(String colorName) {
+    private Color convertColourNameToColor(String colorName) {
         switch (colorName) {
             case "Black":
                 return Color.BLACK;
@@ -95,8 +120,8 @@ public class SelectColourView extends JPanel implements ActionListener, Property
         if (evt.getNewValue() instanceof SelectColourState) {
             SelectColourState selectColourState = (SelectColourState) evt.getNewValue();
             if (selectColourState.getColour() != null) {
+                this.setBackground(selectColourState.getColour());
                 String colour = convertColorToColourName(selectColourState.getColour());
-
                 JOptionPane.showMessageDialog(this, "The background colour was changed to " + colour + "!" );
             }
         }

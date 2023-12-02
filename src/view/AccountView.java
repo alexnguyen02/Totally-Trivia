@@ -14,6 +14,8 @@ public class AccountView extends JPanel {
 
     private final JButton deleteAccount;
 
+    private final JButton back;
+
     private final ViewManagerModel viewManagerModel;
 
 
@@ -29,6 +31,10 @@ public class AccountView extends JPanel {
         buttons.add(logOut);
         deleteAccount = new JButton("Delete Account");
         buttons.add(deleteAccount);
+
+        back = new JButton("Back");
+        buttons.add(back);
+
 
         changeColour.addActionListener(new ActionListener() {
             @Override
@@ -55,6 +61,16 @@ public class AccountView extends JPanel {
             public void actionPerformed(ActionEvent evt) {
                 if (evt.getSource().equals(deleteAccount)) {
                     viewManagerModel.setActiveView("delete");
+                    viewManagerModel.firePropertyChanged();
+                }
+            }
+        });
+
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if (evt.getSource().equals(back)) {
+                    viewManagerModel.setActiveView("main screen");
                     viewManagerModel.firePropertyChanged();
                 }
             }
