@@ -13,7 +13,7 @@ public class SelectColourViewModel extends ViewModel{
     private static SelectColourState state;
 
     public SelectColourViewModel() {
-        super("selectColour");
+        super("select colour");
         this.state = new SelectColourState(colour);
     }
 
