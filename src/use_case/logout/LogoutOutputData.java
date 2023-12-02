@@ -2,19 +2,19 @@ package use_case.logout;
 
 public class LogoutOutputData {
     private final boolean success;
-    private final String message;
+    private final String username;
 
-    public LogoutOutputData(boolean success, String message) {
+    public LogoutOutputData(boolean success, String username) {
         this.success = success;
-        this.message = message;
+        this.username = username;
     }
 
     public boolean isSuccess() {
         return success;
     }
 
-    public String getMessage() {
-        return message;
+    public String getUsername() {
+        return username;
     }
 
 }

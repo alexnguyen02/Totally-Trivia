@@ -11,10 +11,10 @@ public class LogoutController {
     }
 
 
-    public void execute() {
+    public void execute(String s) {
 
 
-        logoutUseCaseInteractor.execute();
+        logoutUseCaseInteractor.execute(s);
     }
 }
 

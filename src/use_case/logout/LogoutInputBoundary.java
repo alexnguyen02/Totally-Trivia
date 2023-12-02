@@ -1,5 +1,5 @@
 package use_case.logout;
 
 public interface LogoutInputBoundary {
-    void execute();
+    void execute(String s);
 }

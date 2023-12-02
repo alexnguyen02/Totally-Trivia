@@ -1,18 +1,20 @@
 package use_case.logout;
 
-public class LogoutInteractor {
-    public void execute(LogoutInputData inputData, LogoutOutputBoundary outputBoundary) {
-        // Perform any necessary validation or business logic related to logout
-        // Example: Check if the user exists, update the user's authentication status, etc.
+import use_case.delete.DeleteOutputData;
 
-        // For the sake of simplicity, let's assume the logout is always successful
-        boolean success = true;
-        String message = "Logout successful";
+public class LogoutInteractor implements LogoutInputBoundary {
+    final LogoutUserDataAccessInterface userDataAccessObject;
+    final LogoutOutputBoundary userPresenter;
 
-        // Create an instance of LogoutOutputData with the result
-        LogoutOutputData outputData = new LogoutOutputData(success, message);
+    public LogoutInteractor(LogoutUserDataAccessInterface userDataAccessObject, LogoutOutputBoundary userPresenter) {
+        this.userDataAccessObject = userDataAccessObject;
+        this.userPresenter = userPresenter;
+    }
 
-        // Pass the output data to the output boundary for presentation
-        outputBoundary.prepareSuccessView(outputData);
+    @Override
+    public void execute(String s) {
+        boolean b = userDataAccessObject.logoutUser();
+        LogoutOutputData logoutOutputData = new LogoutOutputData(b, s);
+        userPresenter.prepareSuccessView(logoutOutputData);
     }
 }
