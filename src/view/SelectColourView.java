@@ -46,6 +46,7 @@ public class SelectColourView extends JPanel implements ActionListener, Property
         JPanel buttons = new JPanel();
         back = new JButton("Back");
         buttons.add(back);
+        add(buttons);
 
         back.addActionListener(new ActionListener() {
             @Override
