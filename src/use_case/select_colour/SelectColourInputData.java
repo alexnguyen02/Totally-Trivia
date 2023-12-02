@@ -1,15 +1,14 @@
 package use_case.select_colour;
 
-import java.awt.Color;
 
 public class SelectColourInputData {
-    private Color colour;
+    private String colour;
 
-    public SelectColourInputData(Color colour) {
+    public SelectColourInputData(String colour) {
         this.colour = colour;
     }
 
-    Color getColour() {
+    String getColour() {
         return colour;
     }
 }

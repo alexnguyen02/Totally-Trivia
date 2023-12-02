@@ -53,8 +53,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                     String colourScheme = String.valueOf(col[headers.get("colour_scheme")]);
                     LocalDateTime ldt = LocalDateTime.parse(creationTimeText);
                     Integer int_points = Integer.valueOf(points);
-                    Color colour_ColourScheme = new Color(Integer.valueOf(colourScheme));
-                    User user = userFactory.create(username, password, ldt, int_points, colour_ColourScheme);
+                    User user = userFactory.create(username, password, ldt, int_points, colourScheme);
                     accounts.put(username, user);
                 }
             }
@@ -110,4 +109,12 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         user.setPoints(user.getPoints() + points);
         save();
     }
+
+//    @Override
+    public void changeColourScheme(String userId, String colour) {
+        User user = accounts.get(userId);
+        user.setColourScheme(colour);
+        save();
+    }
+
 }

@@ -5,14 +5,23 @@ import java.awt.*;
 
 
 public class SelectColourState {
-    private Color colour;
+    private String colour;
+    private String colourError = null;
 
-    public SelectColourState(Color colour) {
+    public SelectColourState(String colour) {
         this.colour = colour;
     }
 
-    public Color getColour() {
+    public String getColour() {
         return colour;
+    }
+
+    public String getColourError() {
+        return colourError;
+    }
+
+    public void setColourError(String colourError) {
+        this.colourError = colourError;
     }
 
 }
