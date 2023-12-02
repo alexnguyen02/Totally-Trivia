@@ -47,7 +47,7 @@ public class GameOverView extends JPanel implements ActionListener, PropertyChan
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        gameOverController.execute("select mode");
+                        gameOverController.execute("select mode", gameOverViewModel.getState().getPointsEarned());
                     }
                 }
         );
@@ -56,7 +56,7 @@ public class GameOverView extends JPanel implements ActionListener, PropertyChan
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        gameOverController.execute("main screen");
+                        gameOverController.execute("main screen", gameOverViewModel.getState().getPointsEarned());
                     }
                 }
         );
