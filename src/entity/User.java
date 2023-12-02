@@ -13,11 +13,11 @@ public interface User {
 
     Integer getPoints();
 
-    Color getColourScheme();
+    String getColourScheme();
 
     void setPoints(Integer points);
 
-    void setColourScheme(Color colour);
+    void setColourScheme(String colour);
 
     void copyUser(User user);
 }

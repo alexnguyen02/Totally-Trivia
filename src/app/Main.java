@@ -21,7 +21,7 @@ import interface_adaptors.select_mode.SelectModeViewModel;
 import interface_adaptors.signup.SignupViewModel;
 import interface_adaptors.ViewManagerModel;
 import interface_adaptors.select_colour.SelectColourViewModel;
-import data_access.SelectColourDataAccessObject;
+//import data_access.SelectColourDataAccessObject;
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.logout.LogoutInputBoundary;
 import use_case.logout.LogoutInteractor;
@@ -34,7 +34,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Build the main program window, the main panel containing the
         // various cards, and the layout, and stitch them together.
 
@@ -76,10 +76,11 @@ public class Main {
         selectModeAccessObject = new SelectModeDataAccessObject();
 
         // Initializes all the remaining Data Access Objects.
+
         SelectModeDataAccessObject selectModeDataAccessObject = new SelectModeDataAccessObject();
         QuestionStorageDataAccessObject questionStorageDataAccessObject = new QuestionStorageDataAccessObject();
-        Color defaultColour = new Color(255);
-        SelectColourDataAccessObject selectColourDataAccessObject = new SelectColourDataAccessObject(defaultColour);
+//        Color defaultColour = new Color(255);
+//        SelectColourDataAccessObject selectColourDataAccessObject = new SelectColourDataAccessObject(defaultColour);
 
         // Initializes an empty User. This User will be filled in by sign up/log in.
         CommonUserFactory userFactory = new CommonUserFactory();
@@ -107,7 +108,7 @@ public class Main {
         LogoutView logoutView = new LogoutView(new LogoutController(null), logoutViewModel);
         views.add(logoutView, logoutView.viewName);
 
-        SelectColourView selectColourView = SelectColourUseCaseFactory.create(viewManagerModel, selectColourViewModel, selectColourDataAccessObject);
+        SelectColourView selectColourView = SelectColourUseCaseFactory.create(viewManagerModel, selectColourViewModel, user, userDataAccessObject);
         views.add(selectColourView, selectColourView.viewName);
 
         AccountView accountView = new AccountView(viewManagerModel);
@@ -116,7 +117,10 @@ public class Main {
         MainScreenView mainScreenView = new MainScreenView(viewManagerModel);
         views.add(mainScreenView, mainScreenView.viewName);
 
-        viewManagerModel.setActiveView(signupView.viewName);
+        WelcomeView welcomeView = new WelcomeView(viewManagerModel);
+        views.add(welcomeView, welcomeView.viewName);
+
+        viewManagerModel.setActiveView(welcomeView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();

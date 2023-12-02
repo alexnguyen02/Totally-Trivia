@@ -9,14 +9,14 @@ class CommonUser implements User {
     private String password;
     private LocalDateTime creationTime;
     private Integer points;
-    private Color colourScheme;
+    private String colourScheme;
 
     /**
      * Requires: password is valid.
      * @param name
      * @param password
      */
-    CommonUser(String name, String password, LocalDateTime creationTime, Integer points, Color colourScheme) {
+    CommonUser(String name, String password, LocalDateTime creationTime, Integer points, String colourScheme) {
         this.name = name;
         this.password = password;
         this.creationTime = creationTime;
@@ -41,11 +41,11 @@ class CommonUser implements User {
 
     public Integer getPoints() { return points; }
 
-    public Color getColourScheme() { return colourScheme; }
+    public String getColourScheme() { return colourScheme; }
 
     public void setPoints(Integer points) { this.points = points; }
 
-    public void setColourScheme(Color colour) { this.colourScheme = colour; }
+    public void setColourScheme(String colour) { this.colourScheme = colour; }
     public void copyUser(User user) {
         this.name = user.getName();
         this.password = user.getPassword();

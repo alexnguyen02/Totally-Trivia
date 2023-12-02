@@ -13,7 +13,7 @@ public class SelectColourController {
         this.selectColourInteractor = selectColourInteractor;
     }
 
-    public void execute(Color colour){
+    public void execute(String colour){
         SelectColourInputData selectColourInputData = new SelectColourInputData(colour);
         selectColourInteractor.execute(selectColourInputData);
     }
