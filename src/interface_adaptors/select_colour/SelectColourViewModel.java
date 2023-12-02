@@ -7,16 +7,13 @@ import java.awt.Color;
 import interface_adaptors.ViewModel;
 
 public class SelectColourViewModel extends ViewModel{
-//    public static final String CLEAR_BUTTON_LABEL = "Clear";
 
-    private Color colour;
+    private String colour;
 
     private static SelectColourState state;
 
     public SelectColourViewModel() {
         super("selectColour");
-//        super("clear");
-//        super();
         this.state = new SelectColourState(colour);
     }
 

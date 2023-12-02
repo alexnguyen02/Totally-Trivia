@@ -22,7 +22,7 @@ public class SelectColourPresenter implements SelectColourOutputBoundary{
 
     @Override
     public void prepareSuccessView(SelectColourOutputData selectColourOutputData) {
-        Color colour = selectColourOutputData.getColour();
+        String colour = selectColourOutputData.getColour();
 
         SelectColourState selectColourState = new SelectColourState(colour);
         this.selectColourViewModel.setState(selectColourState);
@@ -34,6 +34,8 @@ public class SelectColourPresenter implements SelectColourOutputBoundary{
 
     @Override
     public void prepareFailView(String error) {
-        JOptionPane.showMessageDialog(null, error);
+        SelectColourState selectColourState = selectColourViewModel.getState();
+        selectColourState.setColourError(error);
+        selectColourViewModel.firePropertyChanged();
     }
 }
