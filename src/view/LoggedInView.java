@@ -3,6 +3,8 @@ package view;
 import interface_adaptors.logged_in.LoggedInState;
 import interface_adaptors.logged_in.LoggedInViewModel;
 import interface_adaptors.login.LoginState;
+import interface_adaptors.logout.LogoutController;
+import interface_adaptors.logout.LogoutState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +25,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     /**
      * A window with a title and a JButton.
      */
-    public LoggedInView(LoggedInViewModel loggedInViewModel) {
+    public LoggedInView(LoggedInViewModel loggedInViewModel, LogoutController logoutController) {
         this.loggedInViewModel = loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
 
@@ -43,7 +45,8 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(logOut)) {
                             String s = username.getText();
-                            logOutController.execute(s);
+
+                            logoutController.execute(s);
 
                         }
                     }
@@ -67,7 +70,14 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        LoggedInState state = (LoggedInState) evt.getNewValue();
-        username.setText(state.getUsername());
+        Object obj = evt.getNewValue();
+        if(obj instanceof LogoutState){
+            LogoutState state = (LogoutState) obj;
+            JOptionPane.showMessageDialog(this, "You successful log out!");
+        }else {
+            LoggedInState state = (LoggedInState) evt.getNewValue();
+            username.setText(state.getUsername());
+        }
     }
+
 }
