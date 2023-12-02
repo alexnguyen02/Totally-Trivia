@@ -7,5 +7,5 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface SelectColourDataAccessInterface {
-    Color changeColour(Color colour);
+    boolean colourUnlocked(Color colour, ArrayList<Color> possibleColours);
 }

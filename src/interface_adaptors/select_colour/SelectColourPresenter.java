@@ -8,6 +8,8 @@ import use_case.select_colour.SelectColourInputData;
 import use_case.select_colour.SelectColourOutputBoundary;
 import use_case.select_colour.SelectColourOutputData;
 
+import javax.swing.*;
+
 
 public class SelectColourPresenter implements SelectColourOutputBoundary{
     private final SelectColourViewModel selectColourViewModel;
@@ -19,7 +21,7 @@ public class SelectColourPresenter implements SelectColourOutputBoundary{
     }
 
     @Override
-    public void prepareView(SelectColourOutputData selectColourOutputData) {
+    public void prepareSuccessView(SelectColourOutputData selectColourOutputData) {
         Color colour = selectColourOutputData.getColour();
 
         SelectColourState selectColourState = new SelectColourState(colour);
@@ -28,5 +30,10 @@ public class SelectColourPresenter implements SelectColourOutputBoundary{
 
         viewManagerModel.setActiveView(selectColourViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
+    }
+
+    @Override
+    public void prepareFailView(String error) {
+        JOptionPane.showMessageDialog(null, error);
     }
 }
