@@ -1,10 +1,20 @@
 package view;
 
 import interface_adaptors.ViewManagerModel;
+import interface_adaptors.delete.DeleteController;
+import interface_adaptors.delete.DeletePresenter;
+import interface_adaptors.delete.DeleteState;
+import interface_adaptors.delete.DeleteViewModel;
+import interface_adaptors.logged_in.LoggedInState;
+import use_case.delete.DeleteInputBoundary;
+import use_case.delete.DeleteInteractor;
+import use_case.delete.DeleteOutputBoundary;
+import use_case.delete.DeleteUserDataAccessInterface;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
 
 public class AccountView extends JPanel {
 
@@ -56,6 +66,20 @@ public class AccountView extends JPanel {
             }
         });
 
+        // need a username in account
+//        delete.addActionListener(
+//                // This creates an anonymous subclass of ActionListener and instantiates it.
+//                new ActionListener() {
+//                    public void actionPerformed(ActionEvent evt) {
+//                        if (evt.getSource().equals(delete)) {
+//                            String s = username.getText();
+//                            deleteController.execute(s);
+//
+//                        }
+//                    }
+//                }
+//        );
+
         deleteAccount.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -77,6 +101,39 @@ public class AccountView extends JPanel {
         });
 
         add(buttons);
+    }
+    public static DeleteController createUserDeleteUseCase(DeleteViewModel deleteViewModel, DeleteUserDataAccessInterface deleteUserDataAccessInterface) {
+        // Notice how we pass this method's parameters to the Presenter.
+        DeleteOutputBoundary deleteOutputBoundary = new DeletePresenter(deleteViewModel);
+
+
+        DeleteInputBoundary deleteInteractor = new DeleteInteractor(deleteUserDataAccessInterface, deleteOutputBoundary);
+
+        return new DeleteController(deleteInteractor);
 
     }
+
+    /**
+     * React to a button click that results in evt.
+     */
+    public void actionPerformed(ActionEvent evt) {
+        System.out.println("Click " + evt.getActionCommand());
+    }
+
+
+
+
+    //different prperty change
+
+//    @Override
+//    public void propertyChange(PropertyChangeEvent evt) {
+//        Object obj = evt.getNewValue();
+//        if(obj instanceof DeleteState){
+//            DeleteState state = (DeleteState) obj;
+//            JOptionPane.showMessageDialog(this, state.getUsernames());
+//        }else {
+//            LoggedInState state = (LoggedInState) evt.getNewValue();
+//            username.setText(state.getUsername());
+//        }
+//    }
 }
