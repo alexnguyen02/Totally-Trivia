@@ -12,6 +12,7 @@ public class DeleteOutputData {
 
 
     public String getUsernames() {
+        if (usernames.equals("User not found")){return "User not found";};
         return "You are successful delete account: " + usernames;
     }
 
