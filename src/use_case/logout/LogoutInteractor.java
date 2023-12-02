@@ -13,8 +13,8 @@ public class LogoutInteractor implements LogoutInputBoundary {
 
     @Override
     public void execute(String s) {
-        boolean b = userDataAccessObject.logoutUser();
-        LogoutOutputData logoutOutputData = new LogoutOutputData(b, s);
+
+        LogoutOutputData logoutOutputData = new LogoutOutputData(true, s);
         userPresenter.prepareSuccessView(logoutOutputData);
     }
 }
