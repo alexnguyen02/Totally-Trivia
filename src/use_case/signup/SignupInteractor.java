@@ -10,13 +10,15 @@ public class SignupInteractor implements SignupInputBoundary {
     final SignupUserDataAccessInterface userDataAccessObject;
     final SignupOutputBoundary userPresenter;
     final UserFactory userFactory;
+    User logged_in;
 
     public SignupInteractor(SignupUserDataAccessInterface signupDataAccessInterface,
                             SignupOutputBoundary signupOutputBoundary,
-                            UserFactory userFactory) {
+                            UserFactory userFactory, User logged_in) {
         this.userDataAccessObject = signupDataAccessInterface;
         this.userPresenter = signupOutputBoundary;
         this.userFactory = userFactory;
+        this.logged_in = logged_in;
     }
 
     @Override
@@ -29,6 +31,7 @@ public class SignupInteractor implements SignupInputBoundary {
 
             LocalDateTime now = LocalDateTime.now();
             User user = userFactory.create(signupInputData.getUsername(), signupInputData.getPassword(), now, 0, new Color(255));
+            logged_in.copyUser(user);
             userDataAccessObject.save(user);
 
             SignupOutputData signupOutputData = new SignupOutputData(user.getName(), now.toString(), false);

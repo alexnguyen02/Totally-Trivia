@@ -5,11 +5,13 @@ import entity.User;
 public class LoginInteractor implements LoginInputBoundary {
     final LoginUserDataAccessInterface userDataAccessObject;
     final LoginOutputBoundary loginPresenter;
+    User logged_in;
 
     public LoginInteractor(LoginUserDataAccessInterface userDataAccessInterface,
-                           LoginOutputBoundary loginOutputBoundary) {
+                           LoginOutputBoundary loginOutputBoundary, User logged_in) {
         this.userDataAccessObject = userDataAccessInterface;
         this.loginPresenter = loginOutputBoundary;
+        this.logged_in = logged_in;
     }
 
     @Override
@@ -25,6 +27,7 @@ public class LoginInteractor implements LoginInputBoundary {
             } else {
 
                 User user = userDataAccessObject.get(loginInputData.getUsername());
+                logged_in.copyUser(user);
 
                 LoginOutputData loginOutputData = new LoginOutputData(user.getName(), false);
                 loginPresenter.prepareSuccessView(loginOutputData);
