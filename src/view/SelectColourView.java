@@ -62,9 +62,9 @@ public class SelectColourView extends JPanel implements ActionListener, Property
             public void actionPerformed(ActionEvent e) {
                 SelectColourState currentState = selectColourViewModel.getState();
 
-                String selectedColourString = colourDropdown.getSelectedItem().toString();
+                String selectedColour = colourDropdown.getSelectedItem().toString();
 
-                Color selectedColour = convertColourNameToColor(selectedColourString);
+//                Color selectedColour = convertColourNameToColor(selectedColourString);
 
                 selectColourController.execute(selectedColour);
 
@@ -77,8 +77,8 @@ public class SelectColourView extends JPanel implements ActionListener, Property
 
     private Color convertColourNameToColor(String colorName) {
         switch (colorName) {
-            case "Black":
-                return Color.BLACK;
+            case "White":
+                return Color.WHITE;
             case "Blue":
                 return Color.BLUE;
             case "Cyan":
@@ -99,39 +99,39 @@ public class SelectColourView extends JPanel implements ActionListener, Property
                 return Color.PINK;
             case "Red":
                 return Color.RED;
-            case "White":
-                return Color.WHITE;
+            case "Black":
+                return Color.BLACK;
             case "Yellow":
                 return Color.YELLOW;
             default:
-                return Color.BLACK;
+                return Color.WHITE;
         }
     }
 
+    public void actionPerformed(ActionEvent evt) {}
 
-    @Override
-    public void actionPerformed(ActionEvent evt) {
-        JOptionPane.showConfirmDialog(this, "Cancel not implemented yet.");
-
-    }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getNewValue() instanceof SelectColourState) {
             SelectColourState selectColourState = (SelectColourState) evt.getNewValue();
             if (selectColourState.getColour() != null) {
-                this.setBackground(selectColourState.getColour());
-                String colour = convertColorToColourName(selectColourState.getColour());
-                JOptionPane.showMessageDialog(this, "The background colour was changed to " + colour + "!" );
+                JOptionPane.showMessageDialog(this, "The background colour was changed to " + selectColourState.getColour() + "!" );
+                Color colour = convertColourNameToColor(selectColourState.getColour());
+                this.setBackground(colour);
+
+
+
+            } else if (selectColourState.getColourError() != null) {
+                JOptionPane.showMessageDialog(this, selectColourState.getColourError());
             }
         }
-
 
     }
 
     private String convertColorToColourName(Color color) {
-        if (color.equals(Color.BLACK)) {
-            return "Black";
+        if (color.equals(Color.WHITE)) {
+            return "White";
         } else if (color.equals(Color.BLUE)) {
             return "Blue";
         } else if (color.equals(Color.CYAN)) {
@@ -152,15 +152,13 @@ public class SelectColourView extends JPanel implements ActionListener, Property
             return "Pink";
         } else if (color.equals(Color.RED)) {
             return "Red";
-        } else if (color.equals(Color.WHITE)) {
-            return "White";
+        } else if (color.equals(Color.BLACK)) {
+            return "Black";
         } else if (color.equals(Color.YELLOW)) {
             return "Yellow";
         } else {
-            return "Black";
+            return "White";
         }
     }
-
-
 
 }

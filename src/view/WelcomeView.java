@@ -16,15 +16,9 @@ public class WelcomeView extends JPanel {
 
     private final ViewManagerModel viewManagerModel;
 
-    private final SignupView signupView;
-
-    private final LoginView loginView;
-
-    public WelcomeView(ViewManagerModel viewManagerModel, SignupView signupView, LoginView loginView) {
+    public WelcomeView(ViewManagerModel viewManagerModel) {
 
         this.viewManagerModel = viewManagerModel;
-        this.signupView = signupView;
-        this.loginView = loginView;
 
 
         JPanel buttons = new JPanel();
@@ -37,7 +31,7 @@ public class WelcomeView extends JPanel {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 if (evt.getSource().equals(signUp)) {
-                    viewManagerModel.setActiveView(signupView.viewName);
+                    viewManagerModel.setActiveView("sign up");
                     viewManagerModel.firePropertyChanged();
                 }
             }
@@ -47,7 +41,7 @@ public class WelcomeView extends JPanel {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 if (evt.getSource().equals(logIn)) {
-                    viewManagerModel.setActiveView(loginView.viewName);
+                    viewManagerModel.setActiveView("log in");
                     viewManagerModel.firePropertyChanged();
                 }
             }
