@@ -12,7 +12,7 @@ public class DeleteOutputData {
 
 
     public String getUsernames() {
-        return usernames;
+        return "You are successful delete account: " + usernames;
     }
 
     public void setUsernames(String usernames) {
