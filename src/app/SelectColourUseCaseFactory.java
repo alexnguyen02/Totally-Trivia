@@ -1,7 +1,7 @@
 package app;
 
 import data_access.FileUserDataAccessObject;
-import view.SelectColourView;
+import view.*;
 import interface_adaptors.ViewManagerModel;
 import interface_adaptors.select_colour.SelectColourViewModel;
 import use_case.select_colour.SelectColourDataAccessInterface;
@@ -20,11 +20,11 @@ public class SelectColourUseCaseFactory {
     private SelectColourUseCaseFactory() {}
 
     public static SelectColourView create(
-            ViewManagerModel viewManagerModel, SelectColourViewModel selectColourViewModel, User user, FileUserDataAccessObject fileUserDataAccessObject) {
+            ViewManagerModel viewManagerModel, SelectColourViewModel selectColourViewModel, User user, FileUserDataAccessObject fileUserDataAccessObject, AccountView accountView, MainScreenView mainScreenView, QuestionView questionView, SelectModeView selectModeView) {
 
         try {
             SelectColourController selectColourController = createSelectColourController(viewManagerModel, selectColourViewModel, user, fileUserDataAccessObject);
-            return new SelectColourView(selectColourViewModel, selectColourController, viewManagerModel);
+            return new SelectColourView(selectColourViewModel, selectColourController, viewManagerModel, accountView, mainScreenView, questionView, selectModeView);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open file.");
         }

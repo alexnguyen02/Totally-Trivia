@@ -92,8 +92,8 @@ public class Main {
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject, user);
         views.add(loginView, loginView.viewName);
 
-        LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
-        views.add(loggedInView, loggedInView.viewName);
+//        LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
+//        views.add(loggedInView, loggedInView.viewName);
 
         SelectModeView selectModeView = SelectModeUseCaseFactory.create(viewManagerModel, selectModeViewModel,
                 selectModeDataAccessObject, questionStorageDataAccessObject, questionViewModel);
@@ -105,17 +105,17 @@ public class Main {
         GameOverView gameOverView = GameOverUseCaseFactory.create(viewManagerModel, gameOverViewModel, userDataAccessObject, user);
         views.add(gameOverView, gameOverView.viewName);
 
-        LogoutView logoutView = new LogoutView(new LogoutController(null), logoutViewModel);
-        views.add(logoutView, logoutView.viewName);
-
-        SelectColourView selectColourView = SelectColourUseCaseFactory.create(viewManagerModel, selectColourViewModel, user, userDataAccessObject);
-        views.add(selectColourView, selectColourView.viewName);
+//        LogoutView logoutView = new LogoutView(new LogoutController(null), logoutViewModel);
+//        views.add(logoutView, logoutView.viewName);
 
         AccountView accountView = new AccountView(viewManagerModel);
         views.add(accountView, accountView.viewName);
 
         MainScreenView mainScreenView = new MainScreenView(viewManagerModel);
         views.add(mainScreenView, mainScreenView.viewName);
+
+        SelectColourView selectColourView = SelectColourUseCaseFactory.create(viewManagerModel, selectColourViewModel, user, userDataAccessObject, accountView, mainScreenView, questionView, selectModeView);
+        views.add(selectColourView, selectColourView.viewName);
 
         WelcomeView welcomeView = new WelcomeView(viewManagerModel);
         views.add(welcomeView, welcomeView.viewName);

@@ -106,6 +106,10 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
         answer4.setText(questionViewModel.FOURTH_ANSWER_BUTTON_LABEL);
     }
 
+    public void changeColour(Color colour) {
+        this.setBackground(colour);
+    }
+
     public void actionPerformed(ActionEvent evt) {}
 
     @Override

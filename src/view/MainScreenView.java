@@ -5,6 +5,7 @@ import view.SelectModeView;
 import view.AccountView;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -50,5 +51,9 @@ public class MainScreenView extends JPanel {
 
         add(buttons);
 
+    }
+
+    public void changeColour(Color colour) {
+        this.setBackground(colour);
     }
 }

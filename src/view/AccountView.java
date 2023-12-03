@@ -12,6 +12,7 @@ import use_case.delete.DeleteOutputBoundary;
 import use_case.delete.DeleteUserDataAccessInterface;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -111,6 +112,10 @@ public class AccountView extends JPanel {
 
         return new DeleteController(deleteInteractor);
 
+    }
+
+    public void changeColour(Color colour) {
+        this.setBackground(colour);
     }
 
     /**
