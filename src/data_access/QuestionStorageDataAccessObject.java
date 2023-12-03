@@ -1,10 +1,11 @@
 package data_access;
 
 import entity.Question;
+import use_case.QuestionStorageDataAccessInterface;
 
 import java.util.ArrayList;
 
-public class QuestionStorageDataAccessObject {
+public class QuestionStorageDataAccessObject implements QuestionStorageDataAccessInterface {
 
     private ArrayList<Question> listOfQuestions;
 

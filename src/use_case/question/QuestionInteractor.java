@@ -1,7 +1,7 @@
 package use_case.question;
 
-import data_access.QuestionStorageDataAccessObject;
 import entity.Question;
+import use_case.QuestionStorageDataAccessInterface;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -9,10 +9,10 @@ import java.util.Objects;
 public class QuestionInteractor implements QuestionInputBoundary {
 
     final QuestionOutputBoundary questionPresenter;
-    final QuestionStorageDataAccessObject questionStorageDataAccessObject;
+    final QuestionStorageDataAccessInterface questionStorageDataAccessObject;
 
     public QuestionInteractor(QuestionOutputBoundary questionPresenter,
-                              QuestionStorageDataAccessObject questionStorageDataAccessObject) {
+                              QuestionStorageDataAccessInterface questionStorageDataAccessObject) {
 
         this.questionPresenter = questionPresenter;
         this.questionStorageDataAccessObject = questionStorageDataAccessObject;
