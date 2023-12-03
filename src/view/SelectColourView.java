@@ -23,18 +23,31 @@ public class SelectColourView extends JPanel implements ActionListener, Property
 
     private final SelectColourController selectColourController;
 
-    private final String[] colourList = new String[]{"Black", "Blue", "Cyan", "Dark Gray",
+    private final AccountView accountView;
+
+    private final MainScreenView mainScreenView;
+
+    private final QuestionView questionView;
+
+    private final SelectModeView selectModeView;
+
+    private final String[] colourList = new String[]{"White", "Blue", "Cyan", "Dark Gray",
             "Gray", "Green", "Light_Gray", "Magenta", "Orange", "Pink", "Red",
-            "White", "Yellow"};
+            "Black", "Yellow"};
 
     private final JComboBox<String> colourDropdown = new JComboBox<>(colourList);
 
     private final JButton back;
 
-    public SelectColourView(SelectColourViewModel selectColourViewModel, SelectColourController selectColourController, ViewManagerModel viewManagerModel){
+    public SelectColourView(SelectColourViewModel selectColourViewModel, SelectColourController selectColourController, ViewManagerModel viewManagerModel,
+                            AccountView accountView, MainScreenView mainScreenView, QuestionView questionView, SelectModeView selectModeView){
         this.selectColourViewModel = selectColourViewModel;
         this.selectColourController = selectColourController;
         this.selectColourViewModel.addPropertyChangeListener(this);
+        this.accountView = accountView;
+        this.mainScreenView = mainScreenView;
+        this.questionView = questionView;
+        this.selectModeView = selectModeView;
 
 
         JPanel titlePanel = new JPanel(new FlowLayout());
@@ -117,9 +130,14 @@ public class SelectColourView extends JPanel implements ActionListener, Property
         if (evt.getNewValue() instanceof SelectColourState) {
             SelectColourState selectColourState = (SelectColourState) evt.getNewValue();
             if (selectColourState.getColour() != null) {
-                JOptionPane.showMessageDialog(this, "The background colour was changed to " + selectColourState.getColour() + "!" );
+//                JOptionPane.showMessageDialog(this, "The background colour was changed to " + selectColourState.getColour() + "!" );
                 Color colour = convertColourNameToColor(selectColourState.getColour());
                 this.setBackground(colour);
+
+                accountView.changeColour(colour);
+                mainScreenView.changeColour(colour);
+                questionView.changeColour(colour);
+                selectModeView.changeColour(colour);
 
 
 

@@ -135,6 +135,9 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
         this.add(buttons);
     }
 
+    public void changeColour(Color colour) {
+        this.setBackground(colour);
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         JOptionPane.showConfirmDialog(this, "Reset not implemented yet.");
