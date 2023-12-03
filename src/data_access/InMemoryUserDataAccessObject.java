@@ -1,12 +1,13 @@
 package data_access;
 
 import entity.User;
+import use_case.select_colour.SelectColourUserDataAccessInterface;
 import use_case.signup.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface {
+public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface, SelectColourUserDataAccessInterface {
 
     private final Map<String, User> users = new HashMap<>();
 
@@ -30,5 +31,13 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
     @Override
     public User get(String username) {
         return null;
+    }
+
+    @Override
+    public void changeColourScheme(String username, String colourScheme) {
+        User user = users.get(username);
+        if (user != null) {
+            user.setColourScheme(colourScheme);
+        }
     }
 }
