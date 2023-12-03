@@ -17,7 +17,6 @@ import interface_adaptors.select_mode.SelectModeViewModel;
 import interface_adaptors.signup.SignupViewModel;
 import interface_adaptors.ViewManagerModel;
 import interface_adaptors.select_colour.SelectColourViewModel;
-//import data_access.SelectColourDataAccessObject;
 import use_case.logout.LogoutInteractor;
 import use_case.select_mode.SelectModeDataObjectInterface;
 import view.*;
@@ -98,7 +97,7 @@ public class Main {
         MainScreenView mainScreenView = new MainScreenView(viewManagerModel);
         views.add(mainScreenView, mainScreenView.viewName);
 
-        SelectColourView selectColourView = SelectColourUseCaseFactory.create(viewManagerModel, selectColourViewModel, user, userDataAccessObject, accountView, mainScreenView, questionView, selectModeView);
+        SelectColourView selectColourView = SelectColourUseCaseFactory.create(viewManagerModel, selectColourViewModel, user, userDataAccessObject, accountView, mainScreenView, questionView, selectModeView, gameOverView);
         views.add(selectColourView, selectColourView.viewName);
 
         WelcomeView welcomeView = new WelcomeView(viewManagerModel);

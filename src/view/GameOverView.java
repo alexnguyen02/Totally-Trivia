@@ -36,7 +36,9 @@ public class GameOverView extends JPanel implements ActionListener, PropertyChan
         points_earned.setAlignmentX(Component.CENTER_ALIGNMENT);
         correct_answers.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JPanel buttons = new JPanel();
+        Box buttons = Box.createHorizontalBox();
+        Box spacing = Box.createVerticalBox();
+        spacing.add(Box.createVerticalStrut(30));
 
         play_again = new JButton(gameOverViewModel.PLAY_AGAIN_BUTTON_LABEL);
         buttons.add(play_again);
@@ -66,6 +68,7 @@ public class GameOverView extends JPanel implements ActionListener, PropertyChan
         this.add(title);
         this.add(points_earned);
         this.add(correct_answers);
+        this.add(spacing);
         this.add(buttons);
 
     }
@@ -74,6 +77,10 @@ public class GameOverView extends JPanel implements ActionListener, PropertyChan
         this.points_earned.setText(gameOverViewModel.POINTS_EARNED + gameOverViewModel.getState().getPointsEarned());
         this.correct_answers.setText(gameOverViewModel.CORRECT_ANSWERS +
                 gameOverViewModel.getState().getCorrectNum() + '/' + gameOverViewModel.getState().getTotalNum());
+    }
+
+    public void changeColour(Color colour) {
+        this.setBackground(colour);
     }
 
     public void actionPerformed(ActionEvent evt) {}

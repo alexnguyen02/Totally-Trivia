@@ -31,6 +31,8 @@ public class SelectColourView extends JPanel implements ActionListener, Property
     private final QuestionView questionView;
 
     private final SelectModeView selectModeView;
+    private final GameOverView gameOverView;
+    private final LabelDropDownPanel categoryInfo;
 
     private final String[] colourList = new String[]{"White", "Blue", "Cyan", "Dark Gray",
             "Gray", "Green", "Light_Gray", "Magenta", "Orange", "Pink", "Red",
@@ -41,7 +43,7 @@ public class SelectColourView extends JPanel implements ActionListener, Property
     private final JButton back;
 
     public SelectColourView(SelectColourViewModel selectColourViewModel, SelectColourController selectColourController, ViewManagerModel viewManagerModel,
-                            AccountView accountView, MainScreenView mainScreenView, QuestionView questionView, SelectModeView selectModeView){
+                            AccountView accountView, MainScreenView mainScreenView, QuestionView questionView, SelectModeView selectModeView, GameOverView gameOverView){
         this.selectColourViewModel = selectColourViewModel;
         this.selectColourController = selectColourController;
         this.selectColourViewModel.addPropertyChangeListener(this);
@@ -49,9 +51,10 @@ public class SelectColourView extends JPanel implements ActionListener, Property
         this.mainScreenView = mainScreenView;
         this.questionView = questionView;
         this.selectModeView = selectModeView;
+        this.gameOverView = gameOverView;
 
 
-        LabelDropDownPanel categoryInfo = new LabelDropDownPanel(new JLabel("Select the Background Colour"), colourDropdown);
+        categoryInfo = new LabelDropDownPanel(new JLabel("Select the Background Colour"), colourDropdown);
 
         Box buttons = Box.createVerticalBox();
         buttons.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -85,6 +88,7 @@ public class SelectColourView extends JPanel implements ActionListener, Property
 
                 // Update the state in the view model
                 selectColourViewModel.setState(currentState);
+                //categoryInfo.setBackground(We need to get a colour from the state);
             }
         });
         add(buttons);
@@ -139,6 +143,7 @@ public class SelectColourView extends JPanel implements ActionListener, Property
                 mainScreenView.changeColour(colour);
                 questionView.changeColour(colour);
                 selectModeView.changeColour(colour);
+                gameOverView.changeColour(colour);
 
 
 

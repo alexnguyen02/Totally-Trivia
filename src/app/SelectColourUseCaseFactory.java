@@ -20,11 +20,11 @@ public class SelectColourUseCaseFactory {
     private SelectColourUseCaseFactory() {}
 
     public static SelectColourView create(
-            ViewManagerModel viewManagerModel, SelectColourViewModel selectColourViewModel, User user, FileUserDataAccessObject fileUserDataAccessObject, AccountView accountView, MainScreenView mainScreenView, QuestionView questionView, SelectModeView selectModeView) {
+            ViewManagerModel viewManagerModel, SelectColourViewModel selectColourViewModel, User user, FileUserDataAccessObject fileUserDataAccessObject, AccountView accountView, MainScreenView mainScreenView, QuestionView questionView, SelectModeView selectModeView, GameOverView gameOverView) {
 
         try {
             SelectColourController selectColourController = createSelectColourController(viewManagerModel, selectColourViewModel, user, fileUserDataAccessObject);
-            return new SelectColourView(selectColourViewModel, selectColourController, viewManagerModel, accountView, mainScreenView, questionView, selectModeView);
+            return new SelectColourView(selectColourViewModel, selectColourController, viewManagerModel, accountView, mainScreenView, questionView, selectModeView, gameOverView);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open file.");
         }

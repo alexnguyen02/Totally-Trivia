@@ -42,6 +42,9 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
     // Reset all the choices button
     // In reset mode: any category, any difficulty level and 10 number of questions.
     private final JButton reset;
+    private final LabelDropDownPanel categoryInfo;
+    private final LabelDropDownPanel difficultyInfo;
+    private final LabelDropDownPanel numOfQuestionInfo;
 
     public SelectModeView(SelectModeViewModel selectModeViewModel, SelectModeController selectModeController){
         this.selectModeViewModel = selectModeViewModel;
@@ -53,9 +56,9 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
         JLabel title = new JLabel(TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        LabelDropDownPanel categoryInfo = new LabelDropDownPanel(new JLabel(CATEGORY_LABEL), categoryDropdown);
-        LabelDropDownPanel difficultyInfo = new LabelDropDownPanel(new JLabel(DIFFICULTY_LABEL), difficultyLevelDropdown);
-        LabelDropDownPanel numOfQuestionInfo = new LabelDropDownPanel(new JLabel(NUM_QUESTIONS_LABEL), numOfQuestionDropdown);
+        categoryInfo = new LabelDropDownPanel(new JLabel(CATEGORY_LABEL), categoryDropdown);
+        difficultyInfo = new LabelDropDownPanel(new JLabel(DIFFICULTY_LABEL), difficultyLevelDropdown);
+        numOfQuestionInfo = new LabelDropDownPanel(new JLabel(NUM_QUESTIONS_LABEL), numOfQuestionDropdown);
 
         Box buttons = Box.createHorizontalBox();
         start = new JButton(SelectModeViewModel.START_BUTTON_LABEL);
@@ -136,7 +139,11 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
     }
 
     public void changeColour(Color colour) {
+
         this.setBackground(colour);
+        this.categoryInfo.setBackground(colour);
+        this.difficultyInfo.setBackground(colour);
+        this.numOfQuestionInfo.setBackground(colour);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -144,14 +151,6 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getNewValue() instanceof SelectModeState){
-            SelectModeState selectModeState = (SelectModeState) evt.getNewValue();
+    public void propertyChange(PropertyChangeEvent evt) { }
 
-            if (selectModeState.getOutputQuestions() != null){
-                JOptionPane.showMessageDialog(this, selectModeState.toString());
-            }
-        }
-
-    }
 }
