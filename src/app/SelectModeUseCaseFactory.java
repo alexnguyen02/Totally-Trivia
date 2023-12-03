@@ -1,6 +1,7 @@
 package app;
 
 import data_access.QuestionStorageDataAccessObject;
+import entity.QuestionStorage;
 import interface_adaptors.ViewManagerModel;
 import interface_adaptors.question.QuestionViewModel;
 import interface_adaptors.select_mode.SelectModeController;
@@ -23,12 +24,12 @@ public class SelectModeUseCaseFactory {
             ViewManagerModel viewManagerModel,
             SelectModeViewModel selectModeViewModel,
             SelectModeDataObjectInterface selectModeDataObject,
-            QuestionStorageDataAccessObject questionStorageDataAccessObject,
+            QuestionStorage questionStorage,
             QuestionViewModel questionViewModel) {
 
         try {
             SelectModeController selectModeController = createSelectModeUseCase(viewManagerModel, selectModeViewModel,
-                    selectModeDataObject, questionStorageDataAccessObject, questionViewModel);
+                    selectModeDataObject, questionStorage, questionViewModel);
             return new SelectModeView(selectModeViewModel, selectModeController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not access data object");
@@ -41,7 +42,7 @@ public class SelectModeUseCaseFactory {
             ViewManagerModel viewManagerModel,
             SelectModeViewModel selectModeViewModel,
             SelectModeDataObjectInterface selectModeDataAccessObject,
-            QuestionStorageDataAccessObject questionStorageDataAccessObject,
+            QuestionStorage questionStorage,
             QuestionViewModel questionViewModel) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.
@@ -49,7 +50,7 @@ public class SelectModeUseCaseFactory {
                 selectModeViewModel, questionViewModel);
 
         SelectModeInputBoundary selectModeInteractor= new SelectModeInteractor(selectModeDataAccessObject,
-                selectModeOutputBoundary, questionStorageDataAccessObject);
+                selectModeOutputBoundary, questionStorage);
 
         return new SelectModeController(selectModeInteractor);
     }
