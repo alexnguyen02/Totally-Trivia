@@ -6,6 +6,7 @@ import data_access.QuestionStorageDataAccessObject;
 import data_access.SelectModeDataAccessObject;
 import entity.CommonUserFactory;
 import entity.User;
+import interface_adaptors.delete.DeleteController;
 import interface_adaptors.delete.DeleteViewModel;
 import interface_adaptors.game_over.GameOverViewModel;
 import interface_adaptors.login.LoginViewModel;
@@ -17,6 +18,7 @@ import interface_adaptors.select_mode.SelectModeViewModel;
 import interface_adaptors.signup.SignupViewModel;
 import interface_adaptors.ViewManagerModel;
 import interface_adaptors.select_colour.SelectColourViewModel;
+import use_case.delete.DeleteInteractor;
 import use_case.logout.LogoutInteractor;
 import use_case.select_mode.SelectModeDataObjectInterface;
 import view.*;
@@ -25,6 +27,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
+
+import static view.AccountView.createUserDeleteUseCase;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -102,6 +106,12 @@ public class Main {
 
         WelcomeView welcomeView = new WelcomeView(viewManagerModel);
         views.add(welcomeView, welcomeView.viewName);
+
+        String s = user.getName();
+        DeleteController deleteController = createUserDeleteUseCase(deleteViewModel, user, userDataAccessObject);
+
+        DeleteView deleteView = new DeleteView(deleteController, deleteViewModel);
+        views.add(deleteView, deleteView.viewName);
 
         viewManagerModel.setActiveView(welcomeView.viewName);
         viewManagerModel.firePropertyChanged();
