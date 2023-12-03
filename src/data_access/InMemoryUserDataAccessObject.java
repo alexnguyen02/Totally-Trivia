@@ -9,8 +9,7 @@ import use_case.signup.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, GameOverUserDataAccessInterface  {
-public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface, SelectColourUserDataAccessInterface {
+    public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface, SelectColourUserDataAccessInterface, GameOverUserDataAccessInterface {
   
     private final Map<String, User> users = new HashMap<>();
 
@@ -36,7 +35,6 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
         return users.get(username);
     }
 
-    @Override
     public void changePoints(String userId, Integer points) {  }
     public void changeColourScheme(String username, String colourScheme) {
         User user = users.get(username);
@@ -45,3 +43,4 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
         }
     }
 }
+

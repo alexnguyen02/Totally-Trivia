@@ -25,7 +25,7 @@ public class GameOverInteractorTest {
                 // 2 things to check: the output data is correct, and the user's points have been updated in the DAO.
                 assertEquals("select_mode", view_name.getViewName());
                 Integer user_points = userRepository.get(logged_in_user.getName()).getPoints();
-                assertEquals(new Integer(57), user_points);
+                assert user_points.equals(57);
             }
 
             //@Override
