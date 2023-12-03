@@ -84,7 +84,7 @@ public class Main {
 
         // Initializes an empty User. This User will be filled in by sign up/log in.
         CommonUserFactory userFactory = new CommonUserFactory();
-        User user = userFactory.create("", "",LocalDateTime.parse("2023-12-01T14:58:50.150"), 0, "White");
+        User user = userFactory.create("", "",LocalDateTime.parse("2023-12-01T14:58:50.150"), 0, "");
 
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject, user);
         views.add(signupView, signupView.viewName);

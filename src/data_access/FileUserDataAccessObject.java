@@ -110,8 +110,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         user.setPoints(user.getPoints() + points);
         save();
     }
-  
-   @Override
+
     public void changeColourScheme(String userId, String colour) {
         User user = accounts.get(userId);
         user.setColourScheme(colour);

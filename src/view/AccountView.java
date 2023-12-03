@@ -66,21 +66,7 @@ public class AccountView extends JPanel {
             }
         });
 
-        // need a username in account
-//        delete.addActionListener(
-//                // This creates an anonymous subclass of ActionListener and instantiates it.
-//                new ActionListener() {
-//                    public void actionPerformed(ActionEvent evt) {
-//                        if (evt.getSource().equals(delete)) {
-//                            String s = username.getText();
-//                            deleteController.execute(s);
-//
-//                        }
-//                    }
-//                }
-//        );
-
-        deleteAccount.addActionListener(new ActionListener() {
+    deleteAccount.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 if (evt.getSource().equals(deleteAccount)) {

@@ -19,6 +19,7 @@ public class GameOverInteractor implements GameOverInputBoundary {
     public void execute(GameOverInputData gameOverInputData) {
         String username = logged_in.getName();
         userDataAccessObject.changePoints(username, gameOverInputData.getPoints());
+        logged_in.setPoints(logged_in.getPoints() + gameOverInputData.getPoints());
         GameOverOutputData gameOverOutputData = new GameOverOutputData(gameOverInputData.getViewName());
         gameOverPresenter.prepareSuccessView(gameOverOutputData);
     }
