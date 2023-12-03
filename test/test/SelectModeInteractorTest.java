@@ -3,10 +3,10 @@ package test;
 import data_access.InMemorySelectModeAccessObject;
 import data_access.QuestionStorageDataAccessObject;
 import entity.Question;
+import entity.QuestionStorage;
 import use_case.select_mode.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -18,7 +18,17 @@ public class SelectModeInteractorTest {
     public void successTest(){
         SelectModeInputData inputData = new SelectModeInputData("Animals", "Easy", 2);
         SelectModeDataObjectInterface selectModeDatabase = new InMemorySelectModeAccessObject();
-        QuestionStorageDataAccessObject questionStorageDataAccessObject = new QuestionStorageDataAccessObject();
+        QuestionStorage questionStorageDataAccessObject = new QuestionStorage() {
+            @Override
+            public ArrayList<Question> getQuestions() {
+                return null;
+            }
+
+            @Override
+            public void setQuestions(ArrayList<Question> newQuestions) {
+
+            }
+        };
 
         SelectModeOutputBoundary successPresenter = new SelectModeOutputBoundary() {
             @Override

@@ -24,26 +24,12 @@ public class SelectModeDAOTest {
     }
 
     @org.junit.Test
-    public void getCategory(){
+    public void successTest(){
         for (Question q: actualQuestions){
             assertEquals("Entertainment: Books", q.getCategory());
-        }
-        assertEquals(5, actualQuestions.size());
-    }
-
-    @org.junit.Test
-    public void getDifficultyLevel(){
-        for (Question q: actualQuestions){
             assertEquals("Hard", q.getDifficultyLevel());
-        }
-    }
-
-    @org.junit.Test
-    public void sizeTest(){
-        for (Question q: actualQuestions){
             assertEquals(4, q.getAnswerPackage().getPossibleAnswers().size());
         }
         assertEquals(5, actualQuestions.size());
-
     }
 }
