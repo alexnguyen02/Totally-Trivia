@@ -1,23 +1,24 @@
 package use_case.select_mode;
 
+import data_access.QuestionStorageDataAccessObject;
 import entity.Question;
-import use_case.QuestionStorageDataAccessInterface;
+import entity.QuestionStorage;
 
 import java.util.ArrayList;
 
 public class SelectModeInteractor implements SelectModeInputBoundary {
 
     private SelectModeDataObjectInterface selectModeDataAccessObject;
-    private QuestionStorageDataAccessInterface questionStorageDataAccessObject;
+    private QuestionStorage questionStorage;
 
     private SelectModeOutputBoundary selectModePresenter;
 
     public SelectModeInteractor(SelectModeDataObjectInterface selectModeDataAccessObject,
                                 SelectModeOutputBoundary selectModePresenter,
-                                QuestionStorageDataAccessInterface questionStorageDataAccessObject){
+                                QuestionStorage questionStorage){
         this.selectModeDataAccessObject = selectModeDataAccessObject;
         this.selectModePresenter = selectModePresenter;
-        this.questionStorageDataAccessObject = questionStorageDataAccessObject;
+        this.questionStorage = questionStorage;
     }
 
     @Override
@@ -32,7 +33,7 @@ public class SelectModeInteractor implements SelectModeInputBoundary {
         System.out.println(listOfQuestions);
 
 
-        questionStorageDataAccessObject.setQuestions(listOfQuestions);
+        questionStorage.setQuestions(listOfQuestions);
         SelectModeOutputData outputData = new SelectModeOutputData(listOfQuestions);
         selectModePresenter.prepareSelectModeSuccessView(outputData);
 
