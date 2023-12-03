@@ -35,7 +35,7 @@ import java.util.Map;
         return users.get(username);
     }
 
-    public void changePoints(String userId, Integer points) {  }
+    public void changePoints(String userId, Integer points) { users.get(userId).setPoints(points); }
     public void changeColourScheme(String username, String colourScheme) {
         User user = users.get(username);
         if (user != null) {
