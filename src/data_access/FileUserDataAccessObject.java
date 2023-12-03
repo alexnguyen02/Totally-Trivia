@@ -5,6 +5,7 @@ import entity.UserFactory;
 import use_case.delete.DeleteUserDataAccessInterface;
 import use_case.game_over.GameOverUserDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
+import use_case.select_colour.SelectColourUserDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 
 import java.awt.*;
@@ -14,7 +15,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, GameOverUserDataAccessInterface, DeleteUserDataAccessInterface {
+public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, GameOverUserDataAccessInterface, DeleteUserDataAccessInterface, SelectColourUserDataAccessInterface {
 
     private final File csvFile;
 
@@ -111,7 +112,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         save();
     }
   
-//   @Override
+   @Override
     public void changeColourScheme(String userId, String colour) {
         User user = accounts.get(userId);
         user.setColourScheme(colour);
