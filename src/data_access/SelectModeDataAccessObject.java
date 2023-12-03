@@ -121,10 +121,12 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
         // Extract the category of the question
         String categoryRegex = "\"category\":\"(.*?)\"";
         category = extractStringPattern(categoryRegex, JSONString, false);
+        System.out.println(category);
 
         // Extract the difficulty level of the question
         String difficultyLevelRegex = "\"difficulty\":\"(.*?)\"";
-        difficultyLevel = extractStringPattern(difficultyLevelRegex, JSONString, false);
+        String rawDifficultyLevel = extractStringPattern(difficultyLevelRegex, JSONString, false);
+        difficultyLevel = Character.toUpperCase(rawDifficultyLevel.charAt(0)) + rawDifficultyLevel.substring(1);
 
         // Build a new AnswerPackage
         answerPackage = buildAnswerPackage(JSONString);
