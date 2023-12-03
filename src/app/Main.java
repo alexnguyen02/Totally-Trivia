@@ -1,6 +1,5 @@
 package app;
 
-import app.LoginUseCaseFactory;
 import data_access.FileUserDataAccessObject;
 
 import data_access.QuestionStorageDataAccessObject;
@@ -8,11 +7,8 @@ import data_access.SelectModeDataAccessObject;
 import entity.CommonUserFactory;
 import entity.User;
 import interface_adaptors.delete.DeleteViewModel;
-import interface_adaptors.game_over.GameOverController;
-import interface_adaptors.game_over.GameOverPresenter;
 import interface_adaptors.game_over.GameOverViewModel;
 import interface_adaptors.login.LoginViewModel;
-import interface_adaptors.logged_in.LoggedInViewModel;
 import interface_adaptors.logout.LogoutController;
 import interface_adaptors.logout.LogoutPresenter;
 import interface_adaptors.logout.LogoutViewModel;
@@ -22,8 +18,6 @@ import interface_adaptors.signup.SignupViewModel;
 import interface_adaptors.ViewManagerModel;
 import interface_adaptors.select_colour.SelectColourViewModel;
 //import data_access.SelectColourDataAccessObject;
-import use_case.login.LoginUserDataAccessInterface;
-import use_case.logout.LogoutInputBoundary;
 import use_case.logout.LogoutInteractor;
 import use_case.select_mode.SelectModeDataObjectInterface;
 import view.*;
@@ -39,7 +33,7 @@ public class Main {
         // various cards, and the layout, and stitch them together.
 
         // The main application window.
-        JFrame application = new JFrame("Trivia Cash");
+        JFrame application = new JFrame("Totally Trivia!");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         CardLayout cardLayout = new CardLayout();
@@ -54,7 +48,6 @@ public class Main {
 
         // Initiates all the ViewModels for each use case.
         LoginViewModel loginViewModel = new LoginViewModel();
-        LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
         QuestionViewModel questionViewModel = new QuestionViewModel();
         GameOverViewModel gameOverViewModel = new GameOverViewModel();
@@ -71,16 +64,10 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        // Initialize InMemoryDataAccessObject (for testing purpose); The actual Data Access Object is calling API
-        SelectModeDataObjectInterface selectModeAccessObject;
-        selectModeAccessObject = new SelectModeDataAccessObject();
-
         // Initializes all the remaining Data Access Objects.
 
         SelectModeDataAccessObject selectModeDataAccessObject = new SelectModeDataAccessObject();
         QuestionStorageDataAccessObject questionStorageDataAccessObject = new QuestionStorageDataAccessObject();
-//        Color defaultColour = new Color(255);
-//        SelectColourDataAccessObject selectColourDataAccessObject = new SelectColourDataAccessObject(defaultColour);
 
         // Initializes an empty User. This User will be filled in by sign up/log in.
         CommonUserFactory userFactory = new CommonUserFactory();
@@ -89,11 +76,8 @@ public class Main {
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject, user);
         views.add(signupView, signupView.viewName);
 
-        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject, user);
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, userDataAccessObject, user);
         views.add(loginView, loginView.viewName);
-
-//        LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
-//        views.add(loggedInView, loggedInView.viewName);
 
         SelectModeView selectModeView = SelectModeUseCaseFactory.create(viewManagerModel, selectModeViewModel,
                 selectModeDataAccessObject, questionStorageDataAccessObject, questionViewModel);
@@ -105,8 +89,8 @@ public class Main {
         GameOverView gameOverView = GameOverUseCaseFactory.create(viewManagerModel, gameOverViewModel, userDataAccessObject, user);
         views.add(gameOverView, gameOverView.viewName);
 
-//        LogoutView logoutView = new LogoutView(new LogoutController(null), logoutViewModel);
-//        views.add(logoutView, logoutView.viewName);
+        LogoutView logoutView = new LogoutView(new LogoutController(new LogoutInteractor(new LogoutPresenter(viewManagerModel, logoutViewModel), user)), logoutViewModel);
+        views.add(logoutView, logoutView.viewName);
 
         AccountView accountView = new AccountView(viewManagerModel);
         views.add(accountView, accountView.viewName);

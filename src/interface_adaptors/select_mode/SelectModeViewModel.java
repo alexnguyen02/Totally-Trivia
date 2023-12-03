@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class SelectModeViewModel extends ViewModel {
 
-    public static final String TITLE_LABEL = "Custom your trivia";
+    public static final String TITLE_LABEL = "Customize Your Trivia";
 
     public static final String CATEGORY_LABEL = "Category";
     public static final String DIFFICULTY_LABEL = "Difficulty level";

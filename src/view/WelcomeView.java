@@ -5,14 +5,18 @@ import view.LoginView;
 import interface_adaptors.ViewManagerModel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import static interface_adaptors.select_mode.SelectModeViewModel.TITLE_LABEL;
 
 public class WelcomeView extends JPanel {
 
     public final String viewName = "welcome";
     private final JButton logIn;
     private final JButton signUp;
+    private final JLabel title;
 
     private final ViewManagerModel viewManagerModel;
 
@@ -20,11 +24,20 @@ public class WelcomeView extends JPanel {
 
         this.viewManagerModel = viewManagerModel;
 
+        title = new JLabel("Welcome to Totally Trivia!");
+        title.setFont(new Font("Impact", Font.PLAIN, 30));
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JPanel buttons = new JPanel();
+
+        Box buttons = Box.createVerticalBox();
+
+        buttons.add(Box.createVerticalStrut(20));
+        buttons.setAlignmentX(Component.CENTER_ALIGNMENT);
         logIn = new JButton("Log In");
+        logIn.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttons.add(logIn);
         signUp = new JButton("Sign Up");
+        signUp.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttons.add(signUp);
 
         signUp.addActionListener(new ActionListener() {
@@ -47,6 +60,9 @@ public class WelcomeView extends JPanel {
             }
         });
 
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        add(title);
         add(buttons);
 
     }

@@ -57,7 +57,7 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
         LabelDropDownPanel difficultyInfo = new LabelDropDownPanel(new JLabel(DIFFICULTY_LABEL), difficultyLevelDropdown);
         LabelDropDownPanel numOfQuestionInfo = new LabelDropDownPanel(new JLabel(NUM_QUESTIONS_LABEL), numOfQuestionDropdown);
 
-        JPanel buttons = new JPanel();
+        Box buttons = Box.createHorizontalBox();
         start = new JButton(SelectModeViewModel.START_BUTTON_LABEL);
         buttons.add(start);
         reset = new JButton(SelectModeViewModel.RESET_BUTTON_LABEL);

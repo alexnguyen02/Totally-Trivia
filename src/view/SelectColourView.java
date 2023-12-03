@@ -5,8 +5,7 @@ import interface_adaptors.select_colour.SelectColourController;
 import interface_adaptors.select_colour.SelectColourViewModel;
 import interface_adaptors.select_colour.SelectColourState;
 
-import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,6 +14,8 @@ import java.beans.PropertyChangeListener;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+
+import static interface_adaptors.select_mode.SelectModeViewModel.CATEGORY_LABEL;
 
 public class SelectColourView extends JPanel implements ActionListener, PropertyChangeListener {
     public String viewName = "select colour";
@@ -50,14 +51,14 @@ public class SelectColourView extends JPanel implements ActionListener, Property
         this.selectModeView = selectModeView;
 
 
-        JPanel titlePanel = new JPanel(new FlowLayout());
-        JLabel titleLabel = new JLabel("Select the Background Colour");
-        titlePanel.add(titleLabel);
+        LabelDropDownPanel categoryInfo = new LabelDropDownPanel(new JLabel("Select the Background Colour"), colourDropdown);
 
-        add(titlePanel);
-
-        JPanel buttons = new JPanel();
+        Box buttons = Box.createVerticalBox();
+        buttons.setAlignmentX(Component.CENTER_ALIGNMENT);
         back = new JButton("Back");
+        back.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttons.add(categoryInfo);
+        buttons.add(Box.createVerticalStrut(50));
         buttons.add(back);
         add(buttons);
 
@@ -86,7 +87,7 @@ public class SelectColourView extends JPanel implements ActionListener, Property
                 selectColourViewModel.setState(currentState);
             }
         });
-        add(colourDropdown);
+        add(buttons);
     }
 
     private Color convertColourNameToColor(String colorName) {

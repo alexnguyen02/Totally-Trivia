@@ -14,6 +14,7 @@ public class MainScreenView extends JPanel {
     public String viewName = "main screen";
     private final JButton playGame;
     private final JButton account;
+    private final JLabel title;
 
     private final ViewManagerModel viewManagerModel;
 
@@ -22,11 +23,18 @@ public class MainScreenView extends JPanel {
 
         this.viewManagerModel = viewManagerModel;
 
+        title = new JLabel("Totally Trivia!");
+        title.setFont(new Font("Impact", Font.PLAIN, 30));
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JPanel buttons = new JPanel();
+
+        Box buttons = Box.createVerticalBox();
+        buttons.add(Box.createVerticalStrut(30));
         playGame = new JButton("Play Game");
+        playGame.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttons.add(playGame);
         account = new JButton("Account");
+        account.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttons.add(account);
 
         playGame.addActionListener(new ActionListener() {
@@ -49,6 +57,9 @@ public class MainScreenView extends JPanel {
             }
         });
 
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        add(title);
         add(buttons);
 
     }

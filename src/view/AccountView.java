@@ -3,9 +3,7 @@ package view;
 import interface_adaptors.ViewManagerModel;
 import interface_adaptors.delete.DeleteController;
 import interface_adaptors.delete.DeletePresenter;
-import interface_adaptors.delete.DeleteState;
 import interface_adaptors.delete.DeleteViewModel;
-import interface_adaptors.logged_in.LoggedInState;
 import use_case.delete.DeleteInputBoundary;
 import use_case.delete.DeleteInteractor;
 import use_case.delete.DeleteOutputBoundary;
@@ -15,7 +13,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
 
 public class AccountView extends JPanel {
 
@@ -34,16 +31,20 @@ public class AccountView extends JPanel {
 
         this.viewManagerModel = viewManagerModel;
 
+        Box buttons = Box.createVerticalBox();
+        buttons.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JPanel buttons = new JPanel();
         changeColour = new JButton("Change Background Colour");
+        changeColour.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttons.add(changeColour);
         logOut = new JButton("Log Out");
+        logOut.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttons.add(logOut);
         deleteAccount = new JButton("Delete Account");
+        deleteAccount.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttons.add(deleteAccount);
-
         back = new JButton("Back");
+        back.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttons.add(back);
 
 
@@ -67,20 +68,6 @@ public class AccountView extends JPanel {
             }
         });
 
-        // need a username in account
-//        delete.addActionListener(
-//                // This creates an anonymous subclass of ActionListener and instantiates it.
-//                new ActionListener() {
-//                    public void actionPerformed(ActionEvent evt) {
-//                        if (evt.getSource().equals(delete)) {
-//                            String s = username.getText();
-//                            deleteController.execute(s);
-//
-//                        }
-//                    }
-//                }
-//        );
-
         deleteAccount.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -100,6 +87,8 @@ public class AccountView extends JPanel {
                 }
             }
         });
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         add(buttons);
     }

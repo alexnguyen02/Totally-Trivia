@@ -1,5 +1,6 @@
 package view;
 
+import interface_adaptors.ViewManagerModel;
 import interface_adaptors.login.LoginController;
 import interface_adaptors.login.LoginState;
 import interface_adaptors.login.LoginViewModel;
@@ -18,6 +19,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
     public final String viewName = "log in";
     private final LoginViewModel loginViewModel;
+    private final ViewManagerModel viewManagerModel;
 
     final JTextField usernameInputField = new JTextField(15);
     private final JLabel usernameErrorField = new JLabel();
@@ -29,10 +31,11 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     final JButton cancel;
     private final LoginController loginController;
 
-    public LoginView(LoginViewModel loginViewModel, LoginController controller) {
+    public LoginView(LoginViewModel loginViewModel, LoginController controller, ViewManagerModel viewManagerModel) {
 
         this.loginController = controller;
         this.loginViewModel = loginViewModel;
+        this.viewManagerModel = viewManagerModel;
         this.loginViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel("Login Screen");
@@ -64,7 +67,16 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                 }
         );
 
-        cancel.addActionListener(this);
+        cancel.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(cancel)) {
+
+                            viewManagerModel.setActiveView("welcome");
+                            viewManagerModel.firePropertyChanged();
+                        }
+                    }
+                });
 
         usernameInputField.addKeyListener(new KeyListener() {
             @Override
