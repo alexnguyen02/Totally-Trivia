@@ -18,7 +18,7 @@ class AccountViewTest {
         assertEquals(accountView.changeColour.getText(), "Change Background Colour");
         assertEquals(accountView.logOut.getText(), "Log Out");
         assertEquals(accountView.deleteAccount.getText(), "Delete Account");
-        assertEquals(accountView.back.getText(), "Bacl");
+        assertEquals(accountView.back.getText(), "Back");
     }
     @Test
     public void changeColourTest() {

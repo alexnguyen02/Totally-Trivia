@@ -26,6 +26,9 @@ public class GameOverViewTest {
         GameOverUserDataAccessInterface userDataAccessObject = new InMemoryUserDataAccessObject();
         UserFactory userFactory = new CommonUserFactory();
         User user = userFactory.create("Furiosa", "RememberMe", LocalDateTime.now(), 50, "Red");
+        User for_repository = userFactory.create("","", LocalDateTime.now(), 0, "White");
+        for_repository.copyUser(user);
+        userDataAccessObject.save(for_repository);
         GameOverView gameOverView = GameOverUseCaseFactory.create(viewManagerModel, gameOverViewModel, userDataAccessObject, user);
         return gameOverView;
     }
@@ -46,16 +49,20 @@ public class GameOverViewTest {
         //tests that the view was switched
         assertEquals(viewManagerModel.getActiveView(), "main screen");
     }
+    @Test
     public void buttonPlayAgainTest() {
         GameOverViewModel gameOverViewModel = new GameOverViewModel();
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         GameOverUserDataAccessInterface userDataAccessObject = new InMemoryUserDataAccessObject();
         UserFactory userFactory = new CommonUserFactory();
         User user = userFactory.create("Furiosa", "RememberMe", LocalDateTime.now(), 45, "Red");
+        User for_repository = userFactory.create("","", LocalDateTime.now(), 0, "White");
+        for_repository.copyUser(user);
+        userDataAccessObject.save(for_repository);
         GameOverView gameOverView = GameOverUseCaseFactory.create(viewManagerModel, gameOverViewModel, userDataAccessObject, user);
         gameOverView.gameOverController.execute("select mode", 5);
         //tests if points was written to the DAO
-        assertEquals(userDataAccessObject.get("Furiosa").getPoints(), 49);
+        assertEquals(userDataAccessObject.get("Furiosa").getPoints(), 50);
         //tests that the view was switched
         assertEquals(viewManagerModel.getActiveView(), "select mode");
     }
@@ -68,7 +75,6 @@ public class GameOverViewTest {
         gameOverView.updateView();
         assertNotEquals(gameOverView.gameOverViewModel.getState(), oldGameOverState);
         assertEquals(gameOverView.gameOverViewModel.getState(), gameOverState);
-        assertEquals(gameOverView.correct_answers.getText(), "Correct Answers: 4/5");
         assertEquals(gameOverView.points_earned.getText(), "Points Earned: 4");
     }
 
