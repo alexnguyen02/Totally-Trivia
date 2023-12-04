@@ -12,9 +12,9 @@ import java.awt.event.ActionListener;
 public class MainScreenView extends JPanel {
 
     public String viewName = "main screen";
-    private final JButton playGame;
-    private final JButton account;
-    private final JLabel title;
+    public final JButton playGame;
+    public final JButton account;
+    public final JLabel title;
 
     private final ViewManagerModel viewManagerModel;
 
