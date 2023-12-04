@@ -15,7 +15,7 @@ class WelcomeViewTest {
         WelcomeView welcomeView = new WelcomeView(viewManagerModel);
 
         assertEquals(welcomeView.title.getText(), "Welcome to Totally Trivia!");
-        assertEquals(welcomeView.logIn.getText(), "Log in");
+        assertEquals(welcomeView.logIn.getText(), "Log In");
         assertEquals(welcomeView.signUp.getText(), "Sign Up");
     }
 
