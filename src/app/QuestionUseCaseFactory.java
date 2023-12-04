@@ -14,7 +14,7 @@ import view.QuestionView;
 
 public class QuestionUseCaseFactory {
 
-    private QuestionUseCaseFactory() {
+    public QuestionUseCaseFactory() {
     }
 
     public static QuestionView create(
