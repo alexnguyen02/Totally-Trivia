@@ -26,7 +26,7 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
 
     private final Map<String, Integer> categoryMap = new HashMap<>();
 
-    private Integer numOfQuestions;
+    private String numOfQuestions;
 
     private Integer category;
 
@@ -45,29 +45,29 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
     }
 
     @Override
-    public ArrayList<Question> getQuestions(String category, String difficultyLevel, int numOfQuestions) {
+    public ArrayList<Question> getQuestions(String category, String difficultyLevel, String numOfQuestions) {
         buildAPIURL(category, difficultyLevel, numOfQuestions);
         return getQuestionsFromAPI();
     }
 
-    private void buildAPIURL(String category, String difficultyLevel, int numOfQuestions){
+    private void buildAPIURL(String category, String difficultyLevel, String numOfQuestions){
         this.category = categoryMap.get(category);
         this.difficultyLevel = difficultyLevel.toLowerCase();
         this.numOfQuestions = numOfQuestions;
 
         if (category.equals("Any category") && difficultyLevel.equals("Any difficulty level")){
-            API_URL = String.format("https://opentdb.com/api.php?amount=%d&type=multiple",
+            API_URL = String.format("https://opentdb.com/api.php?amount=%s&type=multiple",
                     this.numOfQuestions);
         } else if (category.equals("Any category")) {
-            API_URL = String.format("https://opentdb.com/api.php?amount=%d&difficulty=%s&type=multiple",
+            API_URL = String.format("https://opentdb.com/api.php?amount=%s&difficulty=%s&type=multiple",
                     this.numOfQuestions,
                     this.difficultyLevel);
         } else if (difficultyLevel.equals("Any difficulty level")) {
-            API_URL = String.format("https://opentdb.com/api.php?amount=%d&category=%d&type=multiple",
+            API_URL = String.format("https://opentdb.com/api.php?amount=%s&category=%d&type=multiple",
                     this.numOfQuestions,
                     this.category);
         } else {
-            API_URL = String.format("https://opentdb.com/api.php?amount=%d&category=%d&difficulty=%s&type=multiple",
+            API_URL = String.format("https://opentdb.com/api.php?amount=%s&category=%d&difficulty=%s&type=multiple",
                     this.numOfQuestions,
                     this.category,
                     this.difficultyLevel);

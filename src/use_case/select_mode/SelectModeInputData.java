@@ -5,12 +5,12 @@ public class SelectModeInputData {
 
     private String difficultyLevel;
 
-    private int numberOfQuestions;
+    private String numOfQuestions;
 
-    public SelectModeInputData(String category, String difficultyLevel, int numberOfQuestions){
+    public SelectModeInputData(String category, String difficultyLevel, String numOfQuestions){
         this.category = category;
         this.difficultyLevel = difficultyLevel;
-        this.numberOfQuestions = numberOfQuestions;
+        this.numOfQuestions = numOfQuestions;
     }
 
     public String getCategory(){
@@ -21,8 +21,8 @@ public class SelectModeInputData {
         return this.difficultyLevel;
     }
 
-    public int getNumberOfQuestions(){
-        return this.numberOfQuestions;
+    public String getNumberOfQuestionsString(){
+        return this.numOfQuestions;
     }
 
 }

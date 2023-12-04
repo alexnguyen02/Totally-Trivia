@@ -13,6 +13,7 @@ public class SelectModeOutputData {
     }
 
     public ArrayList<Question> getOutputQuestions(){
+
         return this.listOfQuestions;
     }
 }
