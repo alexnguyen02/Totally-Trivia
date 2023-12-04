@@ -2,7 +2,6 @@ package app;
 
 import data_access.FileUserDataAccessObject;
 
-import data_access.QuestionStorageDataAccessObject;
 import data_access.SelectModeDataAccessObject;
 import entity.CommonQuestionStorage;
 import entity.CommonUserFactory;
@@ -20,9 +19,7 @@ import interface_adaptors.select_mode.SelectModeViewModel;
 import interface_adaptors.signup.SignupViewModel;
 import interface_adaptors.ViewManagerModel;
 import interface_adaptors.select_colour.SelectColourViewModel;
-import use_case.delete.DeleteInteractor;
 import use_case.logout.LogoutInteractor;
-import use_case.select_mode.SelectModeDataObjectInterface;
 import view.*;
 
 import javax.swing.*;
@@ -109,7 +106,7 @@ public class Main {
         views.add(welcomeView, welcomeView.viewName);
 
         String s = user.getName();
-        DeleteController deleteController = DeleteUseCaseFactory.createUserDeleteUseCase(deleteViewModel, user, userDataAccessObject);
+        DeleteController deleteController = DeleteUseCaseFactory.createUserDeleteUseCase(viewManagerModel, deleteViewModel, user, userDataAccessObject);
 
         DeleteView deleteView = new DeleteView(deleteController, deleteViewModel);
         views.add(deleteView, deleteView.viewName);
