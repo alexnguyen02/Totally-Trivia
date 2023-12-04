@@ -111,7 +111,7 @@ public class Main {
         views.add(welcomeView, welcomeView.viewName);
 
         String s = user.getName();
-        DeleteController deleteController = createUserDeleteUseCase(deleteViewModel, user, userDataAccessObject);
+        DeleteController deleteController = DeleteUseCaseFactory.createUserDeleteUseCase(deleteViewModel, user, userDataAccessObject);
 
         DeleteView deleteView = new DeleteView(deleteController, deleteViewModel);
         views.add(deleteView, deleteView.viewName);
