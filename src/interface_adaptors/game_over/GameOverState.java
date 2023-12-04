@@ -1,7 +1,5 @@
 package interface_adaptors.game_over;
 
-import interface_adaptors.question.QuestionState;
-
 public class GameOverState {
 
     private int totalNum;

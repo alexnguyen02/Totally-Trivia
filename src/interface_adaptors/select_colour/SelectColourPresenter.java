@@ -1,10 +1,6 @@
 package interface_adaptors.select_colour;
 
-import java.awt.*;
-import java.util.List;
 import interface_adaptors.ViewManagerModel;
-import use_case.select_colour.SelectColourOutputBoundary;
-import use_case.select_colour.SelectColourInputData;
 import use_case.select_colour.SelectColourOutputBoundary;
 import use_case.select_colour.SelectColourOutputData;
 

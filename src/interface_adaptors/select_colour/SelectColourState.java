@@ -1,7 +1,5 @@
 package interface_adaptors.select_colour;
 
-import java.util.List;
-import java.awt.*;
 
 
 public class SelectColourState {

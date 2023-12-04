@@ -3,16 +3,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import interface_adaptors.ViewManagerModel;
 import interface_adaptors.logout.LogoutController;
 import interface_adaptors.logout.LogoutViewModel;
 import interface_adaptors.logout.LogoutState;
-import interface_adaptors.signup.SignupState;
+
 public class LogoutView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "logout";
 

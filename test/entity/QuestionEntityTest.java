@@ -1,12 +1,9 @@
 package entity;
 
-import entity.AnswerPackage;
-import entity.Question;
 import org.junit.Before;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

@@ -3,7 +3,6 @@ package use_case.signup;
 import entity.User;
 import entity.UserFactory;
 
-import java.awt.*;
 import java.time.LocalDateTime;
 
 public class SignupInteractor implements SignupInputBoundary {

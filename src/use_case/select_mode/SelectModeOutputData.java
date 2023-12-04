@@ -3,7 +3,6 @@ package use_case.select_mode;
 import entity.Question;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SelectModeOutputData {
     private ArrayList<Question> listOfQuestions;

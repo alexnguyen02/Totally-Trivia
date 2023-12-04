@@ -1,14 +1,6 @@
 package view;
 
-import entity.User;
 import interface_adaptors.ViewManagerModel;
-import interface_adaptors.delete.DeleteController;
-import interface_adaptors.delete.DeletePresenter;
-import interface_adaptors.delete.DeleteViewModel;
-import use_case.delete.DeleteInputBoundary;
-import use_case.delete.DeleteInteractor;
-import use_case.delete.DeleteOutputBoundary;
-import use_case.delete.DeleteUserDataAccessInterface;
 
 import javax.swing.*;
 import java.awt.*;

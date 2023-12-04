@@ -4,7 +4,6 @@ import interface_adaptors.ViewManagerModel;
 import interface_adaptors.login.LoginController;
 import interface_adaptors.login.LoginState;
 import interface_adaptors.login.LoginViewModel;
-import interface_adaptors.signup.SignupState;
 
 import javax.swing.*;
 import java.awt.*;

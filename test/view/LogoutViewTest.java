@@ -1,7 +1,5 @@
 package view;
 
-import interface_adaptors.delete.DeleteController;
-import interface_adaptors.delete.DeleteViewModel;
 import interface_adaptors.logout.LogoutController;
 import interface_adaptors.logout.LogoutViewModel;
 import org.junit.jupiter.api.Test;

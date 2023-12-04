@@ -1,6 +1,5 @@
 package entity;
 
-import java.awt.*;
 import java.time.LocalDateTime;
 
 class CommonUser implements User {
