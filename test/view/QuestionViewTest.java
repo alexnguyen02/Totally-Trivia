@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameOverViewTest {
-
     public GameOverView createGameOverView() {
         GameOverViewModel gameOverViewModel = new GameOverViewModel();
         ViewManagerModel viewManagerModel = new ViewManagerModel();
