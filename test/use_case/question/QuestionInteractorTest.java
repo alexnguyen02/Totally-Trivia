@@ -5,59 +5,48 @@ import entity.AnswerPackage;
 import entity.CommonQuestionStorage;
 import entity.Question;
 import entity.QuestionStorage;
-import org.junit.Test;
+import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import use_case.game_over.*;
+import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-
-import static org.junit.Assert.*;
+import java.util.Arrays;
 
 public class QuestionInteractorTest {
-    QuestionStorage questionStorage;
 
-    @BeforeEach
-    public void init() {
+    public QuestionStorage createStorage() {
         ArrayList<Question> listOfQuestions = new ArrayList<>();
 
-        ArrayList<String> answersOne = new ArrayList<>();
-        answersOne.add("Immortan Joe");
-        answersOne.add("The People Eater");
-        answersOne.add("Dementus");
-        answersOne.add("Nux");
+        ArrayList<String> answersOne = new ArrayList<>(Arrays.asList("Immortan Joe", "The People Eater", "Dementus", "Nux"));
         Question questionOne = new Question("Who is the main villain in Mad Max: Fury Road?", "Film", "easy", new AnswerPackage(answersOne, "Immortan Joe"));
         listOfQuestions.add(questionOne);
 
-        ArrayList<String> answersTwo = new ArrayList<>();
-        answersOne.add("The Splendid Angharad");
-        answersOne.add("Cheedo the Fragile");
-        answersOne.add("Toast the Knowing");
-        answersOne.add("The Illuminescent Ira");
+        ArrayList<String> answersTwo = new ArrayList<>(Arrays.asList("The Splendid Angharad", "Cheedo the Fragile", "Toast the Knowing", "The Illuminescent Ira"));
         Question questionTwo = new Question("Which of these characters is not one of the wives in Mad Max: Fury Road?", "Film", "hard", new AnswerPackage(answersTwo, "The Illuminescent Ira"));
         listOfQuestions.add(questionTwo);
 
-        ArrayList<String> answersThree = new ArrayList<>();
-        answersOne.add("O+");
-        answersOne.add("O-");
-        answersOne.add("AB");
-        answersOne.add("B-");
+        ArrayList<String> answersThree = new ArrayList<>(Arrays.asList("O+", "O-", "AB", "B-"));
         Question questionThree = new Question("What is Max Roctansky's blood type?", "Film", "easy", new AnswerPackage(answersThree, "O+"));
         listOfQuestions.add(questionThree);
 
+        QuestionStorage questionStorage = new CommonQuestionStorage();
         questionStorage.setQuestions(listOfQuestions);
+        return questionStorage;
     }
 
     @Test
     public void correctQuestionFirstQuestionTest() {
         QuestionInputData inputData = new QuestionInputData("Immortan Joe", 0);
+        QuestionStorage questionStorage = createStorage();
+
         QuestionOutputBoundary successPresenter = new QuestionOutputBoundary() {
             @Override
             public void prepareSuccessView(QuestionOutputData outputData) {
-                assertEquals(outputData.correctness, true);
-                assertEquals(outputData.nextQuestion, questionStorage.getQuestions().get(1));
-                assertEquals(outputData.totalQuestions, 3);
-                assertEquals(outputData.difficulty, "easy");
+                Assertions.assertTrue(outputData.correctness);
+                Assertions.assertEquals(outputData.nextQuestion, questionStorage.getQuestions().get(1));
+                Assertions.assertEquals(outputData.totalQuestions, 3);
+                Assertions.assertEquals(outputData.difficulty, "easy");
             }
 
             public void prepareFailView(String message) {}

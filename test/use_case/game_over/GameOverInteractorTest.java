@@ -17,21 +17,18 @@ public class GameOverInteractorTest {
         GameOverUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
         UserFactory userFactory = new CommonUserFactory();
         User logged_in_user = userFactory.create("Furiosa", "RememberMe", LocalDateTime.now(), 45, "Red");
-        userRepository.save(logged_in_user);
+        //two users needed to avoid points being added on twice, as InMemoryUserDataAccessObject stores the user as a user, not a line of text.
+        User for_repository = userFactory.create("","", LocalDateTime.now(), 0, "White");
+        for_repository.copyUser(logged_in_user);
+        userRepository.save(for_repository);
 
         GameOverOutputBoundary successPresenter = new GameOverOutputBoundary() {
             @Override
-            public void prepareSuccessView(GameOverOutputData view_name) {
-                // 2 things to check: the output data is correct, and the user's points have been updated in the DAO.
-                assertEquals("select_mode", view_name.getViewName());
+            public void prepareSuccessView(GameOverOutputData gameOverOutputData) {
+                assertEquals("select_mode", gameOverOutputData.getViewName());
                 Integer user_points = userRepository.get(logged_in_user.getName()).getPoints();
-                assert user_points.equals(57);
-            }
-
-            //@Override
-            //public void prepareFailView(String error) {
-                //fail("Use case failure is unexpected.");
-            //}
+                assertEquals(new Integer(57), user_points);
+            };
         };
 
         GameOverInputBoundary interactor = new GameOverInteractor(successPresenter, userRepository, logged_in_user);
