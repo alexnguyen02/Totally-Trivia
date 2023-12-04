@@ -1,10 +1,8 @@
-package test;
+package use_case.select_mode;
 
 import data_access.InMemorySelectModeAccessObject;
-import data_access.QuestionStorageDataAccessObject;
 import entity.Question;
 import entity.QuestionStorage;
-import use_case.select_mode.*;
 
 import java.util.ArrayList;
 
