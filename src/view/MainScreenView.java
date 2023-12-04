@@ -1,8 +1,6 @@
 package view;
 
 import interface_adaptors.ViewManagerModel;
-import view.SelectModeView;
-import view.AccountView;
 
 import javax.swing.*;
 import java.awt.*;

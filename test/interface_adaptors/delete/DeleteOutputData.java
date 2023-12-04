@@ -1,7 +1,5 @@
 package interface_adaptors.delete;
 
-// TODO Complete me
-
 public class DeleteOutputData {
     private String usernames;
     public DeleteOutputData(String usernames) {

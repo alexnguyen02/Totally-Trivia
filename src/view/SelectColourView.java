@@ -13,9 +13,6 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
-import static interface_adaptors.select_mode.SelectModeViewModel.CATEGORY_LABEL;
 
 public class SelectColourView extends JPanel implements ActionListener, PropertyChangeListener {
     public String viewName = "select colour";

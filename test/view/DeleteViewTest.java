@@ -11,17 +11,13 @@ import interface_adaptors.delete.DeleteState;
 import interface_adaptors.delete.DeleteViewModel;
 import org.junit.jupiter.api.Test;
 import use_case.delete.DeleteUserDataAccessInterface;
-import view.DeleteView;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
-import java.awt.*;
-import java.awt.event.ActionEvent;
+
 import java.beans.PropertyChangeEvent;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 public class DeleteViewTest {
 

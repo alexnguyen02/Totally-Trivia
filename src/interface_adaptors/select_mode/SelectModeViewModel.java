@@ -2,7 +2,6 @@ package interface_adaptors.select_mode;
 
 import entity.Question;
 import interface_adaptors.ViewModel;
-import view.SelectModeView;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

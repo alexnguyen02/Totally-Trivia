@@ -1,6 +1,5 @@
 package entity;
 
-import java.awt.*;
 import java.time.LocalDateTime;
 
 public interface UserFactory {

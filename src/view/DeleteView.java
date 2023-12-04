@@ -1,22 +1,15 @@
 package view;
 
-//import interface_adaptors.clear_users.ClearController;
-//import interface_adapter.clear_users.ClearState;
-//import interface_adapter.clear_users.ClearViewModel;
 import interface_adaptors.delete.DeleteController;
 import interface_adaptors.delete.DeleteState;
 import interface_adaptors.delete.DeleteViewModel;
-import interface_adaptors.login.LoginState;
-import interface_adaptors.signup.SignupController;
 import interface_adaptors.signup.SignupState;
-import interface_adaptors.signup.SignupViewModel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 

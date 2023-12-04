@@ -4,7 +4,6 @@ import entity.Question;
 import entity.QuestionStorage;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class QuestionInteractor implements QuestionInputBoundary {
 

@@ -1,7 +1,6 @@
 package data_access;
 
 import entity.AnswerPackage;
-import entity.AnswerPackage;
 import entity.Question;
 import use_case.select_mode.SelectModeDataObjectInterface;
 

@@ -1,6 +1,4 @@
 package use_case.select_colour;
-
-
 public class SelectColourInputData {
     private String colour;
 

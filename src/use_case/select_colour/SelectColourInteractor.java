@@ -1,12 +1,5 @@
 package use_case.select_colour;
 import entity.User;
-import use_case.signup.SignupOutputData;
-
-//import java.awt.Color;
-import java.time.LocalDateTime;
-//import java.util.ArrayList;
-
-import data_access.FileUserDataAccessObject;
 
 
 public class SelectColourInteractor implements SelectColourInputBoundary{

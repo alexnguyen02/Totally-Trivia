@@ -3,7 +3,6 @@ package view;
 
 import interface_adaptors.game_over.GameOverController;
 import interface_adaptors.game_over.GameOverViewModel;
-import interface_adaptors.question.QuestionState;
 
 import javax.swing.*;
 import java.awt.*;

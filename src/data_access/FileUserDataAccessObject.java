@@ -8,7 +8,6 @@ import use_case.login.LoginUserDataAccessInterface;
 import use_case.select_colour.SelectColourUserDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 
-import java.awt.*;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.HashMap;

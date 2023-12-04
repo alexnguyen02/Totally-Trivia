@@ -1,8 +1,5 @@
 package use_case.delete;
 
-// TODO Complete me
-
-import java.util.ArrayList;
 
 public class DeleteOutputData {
     private String usernames;

@@ -1,15 +1,11 @@
 package view;
 
-import view.SignupView;
-import view.LoginView;
 import interface_adaptors.ViewManagerModel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import static interface_adaptors.select_mode.SelectModeViewModel.TITLE_LABEL;
 
 public class WelcomeView extends JPanel {
 

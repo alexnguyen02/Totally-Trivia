@@ -2,8 +2,6 @@ package use_case.question;
 
 import entity.Question;
 
-import java.util.ArrayList;
-
 public class QuestionOutputData {
 
     public final boolean correctness;

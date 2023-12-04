@@ -1,7 +1,5 @@
 package view;
 
-import interface_adaptors.logout.LogoutController;
-import interface_adaptors.logout.LogoutViewModel;
 import interface_adaptors.signup.SignupController;
 import interface_adaptors.signup.SignupViewModel;
 import org.junit.jupiter.api.Test;

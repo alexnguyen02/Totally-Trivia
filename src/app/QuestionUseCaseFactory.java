@@ -4,7 +4,6 @@ package app;
 import entity.QuestionStorage;
 import interface_adaptors.ViewManagerModel;
 import interface_adaptors.question.*;
-import interface_adaptors.game_over.GameOverPresenter;
 import interface_adaptors.game_over.GameOverViewModel;
 import use_case.question.QuestionInputBoundary;
 import use_case.question.QuestionInteractor;

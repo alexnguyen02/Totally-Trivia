@@ -1,6 +1,5 @@
 package app;
 
-import data_access.FileUserDataAccessObject;
 import interface_adaptors.ViewManagerModel;
 import interface_adaptors.game_over.GameOverViewModel;
 import interface_adaptors.game_over.GameOverController;

@@ -1,8 +1,6 @@
 package view;
 
 import interface_adaptors.ViewManagerModel;
-import interface_adaptors.delete.DeleteController;
-import interface_adaptors.delete.DeleteViewModel;
 import interface_adaptors.login.LoginController;
 import interface_adaptors.login.LoginViewModel;
 import org.junit.jupiter.api.Test;

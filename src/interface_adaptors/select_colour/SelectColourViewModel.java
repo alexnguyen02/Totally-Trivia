@@ -2,8 +2,6 @@ package interface_adaptors.select_colour;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.List;
-import java.awt.Color;
 import interface_adaptors.ViewModel;
 
 public class SelectColourViewModel extends ViewModel{

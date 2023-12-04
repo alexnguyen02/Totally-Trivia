@@ -1,7 +1,5 @@
 package use_case.select_colour;
 
-//import java.awt.Color;
-//import java.util.List;
 
 public class SelectColourOutputData {
 

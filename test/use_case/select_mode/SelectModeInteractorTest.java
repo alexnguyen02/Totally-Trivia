@@ -4,14 +4,9 @@ import data_access.InMemorySelectModeAccessObject;
 import entity.CommonQuestionStorage;
 import entity.Question;
 import entity.QuestionStorage;
-import use_case.select_mode.*;
 
 import java.util.ArrayList;
-import java.util.List;
-import entity.Question;
-import entity.QuestionStorage;
 
-import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
