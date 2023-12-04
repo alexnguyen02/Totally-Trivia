@@ -9,7 +9,7 @@ import use_case.signup.*;
 import java.util.HashMap;
 import java.util.Map;
 
-    public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface, SelectColourUserDataAccessInterface, GameOverUserDataAccessInterface {
+public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface, SelectColourUserDataAccessInterface, GameOverUserDataAccessInterface {
   
     private final Map<String, User> users = new HashMap<>();
 
@@ -40,7 +40,10 @@ import java.util.Map;
         user.setPoints(user.getPoints() + points);
     }
     public void changeColourScheme(String userId, String colourScheme) {
-        users.get(userId).setColourScheme(colourScheme);
+        User user = users.get(userId);
+        if (user != null) {
+            user.setColourScheme(colourScheme);
+        }
     }
 }
 

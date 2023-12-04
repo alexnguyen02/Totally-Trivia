@@ -1,22 +1,21 @@
 package use_case.select_colour;
 
-import data_access.FileUserDataAccessObject;
-import data_access.InMemorySelectModeAccessObject;
 import data_access.InMemoryUserDataAccessObject;
 import entity.CommonUserFactory;
-import entity.Question;
 import entity.User;
-import use_case.select_colour.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class SelectColourInteractorTest {
-    @org.junit.Test
+    @Test
     public void successTest() throws IOException {
         SelectColourInputData inputData = new SelectColourInputData("Orange");
 
@@ -28,7 +27,7 @@ public class SelectColourInteractorTest {
         SelectColourOutputBoundary successPresenter = new SelectColourOutputBoundary() {
             @Override
             public void prepareSuccessView(SelectColourOutputData selectColourOutputData) {
-                assertEquals("Orange", user.getColourScheme());
+                Assertions.assertEquals("Orange", user.getColourScheme());
             }
 
             @Override
@@ -41,8 +40,8 @@ public class SelectColourInteractorTest {
         selectColourInteractor.execute(inputData);
     }
 
-    @org.junit.Test
-    public void failurePasswordMismatchTest() {
+    @Test
+    public void failureColourNotUnlockedTest() {
         SelectColourInputData inputData = new SelectColourInputData("Black");
 
         CommonUserFactory userFactory = new CommonUserFactory();
@@ -53,12 +52,12 @@ public class SelectColourInteractorTest {
         SelectColourOutputBoundary failurePresenter = new SelectColourOutputBoundary() {
             @Override
             public void prepareSuccessView(SelectColourOutputData selectColourOutputData) {
-                fail("Use case success is unexpected.");
+                Assertions.fail("Use case success is unexpected.");
             }
 
             @Override
             public void prepareFailView(String error) {
-                assertEquals("This colour has not been unlocked yet.", error);
+                Assertions.assertEquals("This colour has not been unlocked yet.", error);
             }
         };
 
