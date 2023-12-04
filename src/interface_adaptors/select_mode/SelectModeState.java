@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class SelectModeState {
     private String category = "";
     private String difficultyLevel = "";
-    private Integer numOfQuestions = 0;
+    private String numOfQuestions = "";
 
     private ArrayList<Question> outputQuestions;
 
@@ -45,11 +45,11 @@ public class SelectModeState {
         this.difficultyLevel = difficultyLevel;
     }
 
-    public Integer getNumOfQuestions(){
+    public String getNumOfQuestionsString(){
         return this.numOfQuestions;
     }
 
-    public void setNumOfQuestions(Integer numOfQuestions){
+    public void setNumOfQuestions(String numOfQuestions){
         this.numOfQuestions = numOfQuestions;
     }
 

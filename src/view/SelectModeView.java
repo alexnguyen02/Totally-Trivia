@@ -25,15 +25,15 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
     private final SelectModeController selectModeController;
 
     // Dropdown menus of category and difficulty level, and text input field for number of questions
-    private final String[] categoryList = new String[]{"Any category", "General knowledge", "Books", "Film",
+    private final String[] categoryList = new String[]{"Select","Any category", "General knowledge", "Books", "Film",
             "Music", "Musicals & Theatres", "Television", "Video games", "Board games", "Science & Nature", "Computers",
             "Mathematics", "Mythology", "Sports", "Geography", "History", "Politics", "Arts", "Celebrities", "Animals",
             "Vehicles", "Comics", "Gadgets", "Japanese Anime & Manga", "Cartoon & Animations"};
     private final JComboBox<String> categoryDropdown = new JComboBox<>(categoryList);
-    private final JComboBox<String> difficultyLevelDropdown = new JComboBox<>(new String[]{"Any difficulty level","Easy", "Medium", "Hard"});
+    private final JComboBox<String> difficultyLevelDropdown = new JComboBox<>(new String[]{"Select","Any difficulty level","Easy", "Medium", "Hard"});
 
     // The array of integer {2,4,6} is for testing purpose only; The actual array of integer is {10,20,30}
-    private final JComboBox<Integer> numOfQuestionDropdown = new JComboBox<>(new Integer[]{5, 10, 20, 30}); //
+    private final JComboBox<String> numOfQuestionDropdown = new JComboBox<>(new String[]{"Select","5", "10", "20", "30"}); //
 
 
     // Start (game) button
@@ -72,19 +72,10 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(start)) {
                             SelectModeState currentState = selectModeViewModel.getState();
-                            String category = currentState.getCategory();
-                            String difficulty = currentState.getDifficultyLevel();
-                            Integer num = currentState.getNumOfQuestions();
-
-                            // For testing purpose
-                            System.out.println(currentState.getCategory());
-                            System.out.println(currentState.getDifficultyLevel());
-                            System.out.println(currentState.getNumOfQuestions());
-
                             selectModeController.execute(
                                     currentState.getCategory(),
                                     currentState.getDifficultyLevel(),
-                                    currentState.getNumOfQuestions()
+                                    currentState.getNumOfQuestionsString()
                             );
                         }
                     }
@@ -122,7 +113,7 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         SelectModeState currentState = selectModeViewModel.getState();
-                        Integer numOfQuestions = Integer.parseInt(numOfQuestionDropdown.getSelectedItem().toString());
+                        String numOfQuestions = numOfQuestionDropdown.getSelectedItem().toString();
                         currentState.setNumOfQuestions(numOfQuestions);
                         selectModeViewModel.setState(currentState);
                     }

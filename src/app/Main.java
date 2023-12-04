@@ -4,7 +4,9 @@ import data_access.FileUserDataAccessObject;
 
 import data_access.QuestionStorageDataAccessObject;
 import data_access.SelectModeDataAccessObject;
+import entity.CommonQuestionStorage;
 import entity.CommonUserFactory;
+import entity.QuestionStorage;
 import entity.User;
 import interface_adaptors.delete.DeleteController;
 import interface_adaptors.delete.DeleteViewModel;
@@ -70,11 +72,12 @@ public class Main {
         // Initializes all the remaining Data Access Objects.
 
         SelectModeDataAccessObject selectModeDataAccessObject = new SelectModeDataAccessObject();
-        QuestionStorageDataAccessObject questionStorageDataAccessObject = new QuestionStorageDataAccessObject();
 
         // Initializes an empty User. This User will be filled in by sign up/log in.
         CommonUserFactory userFactory = new CommonUserFactory();
         User user = userFactory.create("", "",LocalDateTime.parse("2023-12-01T14:58:50.150"), 0, "White");
+
+        QuestionStorage questionStorage = new CommonQuestionStorage();
 
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject, user);
         views.add(signupView, signupView.viewName);
@@ -83,10 +86,10 @@ public class Main {
         views.add(loginView, loginView.viewName);
 
         SelectModeView selectModeView = SelectModeUseCaseFactory.create(viewManagerModel, selectModeViewModel,
-                selectModeDataAccessObject, questionStorageDataAccessObject, questionViewModel);
+                selectModeDataAccessObject, questionStorage, questionViewModel);
         views.add(selectModeView, selectModeView.viewName);
 
-        QuestionView questionView = QuestionUseCaseFactory.create(viewManagerModel, questionViewModel, gameOverViewModel, questionStorageDataAccessObject);
+        QuestionView questionView = QuestionUseCaseFactory.create(viewManagerModel, questionViewModel, gameOverViewModel, questionStorage);
         views.add(questionView, questionView.viewName);
 
         GameOverView gameOverView = GameOverUseCaseFactory.create(viewManagerModel, gameOverViewModel, userDataAccessObject, user);
@@ -108,7 +111,7 @@ public class Main {
         views.add(welcomeView, welcomeView.viewName);
 
         String s = user.getName();
-        DeleteController deleteController = createUserDeleteUseCase(deleteViewModel, user, userDataAccessObject);
+        DeleteController deleteController = DeleteUseCaseFactory.createUserDeleteUseCase(deleteViewModel, user, userDataAccessObject);
 
         DeleteView deleteView = new DeleteView(deleteController, deleteViewModel);
         views.add(deleteView, deleteView.viewName);

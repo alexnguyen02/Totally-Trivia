@@ -11,8 +11,9 @@ public class SelectModeController {
         this.selectModeUseCaseInteractor = userSignupUseCaseInteractor;
         }
 
-    public void execute(String category, String difficultyLevel, int numOfQuestions){
-        SelectModeInputData selectModeInputData = new SelectModeInputData(category, difficultyLevel, numOfQuestions);
+    public void execute(String category, String difficultyLevel, String numOfQuestions){
+        SelectModeInputData selectModeInputData =
+                new SelectModeInputData(category, difficultyLevel, numOfQuestions);
         selectModeUseCaseInteractor.execute(selectModeInputData);
     }
 }

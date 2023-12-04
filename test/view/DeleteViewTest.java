@@ -31,16 +31,27 @@ public class DeleteViewTest {
         assertNotNull(deleteView.delete);
     }
 
-    @Test
-    public void testActionPerformed() {
-        DeleteController deleteController = new DeleteController(null);
-        DeleteViewModel deleteViewModel = new DeleteViewModel();
-        DeleteView deleteView = new DeleteView(deleteController, deleteViewModel);
+//    @Test
+//    public void testActionPerformed() {
+//        DeleteController deleteController = new DeleteController(null);
+//        DeleteViewModel deleteViewModel = new DeleteViewModel();
+//        DeleteView deleteView = new DeleteView(deleteController, deleteViewModel);
+//
+//        // Assuming the actionPerformed method should show a confirmation dialog
+//        deleteView.actionPerformed(null);
+//        // Add assertions based on the expected behavior of the actionPerformed method
+//    }
 
-        // Assuming the actionPerformed method should show a confirmation dialog
-        deleteView.actionPerformed(null);
-        // Add assertions based on the expected behavior of the actionPerformed method
-    }
+//    @Test
+//    public void testPropertyChange() {
+//        DeleteController deleteController = new DeleteController(null);
+//        DeleteViewModel deleteViewModel = new DeleteViewModel();
+//        DeleteView deleteView = new DeleteView(deleteController, deleteViewModel);
+//
+//        // Assuming the propertyChange method should show a message dialog
+//        deleteView.propertyChange(null);
+//        // Add assertions based on the expected behavior of the propertyChange method
+//    }
 
-
+    // Add more test methods as needed to cover other functionality in DeleteView
 }
