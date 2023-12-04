@@ -1,6 +1,7 @@
 package data_access;
 
 import entity.AnswerPackage;
+import entity.AnswerPackage;
 import entity.Question;
 import use_case.select_mode.SelectModeDataObjectInterface;
 
@@ -37,8 +38,9 @@ public class InMemorySelectModeAccessObject implements SelectModeDataObjectInter
 
 
     @Override
-    public ArrayList<Question> getQuestions(String category, String difficultyLevel, int numOfQuestions) {
+    public ArrayList<Question> getQuestions(String category, String difficultyLevel, String numOfQuestions) {
         ArrayList<Question> listOfQuestions= new ArrayList<>();
+        int numberOfQuestions = Integer.parseInt(numOfQuestions);
 
         /// For now, we will assume that all questions have the same category, which is "Animals" in this case.
         if (difficultyLevel.equals("Easy")){
@@ -47,12 +49,12 @@ public class InMemorySelectModeAccessObject implements SelectModeDataObjectInter
                 listOfQuestions.add(q);
             }
         } else if (difficultyLevel.equals("Medium")) {
-            for(int i = 0; i < numOfQuestions; i++){
+            for(int i = 0; i < numberOfQuestions; i++){
                 Question q = mediumQuestions.get(i);
                 listOfQuestions.add(q);
             }
         } else {
-            for(int i = 0; i < numOfQuestions; i++){
+            for(int i = 0; i < numberOfQuestions; i++){
                 Question q = hardQuestions.get(i);
                 listOfQuestions.add(q);
             }

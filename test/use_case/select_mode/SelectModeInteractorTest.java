@@ -22,7 +22,7 @@ public class SelectModeInteractorTest {
 
     @org.junit.Test
     public void successTest(){
-        SelectModeInputData inputData = new SelectModeInputData("Animals", "Easy", 2);
+        SelectModeInputData inputData = new SelectModeInputData("Animals", "Easy", "2");
         SelectModeDataObjectInterface selectModeDatabase = new InMemorySelectModeAccessObject();
         QuestionStorage questionStorage = new CommonQuestionStorage();
         QuestionStorage questionStorageDataAccessObject = new QuestionStorage() {

@@ -12,7 +12,7 @@ public class SelectModePresenter implements SelectModeOutputBoundary {
 
     private final SelectModeViewModel selectModeViewModel;
 
-    //this may be breaking CA
+    //This may be breaking CA
     private final QuestionViewModel questionViewModel;
 
     private final ViewManagerModel viewManagerModel;
@@ -41,6 +41,7 @@ public class SelectModePresenter implements SelectModeOutputBoundary {
 
     @Override
     public void prepareSelectModeFailView(String error) {
+
         this.selectModeViewModel.firePropertyChanged();
     }
 
