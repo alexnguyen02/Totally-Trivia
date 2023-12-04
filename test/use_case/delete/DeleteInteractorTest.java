@@ -30,7 +30,7 @@ class DeleteInteractorTest {
         map.put("user_2", user2);
         map.put("user_3", user3);
 
-        DeleteUserDataAccessInterface userRepository = new DeleteUserDataAccessInterface() {
+        DeleteUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject() {
 
             @Override
             public String delete(String username) {
