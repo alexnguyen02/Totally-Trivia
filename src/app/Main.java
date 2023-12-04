@@ -30,8 +30,6 @@ import java.awt.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-import static view.AccountView.createUserDeleteUseCase;
-
 public class Main {
     public static void main(String[] args) throws IOException {
         // Build the main program window, the main panel containing the

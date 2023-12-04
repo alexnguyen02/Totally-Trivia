@@ -1,17 +1,11 @@
-package test;
+package data_access;
 
-import data_access.FileUserDataAccessObject;
-import data_access.InMemorySelectModeAccessObject;
-import data_access.InMemoryUserDataAccessObject;
-import data_access.QuestionStorageDataAccessObject;
 import entity.CommonUserFactory;
-import entity.Question;
 import entity.User;
 import use_case.select_colour.*;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

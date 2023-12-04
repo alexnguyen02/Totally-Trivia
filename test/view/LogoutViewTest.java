@@ -20,11 +20,11 @@ class LogoutViewTest {
 
     @Test
     public void testButtonsExist() {
-        LogoutController deleteController = new LogoutController(null);
-        LogoutViewModel deleteViewModel = new LogoutViewModel();
-        LogoutView deleteView = new LogoutView(deleteController, deleteViewModel);
+        LogoutController logOutController = new LogoutController(null);
+        LogoutViewModel logOutViewModel = new LogoutViewModel();
+        LogoutView logOutView = new LogoutView(logOutController, logOutViewModel);
 
-        assertNotNull(deleteView.logout);
+        assertNotNull(logOutView.logout);
     }
 
 }

@@ -20,12 +20,12 @@ class SignupViewTest {
 
     @Test
     public void testButtonsExist() {
-        SignupController deleteController = new SignupController(null);
-        SignupViewModel deleteViewModel = new SignupViewModel();
-        SignupView deleteView = new SignupView(deleteController, deleteViewModel);
+        SignupController signUpController = new SignupController(null);
+        SignupViewModel signUpViewModel = new SignupViewModel();
+        SignupView signUpView = new SignupView(signUpController, signUpViewModel);
 
-        assertNotNull(deleteView.signUp);
-        assertNotNull(deleteView.clear);
+        assertNotNull(signUpView.signUp);
+        assertNotNull(signUpView.cancel);
     }
 
 }

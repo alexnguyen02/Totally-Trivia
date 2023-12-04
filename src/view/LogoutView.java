@@ -20,7 +20,7 @@ public class LogoutView extends JPanel implements ActionListener, PropertyChange
 
     private final LogoutController logoutController;
 
-    private final JButton logout;
+    public final JButton logout;
 
     public LogoutView(LogoutController logoutController, LogoutViewModel logoutViewModel) {
         this.logoutController = logoutController;
