@@ -5,6 +5,7 @@ import entity.Question;
 import org.junit.Before;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -15,7 +16,7 @@ public class AnswerPackageEntityTest {
 
     @Before
     public void init(){
-        ArrayList<String> possibleAnswers = new ArrayList<>(List.of(new String[]{"Tinworth", "Godric's Hollow", "Hogsmeade", "Mould-on-the-Wold"}));
+        ArrayList<String> possibleAnswers = new ArrayList<>(Arrays.asList((new String[]{"Tinworth", "Godric's Hollow", "Hogsmeade", "Mould-on-the-Wold"})));
         String correctAnswer = "Godric's Hollow";
         answerPackage = new AnswerPackage(
                 possibleAnswers,
