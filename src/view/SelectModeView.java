@@ -46,6 +46,22 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
     private final LabelDropDownPanel difficultyInfo;
     private final LabelDropDownPanel numOfQuestionInfo;
 
+    public String getTitle(){
+        return TITLE_LABEL;
+    }
+
+    public String getCategoryLabel(){
+        return CATEGORY_LABEL;
+    }
+
+    public String getDifficultyLevelLabel(){
+        return DIFFICULTY_LABEL;
+    }
+
+    public String getNumQuestionsLabel(){
+        return NUM_QUESTIONS_LABEL;
+    }
+
     public SelectModeView(SelectModeViewModel selectModeViewModel, SelectModeController selectModeController){
         this.selectModeViewModel = selectModeViewModel;
         this.selectModeController = selectModeController;
@@ -138,7 +154,8 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        JOptionPane.showConfirmDialog(this, "Reset not implemented yet.");
+        JOptionPane.showConfirmDialog(this,
+                "Reset not implemented yet.");
     }
 
     @Override
