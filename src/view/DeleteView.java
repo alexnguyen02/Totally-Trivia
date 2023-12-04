@@ -28,7 +28,7 @@ public class DeleteView extends JPanel implements ActionListener, PropertyChange
 
     private final DeleteController deleteController;
 
-    private final JButton delete;
+    final JButton delete;
 
 
     public DeleteView(DeleteController deletecontroller, DeleteViewModel deleteViewModel) {
