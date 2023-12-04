@@ -1,9 +1,8 @@
-package test;
+package use_case.select_mode;
 
 import data_access.SelectModeDataAccessObject;
 import entity.Question;
 import org.junit.Before;
-import use_case.select_mode.*;
 
 import java.util.ArrayList;
 

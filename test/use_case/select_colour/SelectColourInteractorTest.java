@@ -1,4 +1,4 @@
-package test;
+package use_case.select_colour;
 
 import data_access.FileUserDataAccessObject;
 import data_access.InMemorySelectModeAccessObject;
