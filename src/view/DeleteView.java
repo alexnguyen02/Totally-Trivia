@@ -6,6 +6,7 @@ package view;
 import interface_adaptors.delete.DeleteController;
 import interface_adaptors.delete.DeleteState;
 import interface_adaptors.delete.DeleteViewModel;
+import interface_adaptors.login.LoginState;
 import interface_adaptors.signup.SignupController;
 import interface_adaptors.signup.SignupState;
 import interface_adaptors.signup.SignupViewModel;
@@ -51,8 +52,20 @@ public class DeleteView extends JPanel implements ActionListener, PropertyChange
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(delete)) {
-                            String s = deleteViewModel.getState().getUsernames();
-                            deleteController.execute(s);
+                            int confirmDialogResult = JOptionPane.showConfirmDialog(
+                                    DeleteView.this,
+                                    "Are you sure you want to delete account?",
+                                    "Delete",
+                                    JOptionPane.YES_NO_OPTION
+                            );
+
+                            if (confirmDialogResult == JOptionPane.YES_OPTION) {
+                                // User pressed "Yes" for delete
+                                DeleteState currentState = deleteViewModel.getState();
+                                String s = currentState.getUsernames();
+                                deleteController.execute(s);
+                            }
+
 
                         }
                     }
