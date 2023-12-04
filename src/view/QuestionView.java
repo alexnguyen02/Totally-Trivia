@@ -116,7 +116,6 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
 
     public void updateView() {
         question.setText(questionViewModel.QUESTION_TITLE_LABEL);
-        //question.setText(questionViewModel.QUESTION_TITLE_LABEL);
         answer1.setText(questionViewModel.FIRST_ANSWER_BUTTON_LABEL);
         answer2.setText(questionViewModel.SECOND_ANSWER_BUTTON_LABEL);
         answer3.setText(questionViewModel.THIRD_ANSWER_BUTTON_LABEL);

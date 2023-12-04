@@ -1,6 +1,14 @@
 package use_case.select_mode;
 
 import data_access.InMemorySelectModeAccessObject;
+import data_access.QuestionStorageDataAccessObject;
+import entity.CommonQuestionStorage;
+import entity.Question;
+import entity.QuestionStorage;
+import use_case.select_mode.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import entity.Question;
 import entity.QuestionStorage;
 
@@ -16,6 +24,7 @@ public class SelectModeInteractorTest {
     public void successTest(){
         SelectModeInputData inputData = new SelectModeInputData("Animals", "Easy", 2);
         SelectModeDataObjectInterface selectModeDatabase = new InMemorySelectModeAccessObject();
+        QuestionStorage questionStorage = new CommonQuestionStorage();
         QuestionStorage questionStorageDataAccessObject = new QuestionStorage() {
             @Override
             public ArrayList<Question> getQuestions() {
@@ -45,6 +54,7 @@ public class SelectModeInteractorTest {
                 fail("Select mode use case failure is unexpected");
             }
         };
+        SelectModeInputBoundary selectModeInputInteractor = new SelectModeInteractor(selectModeDatabase, successPresenter, questionStorage);
         SelectModeInputBoundary selectModeInputInteractor = new SelectModeInteractor(selectModeDatabase, successPresenter, questionStorageDataAccessObject);
         selectModeInputInteractor.execute(inputData);
     }
