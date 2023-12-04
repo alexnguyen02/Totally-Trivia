@@ -38,7 +38,7 @@ public class SelectColourInteractorTest {
             }
         };
 
-        SelectColourInputBoundary selectColourInteractor = new SelectColourInteractor(successPresenter, user, null);
+        SelectColourInputBoundary selectColourInteractor = new SelectColourInteractor(successPresenter, user, selectColourUserDataAccessInterface);
         selectColourInteractor.execute(inputData);
     }
 
@@ -63,7 +63,7 @@ public class SelectColourInteractorTest {
             }
         };
 
-        SelectColourInputBoundary selectColourInteractor = new SelectColourInteractor(failurePresenter, user, null);
+        SelectColourInputBoundary selectColourInteractor = new SelectColourInteractor(failurePresenter, user, selectColourUserDataAccessInterface);
         selectColourInteractor.execute(inputData);
     }
 }
