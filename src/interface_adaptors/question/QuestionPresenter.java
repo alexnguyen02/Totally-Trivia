@@ -22,11 +22,11 @@ public class QuestionPresenter implements QuestionOutputBoundary {
         questionState.setNewQuestion(questionOutputData.nextQuestion);
         questionState.setTotalQuestions(questionOutputData.totalQuestions);
         if (questionOutputData.correctness) {
-            if (questionOutputData.difficulty.equals("easy")) {
+            if (questionOutputData.difficulty.equals("Easy")) {
                 questionState.setTotalPoints(questionState.getTotalPoints() + 1);
-            } else if (questionOutputData.difficulty.equals("medium")) {
+            } else if (questionOutputData.difficulty.equals("Medium")) {
                 questionState.setTotalPoints(questionState.getTotalPoints() + 2);
-            } else if (questionOutputData.difficulty.equals("hard")) {
+            } else if (questionOutputData.difficulty.equals("Hard")) {
                 questionState.setTotalPoints(questionState.getTotalPoints() + 3);
             }
         }
