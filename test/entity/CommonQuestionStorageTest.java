@@ -29,10 +29,10 @@ public class CommonQuestionStorageTest {
         listOfQuestions.add(questionOne);
 
         ArrayList<String> answersTwo = new ArrayList<>();
-        answersOne.add("The Splendid Angharad");
-        answersOne.add("Cheedo the Fragile");
-        answersOne.add("Toast the Knowing");
-        answersOne.add("The Illuminescent Ira");
+        answersTwo.add("The Splendid Angharad");
+        answersTwo.add("Cheedo the Fragile");
+        answersTwo.add("Toast the Knowing");
+        answersTwo.add("The Illuminescent Ira");
         Question questionTwo = new Question("Which of these characters is not one of the wives in Mad Max: Fury Road?", "Film", "hard", new AnswerPackage(answersTwo, "The Illuminescent Ira"));
         listOfQuestions.add(questionTwo);
 
