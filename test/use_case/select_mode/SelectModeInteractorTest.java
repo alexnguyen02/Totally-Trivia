@@ -9,6 +9,10 @@ import use_case.select_mode.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import entity.Question;
+import entity.QuestionStorage;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -21,6 +25,17 @@ public class SelectModeInteractorTest {
         SelectModeInputData inputData = new SelectModeInputData("Animals", "Easy", 2);
         SelectModeDataObjectInterface selectModeDatabase = new InMemorySelectModeAccessObject();
         QuestionStorage questionStorage = new CommonQuestionStorage();
+        QuestionStorage questionStorageDataAccessObject = new QuestionStorage() {
+            @Override
+            public ArrayList<Question> getQuestions() {
+                return null;
+            }
+
+            @Override
+            public void setQuestions(ArrayList<Question> newQuestions) {
+
+            }
+        };
 
         SelectModeOutputBoundary successPresenter = new SelectModeOutputBoundary() {
             @Override
@@ -40,6 +55,7 @@ public class SelectModeInteractorTest {
             }
         };
         SelectModeInputBoundary selectModeInputInteractor = new SelectModeInteractor(selectModeDatabase, successPresenter, questionStorage);
+        SelectModeInputBoundary selectModeInputInteractor = new SelectModeInteractor(selectModeDatabase, successPresenter, questionStorageDataAccessObject);
         selectModeInputInteractor.execute(inputData);
     }
 }

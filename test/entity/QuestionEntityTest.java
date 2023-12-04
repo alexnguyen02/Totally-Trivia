@@ -1,4 +1,5 @@
 package test;
+package entity;
 
 import entity.AnswerPackage;
 import entity.Question;

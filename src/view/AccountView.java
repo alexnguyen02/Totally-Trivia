@@ -1,5 +1,6 @@
 package view;
 
+import entity.User;
 import interface_adaptors.ViewManagerModel;
 import interface_adaptors.delete.DeleteController;
 import interface_adaptors.delete.DeletePresenter;
@@ -92,12 +93,12 @@ public class AccountView extends JPanel {
 
         add(buttons);
     }
-    public static DeleteController createUserDeleteUseCase(DeleteViewModel deleteViewModel, DeleteUserDataAccessInterface deleteUserDataAccessInterface) {
+    public static DeleteController createUserDeleteUseCase(DeleteViewModel deleteViewModel, User user, DeleteUserDataAccessInterface deleteUserDataAccessInterface) {
         // Notice how we pass this method's parameters to the Presenter.
         DeleteOutputBoundary deleteOutputBoundary = new DeletePresenter(deleteViewModel);
 
 
-        DeleteInputBoundary deleteInteractor = new DeleteInteractor(deleteUserDataAccessInterface, deleteOutputBoundary);
+        DeleteInputBoundary deleteInteractor = new DeleteInteractor(deleteUserDataAccessInterface, user,deleteOutputBoundary);
 
         return new DeleteController(deleteInteractor);
 
