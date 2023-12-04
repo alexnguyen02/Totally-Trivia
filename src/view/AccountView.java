@@ -18,14 +18,14 @@ import java.awt.event.ActionListener;
 public class AccountView extends JPanel {
 
     public String viewName = "account";
-    private final JButton changeColour;
-    private final JButton logOut;
+    public final JButton changeColour;
+    public final JButton logOut;
 
-    private final JButton deleteAccount;
+    public final JButton deleteAccount;
 
-    private final JButton back;
+    public final JButton back;
 
-    private final ViewManagerModel viewManagerModel;
+    public final ViewManagerModel viewManagerModel;
 
 
     public AccountView(ViewManagerModel viewManagerModel) {
@@ -93,16 +93,6 @@ public class AccountView extends JPanel {
 
         add(buttons);
     }
-    public static DeleteController createUserDeleteUseCase(DeleteViewModel deleteViewModel, User user, DeleteUserDataAccessInterface deleteUserDataAccessInterface) {
-        // Notice how we pass this method's parameters to the Presenter.
-        DeleteOutputBoundary deleteOutputBoundary = new DeletePresenter(deleteViewModel);
-
-
-        DeleteInputBoundary deleteInteractor = new DeleteInteractor(deleteUserDataAccessInterface, user,deleteOutputBoundary);
-
-        return new DeleteController(deleteInteractor);
-
-    }
 
     public void changeColour(Color colour) {
         this.setBackground(colour);
@@ -114,21 +104,4 @@ public class AccountView extends JPanel {
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
     }
-
-
-
-
-    //different prperty change
-
-//    @Override
-//    public void propertyChange(PropertyChangeEvent evt) {
-//        Object obj = evt.getNewValue();
-//        if(obj instanceof DeleteState){
-//            DeleteState state = (DeleteState) obj;
-//            JOptionPane.showMessageDialog(this, state.getUsernames());
-//        }else {
-//            LoggedInState state = (LoggedInState) evt.getNewValue();
-//            username.setText(state.getUsername());
-//        }
-//    }
 }

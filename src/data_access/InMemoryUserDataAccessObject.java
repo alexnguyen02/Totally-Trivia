@@ -1,13 +1,16 @@
 package data_access;
 
 import entity.User;
+import use_case.game_over.GameOverUserDataAccessInterface;
+import use_case.login.LoginUserDataAccessInterface;
+import use_case.select_colour.SelectColourUserDataAccessInterface;
 import use_case.signup.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface {
-
+    public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface, SelectColourUserDataAccessInterface, GameOverUserDataAccessInterface {
+  
     private final Map<String, User> users = new HashMap<>();
 
     /**
@@ -29,6 +32,15 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
 
     @Override
     public User get(String username) {
-        return null;
+        return users.get(username);
+    }
+
+    public void changePoints(String userId, Integer points) {
+        User user = users.get(userId);
+        user.setPoints(user.getPoints() + points);
+    }
+    public void changeColourScheme(String userId, String colourScheme) {
+        users.get(userId).setColourScheme(colourScheme);
     }
 }
+

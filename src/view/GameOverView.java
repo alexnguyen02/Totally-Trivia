@@ -15,11 +15,11 @@ import java.beans.PropertyChangeListener;
 public class GameOverView extends JPanel implements ActionListener, PropertyChangeListener  {
     public final String viewName = "game over";
 
-    private final GameOverViewModel gameOverViewModel;
-    private final GameOverController gameOverController;
+    public final GameOverViewModel gameOverViewModel;
+    public final GameOverController gameOverController;
     private final JLabel title;
-    private final JLabel points_earned;
-    private final JLabel correct_answers;
+    public final JLabel points_earned;
+    public final JLabel correct_answers;
     private final JButton play_again;
     private final JButton main_menu;
 

@@ -1,12 +1,18 @@
-package test;
+package use_case.select_mode;
 
 import data_access.InMemorySelectModeAccessObject;
 import data_access.QuestionStorageDataAccessObject;
+import entity.CommonQuestionStorage;
 import entity.Question;
+import entity.QuestionStorage;
 import use_case.select_mode.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import entity.Question;
+import entity.QuestionStorage;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -16,9 +22,9 @@ public class SelectModeInteractorTest {
 
     @org.junit.Test
     public void successTest(){
-        SelectModeInputData inputData = new SelectModeInputData("Animals", "Easy", 2);
+        SelectModeInputData inputData = new SelectModeInputData("Animals", "Easy", "2");
         SelectModeDataObjectInterface selectModeDatabase = new InMemorySelectModeAccessObject();
-        QuestionStorageDataAccessObject questionStorageDataAccessObject = new QuestionStorageDataAccessObject();
+        QuestionStorage questionStorage = new CommonQuestionStorage();
 
         SelectModeOutputBoundary successPresenter = new SelectModeOutputBoundary() {
             @Override
@@ -37,7 +43,7 @@ public class SelectModeInteractorTest {
                 fail("Select mode use case failure is unexpected");
             }
         };
-        SelectModeInputBoundary selectModeInputInteractor = new SelectModeInteractor(selectModeDatabase, successPresenter, questionStorageDataAccessObject);
+        SelectModeInputBoundary selectModeInputInteractor = new SelectModeInteractor(selectModeDatabase, successPresenter, questionStorage);
         selectModeInputInteractor.execute(inputData);
     }
 }

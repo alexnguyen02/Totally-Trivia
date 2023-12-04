@@ -14,9 +14,9 @@ import static interface_adaptors.select_mode.SelectModeViewModel.TITLE_LABEL;
 public class WelcomeView extends JPanel {
 
     public final String viewName = "welcome";
-    private final JButton logIn;
-    private final JButton signUp;
-    private final JLabel title;
+    public final JButton logIn;
+    public final JButton signUp;
+    public final JLabel title;
 
     private final ViewManagerModel viewManagerModel;
 
