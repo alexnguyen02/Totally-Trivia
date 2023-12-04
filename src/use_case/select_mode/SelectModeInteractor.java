@@ -30,9 +30,6 @@ public class SelectModeInteractor implements SelectModeInputBoundary {
         } else {
             ArrayList<Question> listOfQuestions = selectModeDataAccessObject.getQuestions(category, difficultyLevel, numOfQuestions);
 
-            // For testing purpose
-            System.out.println(listOfQuestions);
-
             questionStorage.setQuestions(listOfQuestions);
             SelectModeOutputData outputData = new SelectModeOutputData(listOfQuestions);
             selectModePresenter.prepareSelectModeSuccessView(outputData);
