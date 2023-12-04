@@ -39,10 +39,6 @@ import java.util.Map;
         User user = users.get(userId);
         user.setPoints(user.getPoints() + points);
     }
-        public void changePoints(String userId, Integer points) {
-            User user = users.get(userId);
-            user.setPoints(user.getPoints() + points);
-        }
     public void changeColourScheme(String username, String colourScheme) {
 
         User user = users.get(username);
