@@ -15,19 +15,22 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class SelectColourInteractorTest {
+
     @Test
     public void successTest() throws IOException {
-        SelectColourInputData inputData = new SelectColourInputData("Orange");
-
         CommonUserFactory userFactory = new CommonUserFactory();
+
         User user = userFactory.create("Rob", "Johnson", LocalDateTime.parse("2023-12-03T19:42:37.375"), 42, "Orange");
 
+        SelectColourInputData inputData = new SelectColourInputData(user.getColourScheme());
+
         SelectColourUserDataAccessInterface selectColourUserDataAccessInterface = new InMemoryUserDataAccessObject();
+        selectColourUserDataAccessInterface.save(user);
 
         SelectColourOutputBoundary successPresenter = new SelectColourOutputBoundary() {
             @Override
             public void prepareSuccessView(SelectColourOutputData selectColourOutputData) {
-                Assertions.assertEquals("Orange", user.getColourScheme());
+                Assertions.assertEquals("Orange", selectColourOutputData.getColour());
             }
 
             @Override

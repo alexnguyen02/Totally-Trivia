@@ -3,15 +3,13 @@ package data_access;
 import entity.User;
 import use_case.delete.DeleteUserDataAccessInterface;
 import use_case.game_over.GameOverUserDataAccessInterface;
-import use_case.login.LoginUserDataAccessInterface;
 import use_case.select_colour.SelectColourUserDataAccessInterface;
 import use_case.signup.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface, SelectColourUserDataAccessInterface, GameOverUserDataAccessInterface {
-    public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface, SelectColourUserDataAccessInterface, GameOverUserDataAccessInterface, DeleteUserDataAccessInterface {
+public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface, SelectColourUserDataAccessInterface, GameOverUserDataAccessInterface, DeleteUserDataAccessInterface {
   
     private final Map<String, User> users = new HashMap<>();
 
@@ -47,7 +45,6 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
             user.setColourScheme(colourScheme);
         }
     }
-
     public String delete(String userId) {
         users.remove(userId);
         return(userId);
