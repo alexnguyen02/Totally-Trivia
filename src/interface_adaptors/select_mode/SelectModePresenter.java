@@ -41,6 +41,7 @@ public class SelectModePresenter implements SelectModeOutputBoundary {
 
     @Override
     public void prepareSelectModeFailView(String error) {
+        // Implement this
 
         this.selectModeViewModel.firePropertyChanged();
     }

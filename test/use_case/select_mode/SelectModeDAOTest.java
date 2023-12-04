@@ -16,7 +16,7 @@ public class SelectModeDAOTest {
     public void init(){
         String category = "Books";
         String difficultyLevel = "Hard";
-        int numOfQuestions = 5;
+        String numOfQuestions = "5";
         SelectModeDataObjectInterface selectModeDataAccessObject = new SelectModeDataAccessObject();
         this.actualQuestions =
                 selectModeDataAccessObject.getQuestions(category, difficultyLevel, numOfQuestions);
