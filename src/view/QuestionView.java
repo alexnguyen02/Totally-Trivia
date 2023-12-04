@@ -18,15 +18,15 @@ import interface_adaptors.question.QuestionViewModel;
 public class QuestionView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "question";
 
-    private final QuestionViewModel questionViewModel;
-    private final QuestionController questionController;
-    private final CreateGameOverController createGameOverController;
+    public final QuestionViewModel questionViewModel;
+    public final QuestionController questionController;
+    public final CreateGameOverController createGameOverController;
 
-    private final JTextPane question;
-    private final JButton answer1;
-    private final JButton answer2;
-    private final JButton answer3;
-    private final JButton answer4;
+    public final JTextPane question;
+    public final JButton answer1;
+    public final JButton answer2;
+    public final JButton answer3;
+    public final JButton answer4;
 
     public QuestionView(QuestionViewModel questionViewModel, QuestionController controller,
                         CreateGameOverController createGameOverController) {
