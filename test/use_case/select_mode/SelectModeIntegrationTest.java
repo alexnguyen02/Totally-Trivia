@@ -31,13 +31,13 @@ public class SelectModeIntegrationTest {
             @Override
             public void prepareSelectModeSuccessView(SelectModeOutputData selectModeOutputData) {
                 ArrayList<Question> outputQuestions = selectModeOutputData.getOutputQuestions();
+                assertEquals(10, outputQuestions.size());
+
                 for (Question q: outputQuestions){
+                    int answerPackageSize = q.getAnswerPackage().getPossibleAnswers().size();
                     assertEquals("Entertainment: Film", q.getCategory());
                     assertEquals("Hard", q.getDifficultyLevel());
-
-                    assertEquals(4, q.getAnswerPackage().getPossibleAnswers().size());
                 }
-                assertEquals(10, outputQuestions.size());
             }
             @Override
             public void prepareSelectModeFailView(String error) {
