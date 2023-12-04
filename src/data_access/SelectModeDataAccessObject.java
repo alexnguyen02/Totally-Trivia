@@ -115,13 +115,9 @@ public class SelectModeDataAccessObject implements SelectModeDataObjectInterface
         String contentRegex = "\"question[^]]*correct_answer\"";
         content = cleanupContentString(extractStringPattern(contentRegex, JSONString, true));
 
-        // For testing purpose
-        System.out.println(content);
-
         // Extract the category of the question
         String categoryRegex = "\"category\":\"(.*?)\"";
         category = extractStringPattern(categoryRegex, JSONString, false);
-        System.out.println(category);
 
         // Extract the difficulty level of the question
         String difficultyLevelRegex = "\"difficulty\":\"(.*?)\"";
