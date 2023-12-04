@@ -15,7 +15,7 @@ class SignupViewTest {
         SignupViewModel deleteViewModel = new SignupViewModel();
         SignupView deleteView = new SignupView(deleteController, deleteViewModel);
 
-        assertEquals("Signup", deleteView.viewName);
+        assertEquals("sign up", deleteView.viewName);
     }
 
     @Test

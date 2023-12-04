@@ -17,7 +17,7 @@ class LoginViewTest {
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         LoginView deleteView = new LoginView(deleteViewModel, deleteController, viewManagerModel);
 
-        assertEquals("login", deleteView.viewName);
+        assertEquals("log in", deleteView.viewName);
     }
 
     @Test
