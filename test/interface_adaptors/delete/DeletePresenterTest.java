@@ -2,6 +2,7 @@ package interface_adaptors.delete;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import interface_adaptors.ViewManagerModel;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,9 +12,10 @@ class DeletePresenterTest {
     void testPrepareSuccessView() {
         // Create a DeleteViewModel for testing
         DeleteViewModel deleteViewModel = new DeleteViewModel();
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
 
         // Create a DeletePresenter with the DeleteViewModel
-        DeletePresenter deletePresenter = new DeletePresenter(deleteViewModel);
+        DeletePresenter deletePresenter = new DeletePresenter(viewManagerModel, deleteViewModel);
 
         // Create test data for the response
         use_case.delete.DeleteOutputData testOutputData = new use_case.delete.DeleteOutputData("testUser");
@@ -31,9 +33,10 @@ class DeletePresenterTest {
     void testPrepareFailView() {
         // Create a DeleteViewModel for testing
         DeleteViewModel deleteViewModel = new DeleteViewModel();
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
 
         // Create a DeletePresenter with the DeleteViewModel
-        DeletePresenter deletePresenter = new DeletePresenter(deleteViewModel);
+        DeletePresenter deletePresenter = new DeletePresenter(viewManagerModel, deleteViewModel);
 
         // Call prepareFailView with a test error message
         deletePresenter.prepareFailView("Test error message");

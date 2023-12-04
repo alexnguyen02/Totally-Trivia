@@ -1,6 +1,7 @@
 package app;
 
 import entity.User;
+import interface_adaptors.ViewManagerModel;
 import interface_adaptors.delete.DeleteController;
 import interface_adaptors.delete.DeletePresenter;
 import interface_adaptors.delete.DeleteViewModel;
@@ -13,9 +14,9 @@ public class DeleteUseCaseFactory {
 
     public DeleteUseCaseFactory() {
     }
-    public static DeleteController createUserDeleteUseCase(DeleteViewModel deleteViewModel, User user, DeleteUserDataAccessInterface deleteUserDataAccessObject) {
+    public static DeleteController createUserDeleteUseCase(ViewManagerModel viewManagerModel, DeleteViewModel deleteViewModel, User user, DeleteUserDataAccessInterface deleteUserDataAccessObject) {
         // Notice how we pass this method's parameters to the Presenter.
-        DeleteOutputBoundary deleteOutputBoundary = new DeletePresenter(deleteViewModel);
+        DeleteOutputBoundary deleteOutputBoundary = new DeletePresenter(viewManagerModel, deleteViewModel);
 
 
         DeleteInputBoundary deleteInteractor = new DeleteInteractor(deleteUserDataAccessObject, user,deleteOutputBoundary);
