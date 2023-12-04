@@ -1,5 +1,6 @@
 package view;
 
+import app.SelectModeUseCaseFactory;
 import data_access.InMemorySelectModeAccessObject;
 import entity.CommonQuestionStorage;
 import entity.Question;
@@ -22,18 +23,18 @@ public class SelectModeViewTest {
     public void selectModeViewTest() {
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         QuestionViewModel questionViewModel = new QuestionViewModel();
-
         SelectModeViewModel selectModeViewModel = new SelectModeViewModel();
-        SelectModeDataObjectInterface selectModeDataObject = new InMemorySelectModeAccessObject();
+        SelectModeDataObjectInterface selectModeDataAccessObject = new InMemorySelectModeAccessObject();
         SelectModePresenter selectModePresenter =
                 new SelectModePresenter(viewManagerModel, selectModeViewModel, questionViewModel);
         QuestionStorage questionStorage = new CommonQuestionStorage();
 
         SelectModeInputBoundary selectModeInputInteractor =
-                new SelectModeInteractor(selectModeDataObject, selectModePresenter, questionStorage);
-        SelectModeController selectModeController = new SelectModeController(selectModeInputInteractor);
-        SelectModeView selectModeView = new SelectModeView(selectModeViewModel, selectModeController);
+                new SelectModeInteractor(selectModeDataAccessObject, selectModePresenter, questionStorage);
+        SelectModeView selectModeView = SelectModeUseCaseFactory.create(viewManagerModel, selectModeViewModel,
+                selectModeDataAccessObject, questionStorage, questionViewModel);
 
+        assert selectModeView != null;
         assertEquals("select mode", selectModeView.viewName);
         assertEquals("Customize Your Trivia", selectModeView.getTitle());
         assertEquals("Category", selectModeView.getCategoryLabel());
