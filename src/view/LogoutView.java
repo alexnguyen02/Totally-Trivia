@@ -12,6 +12,7 @@ import interface_adaptors.logout.LogoutViewModel;
 import interface_adaptors.logout.LogoutState;
 import interface_adaptors.ViewManagerModel;
 
+// This view gives users the option to log out of their account
 public class LogoutView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "logout";
 
@@ -42,6 +43,12 @@ public class LogoutView extends JPanel implements ActionListener, PropertyChange
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttons.add(back);
 
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(title);
+        this.add(buttons);
+
+        // If the user clicks on the 'Log Out' button and answers yes to "Are you sure you want to log out?", they
+        // are logged out
         logout.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 if (evt.getSource().equals(logout)) {
@@ -60,6 +67,7 @@ public class LogoutView extends JPanel implements ActionListener, PropertyChange
             }
         });
 
+        // If the user clicks on the "Back" button, they are taken back to the Account View
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -70,11 +78,6 @@ public class LogoutView extends JPanel implements ActionListener, PropertyChange
             }
         });
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-        this.add(title);
-
-        this.add(buttons);
     }
 
     public void changeColour(Color colour) {
@@ -99,6 +102,5 @@ public class LogoutView extends JPanel implements ActionListener, PropertyChange
                 JOptionPane.showMessageDialog(this, "Logout failed");
             }
         }
-        // Handle other state types if needed
     }
 }

@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// The main screen of our program. Contains "Play Game" and "Account" options.
 public class MainScreenView extends JPanel {
 
     public String viewName = "main screen";
@@ -35,6 +36,7 @@ public class MainScreenView extends JPanel {
         account.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttons.add(account);
 
+        // Takes user to Select Mode View if the "Play Game" button is clicked
         playGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -45,6 +47,7 @@ public class MainScreenView extends JPanel {
             }
         });
 
+        // Takes user to Account View if the "Account" button is clicked
         account.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
