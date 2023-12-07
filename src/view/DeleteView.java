@@ -56,7 +56,6 @@ public class DeleteView extends JPanel implements ActionListener, PropertyChange
         this.add(buttons);
 
         delete.addActionListener(
-                // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(delete)) {

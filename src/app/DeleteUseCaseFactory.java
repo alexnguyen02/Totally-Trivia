@@ -15,7 +15,6 @@ public class DeleteUseCaseFactory {
     public DeleteUseCaseFactory() {
     }
     public static DeleteController createUserDeleteUseCase(ViewManagerModel viewManagerModel, DeleteViewModel deleteViewModel, User user, DeleteUserDataAccessInterface deleteUserDataAccessObject) {
-        // Notice how we pass this method's parameters to the Presenter.
         DeleteOutputBoundary deleteOutputBoundary = new DeletePresenter(viewManagerModel, deleteViewModel);
 
 

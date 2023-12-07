@@ -7,7 +7,7 @@ public class GameOverState {
     private int incorrectNum;
     private int pointsEarned;
 
-    public GameOverState(int totalNum, int CorrectNum, int incorrectNum, int pointsEarned) {
+    public GameOverState(int totalNum, int correctNum, int incorrectNum, int pointsEarned) {
         this.totalNum = totalNum;
         this.correctNum = correctNum;
         this.incorrectNum = incorrectNum;

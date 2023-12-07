@@ -140,7 +140,6 @@ public class QuestionView extends JPanel implements ActionListener, PropertyChan
         } else {
             JOptionPane.showMessageDialog(this, "That answer is incorrect!");
         }
-        //updateView();
         currentState.setQuestionCorrect(null);
         if (currentState.getTotalQuestions() == currentState.getQuestionNum()) {
             gameOver();

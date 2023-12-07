@@ -46,7 +46,7 @@ public class SelectColourView extends JPanel implements ActionListener, Property
 
     public SelectColourView(SelectColourViewModel selectColourViewModel, SelectColourController selectColourController, ViewManagerModel viewManagerModel,
                             AccountView accountView, MainScreenView mainScreenView, QuestionView questionView, SelectModeView selectModeView, GameOverView gameOverView,
-                            DeleteView deleteView, LogoutView logoutView){
+                            DeleteView deleteView, LogoutView logoutView) {
         this.selectColourViewModel = selectColourViewModel;
         this.selectColourController = selectColourController;
         this.selectColourViewModel.addPropertyChangeListener(this);
@@ -127,7 +127,8 @@ public class SelectColourView extends JPanel implements ActionListener, Property
         }
     }
 
-    public void actionPerformed(ActionEvent evt) {}
+    public void actionPerformed(ActionEvent evt) {
+    }
 
 
     @Override
@@ -154,37 +155,4 @@ public class SelectColourView extends JPanel implements ActionListener, Property
         }
 
     }
-
-//    private String convertColorToColourName(Color color) {
-//        if (color.equals(Color.WHITE)) {
-//            return "White";
-//        } else if (color.equals(Color.BLUE)) {
-//            return "Blue";
-//        } else if (color.equals(Color.CYAN)) {
-//            return "Cyan";
-//        } else if (color.equals(Color.DARK_GRAY)) {
-//            return "Dark Gray";
-//        } else if (color.equals(Color.GRAY)) {
-//            return "Gray";
-//        } else if (color.equals(Color.GREEN)) {
-//            return "Green";
-//        } else if (color.equals(Color.LIGHT_GRAY)) {
-//            return "Light Gray";
-//        } else if (color.equals(Color.MAGENTA)) {
-//            return "Magenta";
-//        } else if (color.equals(Color.ORANGE)) {
-//            return "Orange";
-//        } else if (color.equals(Color.PINK)) {
-//            return "Pink";
-//        } else if (color.equals(Color.RED)) {
-//            return "Red";
-//        } else if (color.equals(Color.BLACK)) {
-//            return "Black";
-//        } else if (color.equals(Color.YELLOW)) {
-//            return "Yellow";
-//        } else {
-//            return "White";
-//        }
-//    }
-
 }

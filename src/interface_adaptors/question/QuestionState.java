@@ -2,8 +2,6 @@ package interface_adaptors.question;
 
 import entity.Question;
 
-import java.util.ArrayList;
-
 public class QuestionState {
     private Boolean questionCorrect = null;
     private int questionNum;

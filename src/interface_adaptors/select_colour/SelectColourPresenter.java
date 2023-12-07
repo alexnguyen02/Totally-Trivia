@@ -4,9 +4,6 @@ import interface_adaptors.ViewManagerModel;
 import use_case.select_colour.SelectColourOutputBoundary;
 import use_case.select_colour.SelectColourOutputData;
 
-import javax.swing.*;
-
-
 public class SelectColourPresenter implements SelectColourOutputBoundary{
     private final SelectColourViewModel selectColourViewModel;
     private ViewManagerModel viewManagerModel;

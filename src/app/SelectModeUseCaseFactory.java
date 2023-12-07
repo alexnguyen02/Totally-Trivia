@@ -44,7 +44,6 @@ public class SelectModeUseCaseFactory {
             QuestionStorage questionStorage,
             QuestionViewModel questionViewModel) throws IOException {
 
-        // Notice how we pass this method's parameters to the Presenter.
         SelectModeOutputBoundary selectModeOutputBoundary = new SelectModePresenter(viewManagerModel,
                 selectModeViewModel, questionViewModel);
 
