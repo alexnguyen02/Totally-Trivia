@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+// This view gives users the option to delete their account
 public class DeleteView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "delete";
 
@@ -55,6 +56,8 @@ public class DeleteView extends JPanel implements ActionListener, PropertyChange
 
         this.add(buttons);
 
+        // If the user clicks on the 'Delete' button and answers yes to "Are you sure you want to delete account?", their
+        // account gets deleted
         delete.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
@@ -79,6 +82,7 @@ public class DeleteView extends JPanel implements ActionListener, PropertyChange
                 }
         );
 
+        // If the user clicks on the "Back" button, they are taken back to the Account View
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {

@@ -2,6 +2,7 @@ package entity;
 
 import java.time.LocalDateTime;
 
+//Stores username, password, creation time, points, and current colour scheme, as well as related setter and getter methods
 class CommonUser implements User {
 
     private String name;

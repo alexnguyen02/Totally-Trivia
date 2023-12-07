@@ -14,11 +14,13 @@ public class SelectColourInteractor implements SelectColourInputBoundary{
         this.selectColourUserDataAccessInterface = selectColourUserDataAccessInterface;
     }
 
+
     public void execute(SelectColourInputData selectColourInputData) {
         String selectedColour = selectColourInputData.getColour();
         Integer points = user.getPoints();
         Boolean success = false;
 
+        // Calculates if the user has enough points to be able to change their background to their selected colour
         if ((selectedColour.equals("White") && points >= 0) ||
             (selectedColour.equals("Blue") && points >= 5) ||
             (selectedColour.equals("Cyan") && points >= 10) ||
@@ -36,6 +38,7 @@ public class SelectColourInteractor implements SelectColourInputBoundary{
             success = true;
         }
 
+        // Calls presenter's prepareSuccessView or prepareFailView, depending on if the selected colour has been unlocked
         if (success) {
             user.setColourScheme(selectedColour);
             selectColourUserDataAccessInterface.changeColourScheme(user.getName(), selectedColour);

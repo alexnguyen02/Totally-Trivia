@@ -13,6 +13,7 @@ public class SelectColourController {
         this.selectColourInteractor = selectColourInteractor;
     }
 
+    // Calls interactor's execute method, passing in the user's selected colour (in string format) as an argument
     public void execute(String colour){
         SelectColourInputData selectColourInputData = new SelectColourInputData(colour);
         selectColourInteractor.execute(selectColourInputData);

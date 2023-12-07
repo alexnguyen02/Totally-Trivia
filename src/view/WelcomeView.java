@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//The first screen the user sees once they are logged in
 public class WelcomeView extends JPanel {
 
     public final String viewName = "welcome";

@@ -36,6 +36,7 @@ public class SelectColourView extends JPanel implements ActionListener, Property
 
     private final LabelDropDownPanel categoryInfo;
 
+//    List of possible colours for user to choose from:
     private final String[] colourList = new String[]{"White", "Blue", "Cyan", "Dark Gray",
             "Gray", "Green", "Light_Gray", "Magenta", "Orange", "Pink", "Red",
             "Black", "Yellow"};
@@ -70,6 +71,7 @@ public class SelectColourView extends JPanel implements ActionListener, Property
         buttons.add(back);
         add(buttons);
 
+//        Takes user to Account View if they click on the 'Back' button
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -80,6 +82,7 @@ public class SelectColourView extends JPanel implements ActionListener, Property
             }
         });
 
+//        Dropdown menu where user selects their colour from
         colourDropdown.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -94,6 +97,7 @@ public class SelectColourView extends JPanel implements ActionListener, Property
         });
     }
 
+    // Helper function that converts the colour name (string) to its corresponding instance of Color
     private Color convertColourNameToColor(String colorName) {
         switch (colorName) {
             case "White":
@@ -131,6 +135,8 @@ public class SelectColourView extends JPanel implements ActionListener, Property
     }
 
 
+//    If the colour has been 'unlocked', changes background colour of all accessible views in the program.
+//    Otherwise, shows a pop-up with the error message: "This colour has not been unlocked yet".
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getNewValue() instanceof SelectColourState) {

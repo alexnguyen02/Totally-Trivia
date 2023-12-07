@@ -1,7 +1,5 @@
 package interface_adaptors.select_colour;
 
-
-
 public class SelectColourState {
     private String colour;
     private String colourError = null;
