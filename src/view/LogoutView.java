@@ -10,6 +10,7 @@ import java.beans.PropertyChangeListener;
 import interface_adaptors.logout.LogoutController;
 import interface_adaptors.logout.LogoutViewModel;
 import interface_adaptors.logout.LogoutState;
+import interface_adaptors.ViewManagerModel;
 
 public class LogoutView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "logout";
@@ -20,10 +21,16 @@ public class LogoutView extends JPanel implements ActionListener, PropertyChange
 
     public final JButton logout;
 
-    public LogoutView(LogoutController logoutController, LogoutViewModel logoutViewModel) {
+    public final JButton back;
+
+    public final ViewManagerModel viewManagerModel;
+
+    public LogoutView(LogoutController logoutController, LogoutViewModel logoutViewModel, ViewManagerModel viewManagerModel) {
         this.logoutController = logoutController;
         this.logoutViewModel = logoutViewModel;
         logoutViewModel.addPropertyChangeListener(this);
+
+        this.viewManagerModel = viewManagerModel;
 
         JLabel title = new JLabel(LogoutViewModel.LOGOUT_BUTTON_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -31,6 +38,9 @@ public class LogoutView extends JPanel implements ActionListener, PropertyChange
         JPanel buttons = new JPanel();
         logout = new JButton(LogoutViewModel.LOGOUT_BUTTON_LABEL);
         buttons.add(logout);
+        back = new JButton("Back");
+        back.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttons.add(back);
 
         logout.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -50,11 +60,25 @@ public class LogoutView extends JPanel implements ActionListener, PropertyChange
             }
         });
 
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if (evt.getSource().equals(back)) {
+                    viewManagerModel.setActiveView("account");
+                    viewManagerModel.firePropertyChanged();
+                }
+            }
+        });
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
 
         this.add(buttons);
+    }
+
+    public void changeColour(Color colour) {
+        this.setBackground(colour);
     }
 
     /**

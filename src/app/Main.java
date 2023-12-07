@@ -90,7 +90,7 @@ public class Main {
         GameOverView gameOverView = GameOverUseCaseFactory.create(viewManagerModel, gameOverViewModel, userDataAccessObject, user);
         views.add(gameOverView, gameOverView.viewName);
 
-        LogoutView logoutView = new LogoutView(new LogoutController(new LogoutInteractor(new LogoutPresenter(viewManagerModel, logoutViewModel), user)), logoutViewModel);
+        LogoutView logoutView = new LogoutView(new LogoutController(new LogoutInteractor(new LogoutPresenter(viewManagerModel, logoutViewModel), user)), logoutViewModel, viewManagerModel);
         views.add(logoutView, logoutView.viewName);
 
         AccountView accountView = new AccountView(viewManagerModel);
@@ -99,17 +99,19 @@ public class Main {
         MainScreenView mainScreenView = new MainScreenView(viewManagerModel);
         views.add(mainScreenView, mainScreenView.viewName);
 
-        SelectColourView selectColourView = SelectColourUseCaseFactory.create(viewManagerModel, selectColourViewModel, user, userDataAccessObject, accountView, mainScreenView, questionView, selectModeView, gameOverView);
+        String s = user.getName();
+        DeleteController deleteController = DeleteUseCaseFactory.createUserDeleteUseCase(viewManagerModel, deleteViewModel, user, userDataAccessObject);
+
+        DeleteView deleteView = new DeleteView(deleteController, deleteViewModel, viewManagerModel);
+        views.add(deleteView, deleteView.viewName);
+
+        SelectColourView selectColourView = SelectColourUseCaseFactory.create(viewManagerModel, selectColourViewModel, user, userDataAccessObject, accountView, mainScreenView, questionView, selectModeView, gameOverView,
+                deleteView, logoutView);
         views.add(selectColourView, selectColourView.viewName);
 
         WelcomeView welcomeView = new WelcomeView(viewManagerModel);
         views.add(welcomeView, welcomeView.viewName);
 
-        String s = user.getName();
-        DeleteController deleteController = DeleteUseCaseFactory.createUserDeleteUseCase(viewManagerModel, deleteViewModel, user, userDataAccessObject);
-
-        DeleteView deleteView = new DeleteView(deleteController, deleteViewModel);
-        views.add(deleteView, deleteView.viewName);
 
         viewManagerModel.setActiveView(welcomeView.viewName);
         viewManagerModel.firePropertyChanged();
