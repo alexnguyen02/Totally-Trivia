@@ -11,10 +11,7 @@ import java.util.ArrayList;
 public class SelectModePresenter implements SelectModeOutputBoundary {
 
     private final SelectModeViewModel selectModeViewModel;
-
-    //This may be breaking CA
     private final QuestionViewModel questionViewModel;
-
     private final ViewManagerModel viewManagerModel;
 
     public SelectModePresenter(ViewManagerModel viewManagerModel, SelectModeViewModel selectModeViewModel,
@@ -41,8 +38,8 @@ public class SelectModePresenter implements SelectModeOutputBoundary {
 
     @Override
     public void prepareSelectModeFailView(String error) {
-        // Implement this
-
+        SelectModeState selectModeState = selectModeViewModel.getState();
+        selectModeState.setNotSelectedError(error);
         this.selectModeViewModel.firePropertyChanged();
     }
 

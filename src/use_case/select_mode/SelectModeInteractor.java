@@ -24,7 +24,11 @@ public class SelectModeInteractor implements SelectModeInputBoundary {
         String difficultyLevel = selectModeInputData.getDifficultyLevel();
         String numOfQuestions = selectModeInputData.getNumberOfQuestionsString();
 
-        if (category.equals("Select") || difficultyLevel.equals("Select") || numOfQuestions.equals("Select")){
+
+        if (category == null || difficultyLevel == null || numOfQuestions == null){
+            selectModePresenter.prepareSelectModeFailView(
+                    "Please select a category, a difficulty level and a number of questions");
+        } else if (category.equals("Select") || difficultyLevel.equals("Select") || numOfQuestions.equals("Select")) {
             selectModePresenter.prepareSelectModeFailView(
                     "Please select a category, a difficulty level and a number of questions");
         } else {
