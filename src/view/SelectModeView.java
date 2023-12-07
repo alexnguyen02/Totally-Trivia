@@ -1,5 +1,6 @@
 package view;
 
+import interface_adaptors.ViewManagerModel;
 import interface_adaptors.select_mode.SelectModeController;
 import interface_adaptors.select_mode.SelectModeState;
 import interface_adaptors.select_mode.SelectModeViewModel;
@@ -23,6 +24,7 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
 
     // Controller
     private final SelectModeController selectModeController;
+    private final ViewManagerModel viewManagerModel;
 
     // Dropdown menus of category and difficulty level, and text input field for number of questions
     private final String[] categoryList = new String[]{"Select","Any category", "General knowledge", "Books", "Film",
@@ -41,7 +43,7 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
 
     // Reset all the choices button
     // In reset mode: any category, any difficulty level and 10 number of questions.
-    private final JButton reset;
+    private final JButton back;
     private final LabelDropDownPanel categoryInfo;
     private final LabelDropDownPanel difficultyInfo;
     private final LabelDropDownPanel numOfQuestionInfo;
@@ -62,10 +64,12 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
         return NUM_QUESTIONS_LABEL;
     }
 
-    public SelectModeView(SelectModeViewModel selectModeViewModel, SelectModeController selectModeController){
+    public SelectModeView(SelectModeViewModel selectModeViewModel, SelectModeController selectModeController,
+                          ViewManagerModel viewManagerModel){
         this.selectModeViewModel = selectModeViewModel;
         this.selectModeController = selectModeController;
         this.selectModeViewModel.addPropertyChangeListener(this);
+        this.viewManagerModel = viewManagerModel;
 
         selectModeViewModel.addPropertyChangeListener(this);
 
@@ -79,8 +83,8 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
         Box buttons = Box.createHorizontalBox();
         start = new JButton(SelectModeViewModel.START_BUTTON_LABEL);
         buttons.add(start);
-        reset = new JButton(SelectModeViewModel.RESET_BUTTON_LABEL);
-        buttons.add(reset);
+        back = new JButton(SelectModeViewModel.BACK_BUTTON_LABEL);
+        buttons.add(back);
 
         start.addActionListener(
                 new ActionListener() {
@@ -98,7 +102,15 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
                 }
         );
 
-        reset.addActionListener(this);
+        back.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        viewManagerModel.setActiveView("main screen");
+                        viewManagerModel.firePropertyChanged();
+                    }
+                }
+        );
 
         categoryDropdown.addActionListener(
                 new ActionListener() {
@@ -153,10 +165,7 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
         this.numOfQuestionInfo.setBackground(colour);
     }
     @Override
-    public void actionPerformed(ActionEvent e) {
-        JOptionPane.showConfirmDialog(this,
-                "Reset not implemented yet.");
-    }
+    public void actionPerformed(ActionEvent e) { }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) { }

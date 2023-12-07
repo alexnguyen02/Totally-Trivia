@@ -16,7 +16,7 @@ public class SelectModeViewModel extends ViewModel {
     public static final String NUM_QUESTIONS_LABEL = "Number of questions";
 
     public static final String START_BUTTON_LABEL = "Start";
-    public static final String RESET_BUTTON_LABEL = "Reset";
+    public static final String BACK_BUTTON_LABEL = "Back";
 
     private ArrayList<Question> outputQuestions;
     private static SelectModeState state;

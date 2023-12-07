@@ -35,7 +35,7 @@ public class LogoutView extends JPanel implements ActionListener, PropertyChange
         JLabel title = new JLabel(LogoutViewModel.LOGOUT_BUTTON_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JPanel buttons = new JPanel();
+        Box buttons = Box.createHorizontalBox();
         logout = new JButton(LogoutViewModel.LOGOUT_BUTTON_LABEL);
         buttons.add(logout);
         back = new JButton("Back");

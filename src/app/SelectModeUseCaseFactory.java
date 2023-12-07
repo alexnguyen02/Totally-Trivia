@@ -29,7 +29,7 @@ public class SelectModeUseCaseFactory {
         try {
             SelectModeController selectModeController = createSelectModeUseCase(viewManagerModel, selectModeViewModel,
                     selectModeDataObject, questionStorage, questionViewModel);
-            return new SelectModeView(selectModeViewModel, selectModeController);
+            return new SelectModeView(selectModeViewModel, selectModeController, viewManagerModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not access data object");
         }
