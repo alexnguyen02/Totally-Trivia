@@ -29,6 +29,11 @@ public class SelectColourView extends JPanel implements ActionListener, Property
 
     private final SelectModeView selectModeView;
     private final GameOverView gameOverView;
+
+    private final DeleteView deleteView;
+
+    private final LogoutView logoutView;
+
     private final LabelDropDownPanel categoryInfo;
 
     private final String[] colourList = new String[]{"White", "Blue", "Cyan", "Dark Gray",
@@ -40,7 +45,8 @@ public class SelectColourView extends JPanel implements ActionListener, Property
     private final JButton back;
 
     public SelectColourView(SelectColourViewModel selectColourViewModel, SelectColourController selectColourController, ViewManagerModel viewManagerModel,
-                            AccountView accountView, MainScreenView mainScreenView, QuestionView questionView, SelectModeView selectModeView, GameOverView gameOverView){
+                            AccountView accountView, MainScreenView mainScreenView, QuestionView questionView, SelectModeView selectModeView, GameOverView gameOverView,
+                            DeleteView deleteView, LogoutView logoutView){
         this.selectColourViewModel = selectColourViewModel;
         this.selectColourController = selectColourController;
         this.selectColourViewModel.addPropertyChangeListener(this);
@@ -49,6 +55,8 @@ public class SelectColourView extends JPanel implements ActionListener, Property
         this.questionView = questionView;
         this.selectModeView = selectModeView;
         this.gameOverView = gameOverView;
+        this.deleteView = deleteView;
+        this.logoutView = logoutView;
 
 
         categoryInfo = new LabelDropDownPanel(new JLabel("Select the Background Colour"), colourDropdown);
@@ -79,16 +87,11 @@ public class SelectColourView extends JPanel implements ActionListener, Property
 
                 String selectedColour = colourDropdown.getSelectedItem().toString();
 
-//                Color selectedColour = convertColourNameToColor(selectedColourString);
-
                 selectColourController.execute(selectedColour);
 
-                // Update the state in the view model
                 selectColourViewModel.setState(currentState);
-                //categoryInfo.setBackground(We need to get a colour from the state);
             }
         });
-        add(buttons);
     }
 
     private Color convertColourNameToColor(String colorName) {
@@ -132,7 +135,7 @@ public class SelectColourView extends JPanel implements ActionListener, Property
         if (evt.getNewValue() instanceof SelectColourState) {
             SelectColourState selectColourState = (SelectColourState) evt.getNewValue();
             if (selectColourState.getColour() != null) {
-//                JOptionPane.showMessageDialog(this, "The background colour was changed to " + selectColourState.getColour() + "!" );
+
                 Color colour = convertColourNameToColor(selectColourState.getColour());
                 this.setBackground(colour);
 
@@ -141,7 +144,8 @@ public class SelectColourView extends JPanel implements ActionListener, Property
                 questionView.changeColour(colour);
                 selectModeView.changeColour(colour);
                 gameOverView.changeColour(colour);
-
+                deleteView.changeColour(colour);
+                logoutView.changeColour(colour);
 
 
             } else if (selectColourState.getColourError() != null) {
@@ -151,36 +155,36 @@ public class SelectColourView extends JPanel implements ActionListener, Property
 
     }
 
-    private String convertColorToColourName(Color color) {
-        if (color.equals(Color.WHITE)) {
-            return "White";
-        } else if (color.equals(Color.BLUE)) {
-            return "Blue";
-        } else if (color.equals(Color.CYAN)) {
-            return "Cyan";
-        } else if (color.equals(Color.DARK_GRAY)) {
-            return "Dark Gray";
-        } else if (color.equals(Color.GRAY)) {
-            return "Gray";
-        } else if (color.equals(Color.GREEN)) {
-            return "Green";
-        } else if (color.equals(Color.LIGHT_GRAY)) {
-            return "Light Gray";
-        } else if (color.equals(Color.MAGENTA)) {
-            return "Magenta";
-        } else if (color.equals(Color.ORANGE)) {
-            return "Orange";
-        } else if (color.equals(Color.PINK)) {
-            return "Pink";
-        } else if (color.equals(Color.RED)) {
-            return "Red";
-        } else if (color.equals(Color.BLACK)) {
-            return "Black";
-        } else if (color.equals(Color.YELLOW)) {
-            return "Yellow";
-        } else {
-            return "White";
-        }
-    }
+//    private String convertColorToColourName(Color color) {
+//        if (color.equals(Color.WHITE)) {
+//            return "White";
+//        } else if (color.equals(Color.BLUE)) {
+//            return "Blue";
+//        } else if (color.equals(Color.CYAN)) {
+//            return "Cyan";
+//        } else if (color.equals(Color.DARK_GRAY)) {
+//            return "Dark Gray";
+//        } else if (color.equals(Color.GRAY)) {
+//            return "Gray";
+//        } else if (color.equals(Color.GREEN)) {
+//            return "Green";
+//        } else if (color.equals(Color.LIGHT_GRAY)) {
+//            return "Light Gray";
+//        } else if (color.equals(Color.MAGENTA)) {
+//            return "Magenta";
+//        } else if (color.equals(Color.ORANGE)) {
+//            return "Orange";
+//        } else if (color.equals(Color.PINK)) {
+//            return "Pink";
+//        } else if (color.equals(Color.RED)) {
+//            return "Red";
+//        } else if (color.equals(Color.BLACK)) {
+//            return "Black";
+//        } else if (color.equals(Color.YELLOW)) {
+//            return "Yellow";
+//        } else {
+//            return "White";
+//        }
+//    }
 
 }

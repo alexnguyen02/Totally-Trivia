@@ -4,6 +4,7 @@ import interface_adaptors.delete.DeleteController;
 import interface_adaptors.delete.DeleteState;
 import interface_adaptors.delete.DeleteViewModel;
 import interface_adaptors.signup.SignupState;
+import interface_adaptors.ViewManagerModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,24 +22,38 @@ public class DeleteView extends JPanel implements ActionListener, PropertyChange
 
     private final DeleteController deleteController;
 
-    final JButton delete;
+    public final JButton delete;
+
+    public final JButton back;
+
+    public final ViewManagerModel viewManagerModel;
 
 
-    public DeleteView(DeleteController deletecontroller, DeleteViewModel deleteViewModel) {
+
+    public DeleteView(DeleteController deletecontroller, DeleteViewModel deleteViewModel, ViewManagerModel viewManagerModel) {
 
 
         this.deleteController = deletecontroller;
         this.deleteViewModel = deleteViewModel;
         deleteViewModel.addPropertyChangeListener(this);
 
+        this.viewManagerModel = viewManagerModel;
+
         JLabel title = new JLabel(DeleteViewModel.DELETE_BUTTON_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-
 
         JPanel buttons = new JPanel();
         delete = new JButton(DeleteViewModel.DELETE_BUTTON_LABEL);
         buttons.add(delete);
+        back = new JButton("Back");
+        back.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttons.add(back);
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        this.add(title);
+
+        this.add(buttons);
 
         delete.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
@@ -65,19 +80,20 @@ public class DeleteView extends JPanel implements ActionListener, PropertyChange
                 }
         );
 
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if (evt.getSource().equals(back)) {
+                    viewManagerModel.setActiveView("account");
+                    viewManagerModel.firePropertyChanged();
+                }
+            }
+        });
 
+    }
 
-        // This makes a new KeyListener implementing class, instantiates it, and
-        // makes it listen to keystrokes in the usernameInputField.
-        //
-        // Notice how it has access to instance variables in the enclosing class!
-
-
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-        this.add(title);
-
-        this.add(buttons);
+    public void changeColour(Color colour) {
+        this.setBackground(colour);
     }
 
     /**

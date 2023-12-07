@@ -34,7 +34,7 @@ public class DeleteViewTest {
         String s = user.getName();
         DeleteController deleteController = DeleteUseCaseFactory.createUserDeleteUseCase(viewManagerModel, deleteViewModel, user, userDataAccessObject);
 
-        DeleteView deleteView = new DeleteView(deleteController, deleteViewModel);
+        DeleteView deleteView = new DeleteView(deleteController, deleteViewModel, viewManagerModel);
 
         assertEquals("delete", deleteView.viewName);
     }
@@ -43,7 +43,9 @@ public class DeleteViewTest {
     public void testButtonsExist() {
         DeleteController deleteController = new DeleteController(null);
         DeleteViewModel deleteViewModel = new DeleteViewModel();
-        DeleteView deleteView = new DeleteView(deleteController, deleteViewModel);
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+
+        DeleteView deleteView = new DeleteView(deleteController, deleteViewModel, viewManagerModel);
 
         assertNotNull(deleteView.delete);
     }
@@ -53,7 +55,8 @@ public class DeleteViewTest {
         // Create a DeleteView instance
         DeleteController deleteController = new DeleteController(null);
         DeleteViewModel deleteViewModel = new DeleteViewModel();
-        DeleteView deleteView = new DeleteView(deleteController, deleteViewModel);
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        DeleteView deleteView = new DeleteView(deleteController, deleteViewModel, viewManagerModel);
 
         // Create a DeleteState for testing
         DeleteState testState = new DeleteState();
@@ -78,7 +81,8 @@ public class DeleteViewTest {
         // Create a DeleteView instance
         DeleteController deleteController = new DeleteController(null);
         DeleteViewModel deleteViewModel = new DeleteViewModel();
-        DeleteView deleteView = new DeleteView(deleteController, deleteViewModel);
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        DeleteView deleteView = new DeleteView(deleteController, deleteViewModel, viewManagerModel);
 
         // Create a DeleteState for testing
         try {
