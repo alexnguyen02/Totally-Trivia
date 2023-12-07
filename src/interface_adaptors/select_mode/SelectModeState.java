@@ -5,17 +5,13 @@ import entity.Question;
 import java.util.ArrayList;
 
 public class SelectModeState {
-    private String category = "";
-    private String difficultyLevel = "";
-    private String numOfQuestions = "";
+    private String category = null;
+    private String difficultyLevel = null;
+    private String numOfQuestions = null;
+
+    private String notSelectedError = null;
 
     private ArrayList<Question> outputQuestions;
-
-    public SelectModeState(SelectModeState copy){
-        this.category = copy.category;
-        this.difficultyLevel = copy.difficultyLevel;
-        this.numOfQuestions = copy.numOfQuestions;
-    }
 
     public SelectModeState(ArrayList<Question> outputQuestions){
         this.outputQuestions = outputQuestions;
@@ -63,4 +59,11 @@ public class SelectModeState {
         return questionsToString.toString();
     }
 
+    public void setNotSelectedError(String notSelectedError){
+        this.notSelectedError = notSelectedError;
+    }
+
+    public String getNotSelectedError(){
+        return this.notSelectedError;
+    }
 }

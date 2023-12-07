@@ -165,9 +165,16 @@ public class SelectModeView extends JPanel implements ActionListener, PropertyCh
         this.numOfQuestionInfo.setBackground(colour);
     }
     @Override
-    public void actionPerformed(ActionEvent e) { }
+    public void actionPerformed(ActionEvent e) {
+
+    }
 
     @Override
-    public void propertyChange(PropertyChangeEvent evt) { }
+    public void propertyChange(PropertyChangeEvent evt) {
+        SelectModeState state = (SelectModeState) evt.getNewValue();
+        if (state.getNotSelectedError() != null) {
+            JOptionPane.showMessageDialog(this, state.getNotSelectedError());
+        }
+    }
 
 }
