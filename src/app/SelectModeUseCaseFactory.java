@@ -29,7 +29,7 @@ public class SelectModeUseCaseFactory {
         try {
             SelectModeController selectModeController = createSelectModeUseCase(viewManagerModel, selectModeViewModel,
                     selectModeDataObject, questionStorage, questionViewModel);
-            return new SelectModeView(selectModeViewModel, selectModeController);
+            return new SelectModeView(selectModeViewModel, selectModeController, viewManagerModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not access data object");
         }
@@ -44,7 +44,6 @@ public class SelectModeUseCaseFactory {
             QuestionStorage questionStorage,
             QuestionViewModel questionViewModel) throws IOException {
 
-        // Notice how we pass this method's parameters to the Presenter.
         SelectModeOutputBoundary selectModeOutputBoundary = new SelectModePresenter(viewManagerModel,
                 selectModeViewModel, questionViewModel);
 

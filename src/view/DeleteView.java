@@ -42,7 +42,7 @@ public class DeleteView extends JPanel implements ActionListener, PropertyChange
         JLabel title = new JLabel(DeleteViewModel.DELETE_BUTTON_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JPanel buttons = new JPanel();
+        Box buttons = Box.createHorizontalBox();
         delete = new JButton(DeleteViewModel.DELETE_BUTTON_LABEL);
         buttons.add(delete);
         back = new JButton("Back");
@@ -56,7 +56,6 @@ public class DeleteView extends JPanel implements ActionListener, PropertyChange
         this.add(buttons);
 
         delete.addActionListener(
-                // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(delete)) {

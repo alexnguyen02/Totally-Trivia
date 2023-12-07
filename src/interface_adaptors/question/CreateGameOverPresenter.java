@@ -3,7 +3,6 @@ package interface_adaptors.question;
 import interface_adaptors.ViewManagerModel;
 import interface_adaptors.game_over.GameOverState;
 import interface_adaptors.game_over.GameOverViewModel;
-import interface_adaptors.question.QuestionState;
 
 public class CreateGameOverPresenter {
 

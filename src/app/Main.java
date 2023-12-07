@@ -65,7 +65,6 @@ public class Main {
         }
 
         // Initializes all the remaining Data Access Objects.
-
         SelectModeDataAccessObject selectModeDataAccessObject = new SelectModeDataAccessObject();
 
         // Initializes an empty User. This User will be filled in by sign up/log in.
@@ -111,7 +110,6 @@ public class Main {
 
         WelcomeView welcomeView = new WelcomeView(viewManagerModel);
         views.add(welcomeView, welcomeView.viewName);
-
 
         viewManagerModel.setActiveView(welcomeView.viewName);
         viewManagerModel.firePropertyChanged();

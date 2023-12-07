@@ -43,7 +43,6 @@ public class LoginUseCaseFactory {
             LoginUserDataAccessInterface userDataAccessObject,
             User user) throws IOException {
 
-        // Notice how we pass this method's parameters to the Presenter.
         LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel, loginViewModel);
 
         UserFactory userFactory = new CommonUserFactory();

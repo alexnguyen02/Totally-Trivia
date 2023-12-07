@@ -37,7 +37,6 @@ public class SignupUseCaseFactory {
 
     private static SignupController createUserSignupUseCase(ViewManagerModel viewManagerModel, SignupViewModel signupViewModel, LoginViewModel loginViewModel, SignupUserDataAccessInterface userDataAccessObject, User user) throws IOException {
 
-        // Notice how we pass this method's parameters to the Presenter.
         SignupOutputBoundary signupOutputBoundary = new SignupPresenter(viewManagerModel, signupViewModel, loginViewModel);
 
         UserFactory userFactory = new CommonUserFactory();

@@ -41,7 +41,6 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
             try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
                 String header = reader.readLine();
 
-                // For later: clean this up by creating a new Exception subclass and handling it in the UI.
                 assert header.equals("username,password,creation_time,points,color_scheme");
 
                 String row;

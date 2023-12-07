@@ -6,9 +6,6 @@ import interface_adaptors.ViewManagerModel;
 import use_case.signup.SignupOutputBoundary;
 import use_case.signup.SignupOutputData;
 
-import interface_adaptors.ViewManagerModel;
-import interface_adaptors.login.LoginViewModel;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

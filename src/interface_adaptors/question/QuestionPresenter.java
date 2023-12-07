@@ -4,8 +4,6 @@ import interface_adaptors.ViewManagerModel;
 import use_case.question.QuestionOutputBoundary;
 import use_case.question.QuestionOutputData;
 
-import java.util.Objects;
-
 public class QuestionPresenter implements QuestionOutputBoundary {
 
     private final QuestionViewModel questionViewModel;
