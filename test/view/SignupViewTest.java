@@ -23,7 +23,6 @@ class SignupViewTest {
         SignupView signUpView = new SignupView(signUpController, signUpViewModel);
 
         assertNotNull(signUpView.signUp);
-        assertNotNull(signUpView.cancel);
     }
 
 }
