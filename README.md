@@ -1,8 +1,16 @@
+
+# CSC207 Course Project
+Disclaimer: This repository is a copy of the actual repository from https://github.com/lemoncake206/triviacash-group-28
+
+<br /> 
+
 Team Name: Totally Trivia!
 
+Contributors: Alex Nguyen, Kate Levey, Daniel Kaloshi, and Haichuan Qi
+
+<br /> 
 
 Domain: Our domain is a trivia game. Players either create an account or log in with their current account (if they have one). They then answer questions in order to earn points, which they use to unlock different colour schemes for the game.
-
 
 Software Specification:
 
@@ -13,8 +21,7 @@ She will then be taken to the main screen, where she can choose to either play a
 From the main screen she can then go to the account screen. There she will have the choice to either change her colour scheme, log out, or delete her account. If she chooses to change her colour scheme, she will be taken to the select colour view. There she will be able to select any colour that she has unlocked. Whichever colour she chooses will be the background of every screen in the program. If she logs out, she will be taken back to the welcome view. If she deletes her account, she will also be taken back to the welcome view.
 
 User Stories:
-
-Daniel: Daniel has 5 points and wants to change his colour scheme. He selects Blue from the drop-down menu, and because he has enough points, the colour scheme of the program changes.
-Kate: Kate is playing a game. Every time she answers a question, a new one pops up, and she answers it too. Eventually, she runs out of questions and is taken to the game over screen.
-River: River has an account and wants to log out. He clicks the “log out ” button and is taken back to the welcome view.
-Alex: Alex presses play game and is taken to the select mode screen. There they select a category, a difficulty, and a number of questions. They then press start and start playing the game.
+- Daniel: Daniel has 5 points and wants to change his colour scheme. He selects Blue from the drop-down menu, and because he has enough points, the colour scheme of the program changes. 
+- Kate: Kate is playing a game. Every time she answers a question, a new one pops up, and she answers it too. Eventually, she runs out of questions and is taken to the game over screen. 
+- River: River has an account and wants to log out. He clicks the “log out ” button and is taken back to the welcome view. 
+- Alex: Alex presses play game and is taken to the select mode screen. There they select a category, a difficulty, and a number of questions. They then press start and start playing the game.
