@@ -1,6 +1,6 @@
 
 # CSC207 Course Project
-Disclaimer: This repository is a copy of the actual repository from https://github.com/lemoncake206/triviacash-group-28
+Disclaimer: This repository is a copy of the original repository https://github.com/lemoncake206/triviacash-group-28
 
 <br /> 
 
